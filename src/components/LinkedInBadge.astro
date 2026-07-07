@@ -1,55 +1,29 @@
 ---
-// Official LinkedIn profile badge — markup provided by LinkedIn.
-// LinkedIn's script renders an iframe; when it fails (blocked/offline),
-// a styled fallback card is shown instead (hidden via :has(iframe)).
+// Custom LinkedIn profile card.
+// LinkedIn's official badge embed (platform.linkedin.com/badges) is not used:
+// badges.linkedin.com responds with HTTP 999 and a non-script MIME type
+// (rejected by X-Content-Type-Options: nosniff), so it never renders.
 import { profile } from '../data/portfolio';
 
-const LINKEDIN_URL = 'https://ro.linkedin.com/in/paul-vasile?trk=profile-badge';
+const LINKEDIN_URL = 'https://ro.linkedin.com/in/paul-vasile';
 ---
 
-<div class="linkedin-badge">
-  <div
-    class="badge-base LI-profile-badge"
-    data-locale="en_US"
-    data-size="medium"
-    data-theme="light"
-    data-type="VERTICAL"
-    data-vanity="paul-vasile"
-    data-version="v1"
-  >
+<a class="li-card card" href={LINKEDIN_URL} target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" width="36" height="36" aria-hidden="true">
+    <path
+      fill="#0a66c2"
+      d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"
+    ></path>
+  </svg>
+  <div>
+    <p class="li-name">Paul Cristian Vasile</p>
+    <p class="li-sub">{profile.role}</p>
+    <span class="li-cta">View profile</span>
   </div>
-
-  <a class="li-fallback card" href={LINKEDIN_URL} target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" width="36" height="36" aria-hidden="true">
-      <path
-        fill="#0a66c2"
-        d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"
-      ></path>
-    </svg>
-    <div>
-      <p class="li-name">Paul Cristian Vasile</p>
-      <p class="li-sub">{profile.role}</p>
-      <span class="li-cta">View profile</span>
-    </div>
-  </a>
-</div>
-
-<script
-  is:inline
-  src="https://platform.linkedin.com/badges/js/profile.js"
-  async
-  defer
-  type="text/javascript"></script>
+</a>
 
 <style>
-  .linkedin-badge {
-    display: inline-block;
-  }
-  /* Hide the fallback once LinkedIn's script successfully injects its iframe */
-  .linkedin-badge:has(.LI-profile-badge iframe) .li-fallback {
-    display: none;
-  }
-  .li-fallback {
+  .li-card {
     display: flex;
     align-items: center;
     gap: 16px;
