@@ -139,16 +139,6 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    name: 'nearli: feel closer, every day',
-    kind: 'Side project',
-    icon: '/icons/nearli.jpg',
-    description:
-      'A cozy, private space just for two. Couples share one photo a day that fades after 24 hours — no feeds, no followers, no pressure to perform. Shared countdowns for the moments you can’t wait for, right on the home screen.',
-    tags: ['SwiftUI', 'WidgetKit', 'Privacy-first'],
-    appStore:
-      'https://apps.apple.com/ro/app/nearli-feel-closer-every-day/id6768097078',
-  },
-  {
     name: 'AI Filter',
     kind: 'Client work',
     icon: '/icons/ai-filter.jpg',
