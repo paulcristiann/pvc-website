@@ -134,10 +134,20 @@ export type Project = {
   description: string;
   tags: string[];
   href?: string;
+  website?: string;
   appStore?: string;
 };
 
 export const projects: Project[] = [
+  {
+    name: 'NearbyChat',
+    kind: 'Side project',
+    icon: '/icons/nearbychat.svg',
+    description:
+      'Chat with people around you. NearbyChat connects you to the conversations happening nearby — discover who’s around and start chatting instantly.',
+    tags: ['Social', 'Real-Time Chat', 'Location'],
+    website: 'https://nearbychat.app',
+  },
   {
     name: 'AI Filter',
     kind: 'Client work',

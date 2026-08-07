@@ -121,9 +121,9 @@ import {
       <p class="eyebrow reveal">Apps</p>
       <h2 class="section-title reveal">Built solo, end to end</h2>
       <p class="section-lead reveal">
-        Most of my work ships inside client products. This one is different —
-        I owned everything: product, design, architecture, code, and App Store
-        release. From first sketch to v1.0 and beyond.
+        Most of my work ships inside client products. These are different —
+        I own everything: product, design, architecture, code, and release.
+        From first sketch to v1.0 and beyond.
       </p>
       <div class="project-grid">
         {
@@ -155,6 +155,11 @@ import {
                 {p.appStore && (
                   <a href={p.appStore} target="_blank" rel="noopener">
                     App Store ↗
+                  </a>
+                )}
+                {p.website && (
+                  <a href={p.website} target="_blank" rel="noopener">
+                    Website ↗
                   </a>
                 )}
                 {p.href && (
