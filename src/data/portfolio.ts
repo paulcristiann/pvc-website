@@ -144,9 +144,10 @@ export const projects: Project[] = [
     kind: 'Side project',
     icon: '/icons/nearbychat.svg',
     description:
-      'Chat with people around you. NearbyChat connects you to the conversations happening nearby — discover who’s around and start chatting instantly.',
-    tags: ['Social', 'Real-Time Chat', 'Location'],
+      'Chat with people around you — no internet required. NearbyChat links nearby devices into a peer-to-peer mesh network, so conversations flow directly from phone to phone.',
+    tags: ['P2P', 'Mesh Networking', 'Offline Chat'],
     website: 'https://nearbychat.app',
+    appStore: 'https://apps.apple.com/app/nearby-p2p-mesh-chatting/id6789983060',
   },
   {
     name: 'AI Filter',
