@@ -142,7 +142,7 @@ export const projects: Project[] = [
   {
     name: 'Nearby: P2P mesh chatting',
     kind: 'Side project',
-    icon: '/icons/nearbychat.svg',
+    icon: '/icons/nearbychat.jpg',
     description:
       'Chat with people around you — no internet required. Nearby links nearby devices into a peer-to-peer mesh network, so conversations flow directly from phone to phone.',
     tags: ['P2P', 'Mesh Networking', 'Offline Chat'],
