@@ -21,7 +21,7 @@ export type CaseStudy = {
   sector: string;
   headline: string;
   pitch: string;
-  visual: 'enrollment' | 'calendar' | 'ai' | 'mesh';
+  visual: 'enrollment' | 'clinic' | 'ai' | 'mesh';
   clientHeading?: string;
   client: string;
   challenge: { intro: string; needs: string[] };
@@ -141,7 +141,7 @@ export const caseStudies: CaseStudy[] = [
     headline: 'One platform. The whole clinic.',
     pitch:
       'From online booking to medical records, invoicing and payroll reports, one reliable system runs a veterinary practice that has been caring for pets since 2005.',
-    visual: 'calendar',
+    visual: 'clinic',
     client:
       'WeCare is a well-established veterinary clinic in Bucharest: open since 2005, 8 specialists, a 4.9 Google rating and more than 1,000 patients a year.',
     challenge: {

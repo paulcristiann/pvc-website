@@ -1,0 +1,288 @@
+---
+// Stylized, data-free mockup: a pet owner books online, the visit lands in the
+// clinic's colour-coded schedule and is added to the patient's medical record.
+const slots = [
+  { t: '09:30', state: 'taken' },
+  { t: '10:00', state: 'on' },
+  { t: '10:30', state: '' },
+];
+// [time, doctor colour, isNew]
+const schedule: [string, number, boolean][] = [
+  ['09:00', 0, false],
+  ['09:30', 1, false],
+  ['10:00', 2, true],
+  ['10:30', 0, false],
+];
+---
+
+<div class="cl" aria-hidden="true">
+  <div class="cl-book">
+    <p class="cl-h">Book a visit</p>
+    <div class="cl-row">
+      <span class="cl-k">Service</span>
+      <span class="cl-v">Vaccination</span>
+    </div>
+    <div class="cl-row">
+      <span class="cl-k">Doctor</span>
+      <span class="cl-v"><span class="cl-dot c2"></span>First available</span>
+    </div>
+    <div class="cl-slots">
+      {slots.map((s) => <span class:list={['cl-slot mono', s.state]}>{s.t}</span>)}
+    </div>
+    <span class="cl-confirm">Confirmed <span>✓</span></span>
+  </div>
+
+  <div class="cl-day">
+    <p class="cl-h mono">Today</p>
+    <ul class="cl-sched">
+      {
+        schedule.map(([t, c, isNew], i) => (
+          <li class:list={[`c${c}`, { new: isNew }]} style={`--i:${i}`}>
+            <span class="cl-t mono">{t}</span>
+            <span class="cl-appt">
+              {isNew ? <b>Vaccination</b> : <i />}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="cl-record">
+      <svg class="cl-paw" viewBox="0 0 24 24" fill="currentColor"><ellipse cx="6" cy="10" rx="2.2" ry="2.8"></ellipse><ellipse cx="10" cy="5.5" rx="2.2" ry="2.8"></ellipse><ellipse cx="14" cy="5.5" rx="2.2" ry="2.8"></ellipse><ellipse cx="18" cy="10" rx="2.2" ry="2.8"></ellipse><path d="M12 11c-3 0-6 4.5-6 7 0 1.7 1.3 2.5 3 2.5 1.2 0 2-.6 3-.6s1.8.6 3 .6c1.7 0 3-.8 3-2.5 0-2.5-3-7-6-7z"></path></svg>
+      <span class="cl-rec-text">
+        <b>Medical record</b>
+        <span>Visit added</span>
+      </span>
+      <span class="cl-ok">✓</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cl {
+    --c0: #0a84ff;
+    --c1: #30b06e;
+    --c2: #bf5af2;
+    width: 100%;
+    max-width: 410px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    align-items: center;
+  }
+  .cl-book,
+  .cl-day,
+  .cl-record {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .cl-h {
+    font-size: 0.74rem;
+    font-weight: 650;
+    margin-bottom: 8px;
+  }
+  .cl-day .cl-h {
+    font-size: 0.62rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    margin-bottom: 6px;
+  }
+
+  /* Booking card (pet owner side) */
+  .cl-book {
+    padding: 12px;
+    transform: rotate(-2deg) translateX(10px);
+    transition: transform 0.6s var(--ease);
+  }
+  .cl-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.64rem;
+  }
+  .cl-k {
+    color: var(--text-tertiary);
+  }
+  .cl-v {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .cl-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--c2);
+  }
+  .cl-slots {
+    display: flex;
+    gap: 5px;
+    margin: 9px 0;
+  }
+  .cl-slot {
+    flex: 1;
+    text-align: center;
+    font-size: 0.58rem;
+    padding: 4px 0;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    transition-delay: 0.3s;
+  }
+  .cl-slot.taken {
+    color: var(--text-tertiary);
+    text-decoration: line-through;
+    background: var(--surface-2);
+  }
+  .cl-slot.on {
+    color: #fff;
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .cl-confirm {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.66rem;
+    font-weight: 600;
+    color: var(--signal);
+    background: color-mix(in srgb, var(--signal) 12%, transparent);
+    border-radius: 980px;
+    padding: 4px 0;
+    transition: opacity 0.3s ease 0.7s;
+  }
+
+  /* Clinic schedule (staff side) */
+  .cl-day {
+    position: relative;
+    z-index: 1;
+    padding: 10px 12px 12px;
+    transform: rotate(1.5deg);
+    transition: transform 0.6s var(--ease);
+  }
+  :global(.case-card:hover) .cl-book {
+    transform: rotate(0deg) translateX(10px);
+  }
+  :global(.case-card:hover) .cl-day {
+    transform: rotate(0deg) translateY(-2px);
+  }
+  .cl-sched {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .cl-sched li {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    align-items: center;
+    gap: 6px;
+  }
+  .cl-t {
+    font-size: 0.56rem;
+    color: var(--text-tertiary);
+  }
+  .cl-appt {
+    display: flex;
+    align-items: center;
+    height: 18px;
+    padding: 0 7px;
+    border-radius: 5px;
+    border-left: 3px solid var(--c);
+    background: color-mix(in srgb, var(--c) 15%, var(--surface));
+    font-size: 0.6rem;
+  }
+  .cl-appt i {
+    display: block;
+    width: 60%;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--c);
+    opacity: 0.45;
+  }
+  .cl-appt b {
+    font-weight: 600;
+    color: var(--text);
+  }
+  .c0 {
+    --c: var(--c0);
+  }
+  .c1 {
+    --c: var(--c1);
+  }
+  .c2 {
+    --c: var(--c2);
+  }
+  .cl-sched li.new .cl-appt {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--c) 30%, transparent);
+    transition: opacity 0.4s ease 1s, transform 0.5s var(--ease) 1s;
+  }
+
+  /* Medical record chip */
+  .cl-record {
+    position: absolute;
+    right: -14px;
+    bottom: -18px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 9px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-md);
+    transition: opacity 0.4s ease 1.5s, transform 0.5s var(--ease) 1.5s;
+  }
+  .cl-paw {
+    width: 16px;
+    height: 16px;
+    color: var(--c2);
+  }
+  .cl-rec-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .cl-rec-text b {
+    font-size: 0.6rem;
+    font-weight: 600;
+  }
+  .cl-rec-text span {
+    font-size: 0.56rem;
+    color: var(--text-tertiary);
+  }
+  .cl-ok {
+    font-size: 0.62rem;
+    color: var(--signal);
+  }
+
+  /* Initial state, before the card scrolls into view */
+  :global(.reveal:not(.is-visible)) .cl-slot.on {
+    color: var(--text-secondary);
+    background: transparent;
+    border-color: var(--border);
+  }
+  :global(.reveal:not(.is-visible)) .cl-confirm {
+    opacity: 0;
+  }
+  :global(.reveal:not(.is-visible)) .cl-sched li.new .cl-appt {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  :global(.reveal:not(.is-visible)) .cl-record {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cl *,
+    .cl-book,
+    .cl-day {
+      transition: none !important;
+    }
+  }
+</style>
