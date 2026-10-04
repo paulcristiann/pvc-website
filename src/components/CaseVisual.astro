@@ -2,10 +2,10 @@
 import ClinicMockup from './ClinicMockup.astro';
 import EnrollmentMockup from './EnrollmentMockup.astro';
 import AiFilterMockup from './AiFilterMockup.astro';
-import MeshMockup from './MeshMockup.astro';
+import NearbyMockup from './NearbyMockup.astro';
 
 interface Props {
-  visual: 'enrollment' | 'clinic' | 'ai' | 'mesh';
+  visual: 'enrollment' | 'clinic' | 'ai' | 'nearby';
 }
 const { visual } = Astro.props;
 ---
@@ -13,4 +13,4 @@ const { visual } = Astro.props;
 {visual === 'clinic' && <ClinicMockup />}
 {visual === 'enrollment' && <EnrollmentMockup />}
 {visual === 'ai' && <AiFilterMockup />}
-{visual === 'mesh' && <MeshMockup />}
+{visual === 'nearby' && <NearbyMockup />}

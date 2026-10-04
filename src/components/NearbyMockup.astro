@@ -1,0 +1,217 @@
+---
+// Stylized, data-free mockup: a phone with no signal running a group chat
+// with people in range, plus a two-player game card.
+const board = ['x', 'o', '', '', 'x', 'o', '', '', ''];
+---
+
+<div class="nb" aria-hidden="true">
+  <div class="nb-phone">
+    <div class="nb-status mono">
+      <span>No signal</span>
+      <svg viewBox="0 0 24 24" fill="currentColor" class="nb-plane">
+        <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"></path>
+      </svg>
+    </div>
+    <div class="nb-head">
+      <span class="nb-avatars"><i class="a0"></i><i class="a1"></i><i class="a2"></i></span>
+      <span class="nb-title">
+        <b>Row 14</b>
+        <span class="mono">3 people nearby</span>
+      </span>
+    </div>
+    <div class="nb-chat">
+      <p class="nb-msg them" style="--i:0">Anyone up for a game?</p>
+      <p class="nb-msg me" style="--i:1">Me! Starting one now</p>
+      <p class="nb-msg them alt" style="--i:2">Landing in 2h, plenty of time</p>
+    </div>
+  </div>
+
+  <div class="nb-game">
+    <p class="nb-game-head mono">Your move</p>
+    <div class="nb-board">
+      {board.map((c, i) => <span class:list={[c, { next: i === 8 }]}>{c === 'x' ? '×' : c === 'o' ? '○' : ''}</span>)}
+    </div>
+  </div>
+</div>
+
+<style>
+  .nb {
+    position: relative;
+    width: 100%;
+    max-width: 330px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+  .nb-phone {
+    width: 210px;
+    padding: 10px 12px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: var(--shadow-sm);
+    transform: translateX(-34px);
+  }
+  .nb-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.54rem;
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+    padding: 0 2px;
+  }
+  .nb-plane {
+    width: 11px;
+    height: 11px;
+    color: #ff9f0a;
+  }
+  .nb-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nb-avatars {
+    display: flex;
+  }
+  .nb-avatars i {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--surface);
+    margin-left: -5px;
+  }
+  .nb-avatars i:first-child {
+    margin-left: 0;
+  }
+  .a0 {
+    background: #ff9f0a;
+  }
+  .a1 {
+    background: #30b06e;
+  }
+  .a2 {
+    background: #bf5af2;
+  }
+  .nb-title {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .nb-title b {
+    font-size: 0.7rem;
+    font-weight: 650;
+  }
+  .nb-title span {
+    font-size: 0.54rem;
+    color: var(--signal);
+  }
+  .nb-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .nb-msg {
+    max-width: 82%;
+    font-size: 0.62rem;
+    line-height: 1.3;
+    padding: 5px 9px;
+    border-radius: 12px;
+    transition: opacity 0.4s ease, transform 0.4s var(--ease);
+    transition-delay: calc(0.2s + var(--i) * 0.35s);
+  }
+  .nb-msg.them {
+    align-self: flex-start;
+    background: var(--surface-2);
+    border-bottom-left-radius: 4px;
+  }
+  .nb-msg.me {
+    align-self: flex-end;
+    background: var(--accent);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+
+  /* Game card */
+  .nb-game {
+    position: absolute;
+    right: 0;
+    bottom: -10px;
+    width: 104px;
+    padding: 9px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow-md);
+    transform: rotate(3deg);
+    transition: opacity 0.4s ease 1.3s, transform 0.5s var(--ease) 1.3s;
+  }
+  :global(.case-card:hover) .nb-game {
+    transform: rotate(0deg) translateY(-2px);
+  }
+  .nb-game-head {
+    font-size: 0.56rem;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .nb-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+  .nb-board span {
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 5px;
+    background: var(--surface-2);
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .nb-board .x {
+    color: var(--accent);
+  }
+  .nb-board .o {
+    color: #bf5af2;
+  }
+  .nb-board .next {
+    box-shadow: inset 0 0 0 1.5px var(--accent);
+    animation: nb-pulse 2.4s var(--ease) infinite;
+  }
+  @keyframes nb-pulse {
+    50% {
+      box-shadow: inset 0 0 0 1.5px transparent;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nb-phone {
+      width: 196px;
+      transform: translateX(-46px);
+    }
+    .nb-game {
+      width: 88px;
+      right: -6px;
+    }
+  }
+
+  /* Initial state, before the card scrolls into view */
+  :global(.reveal:not(.is-visible)) .nb-msg {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  :global(.reveal:not(.is-visible)) .nb-game {
+    opacity: 0;
+    transform: rotate(3deg) translateY(10px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nb * {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+</style>

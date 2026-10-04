@@ -21,7 +21,7 @@ export type CaseStudy = {
   sector: string;
   headline: string;
   pitch: string;
-  visual: 'enrollment' | 'clinic' | 'ai' | 'mesh';
+  visual: 'enrollment' | 'clinic' | 'ai' | 'nearby';
   clientHeading?: string;
   client: string;
   challenge: { intro: string; needs: string[] };
@@ -308,10 +308,10 @@ export const caseStudies: CaseStudy[] = [
     },
     kind: 'iOS app',
     sector: 'Messaging · peer-to-peer',
-    headline: 'Offline messaging over a peer-to-peer mesh',
+    headline: 'Offline chat and games, phone to phone',
     pitch:
-      'A chat app that links nearby phones into a mesh, so messages hop from phone to phone with no internet, servers or accounts. My own product, made for flights, festivals and anywhere without signal.',
-    visual: 'mesh',
+      'A peer-to-peer app for chatting, group chats and games with people around you, with no internet, servers or accounts. My own product, made for flights, festivals and anywhere without signal.',
+    visual: 'nearby',
     clientHeading: 'The idea',
     client:
       'Nearby is my own product. Some of the moments we most want to message each other, on a plane, on a train abroad, in a packed crowd, are exactly when there is no signal.',
@@ -319,7 +319,7 @@ export const caseStudies: CaseStudy[] = [
       intro: 'Building a chat app without the internet means solving everything a server normally does. Nearby had to:',
       needs: [
         'find people nearby and connect automatically, without accounts or phone numbers,',
-        'carry messages further than one phone can reach by relaying them through others,',
+        'support group chats and games directly between phones, with no server in the middle,',
         'keep running in the background without draining the battery,',
         'keep every conversation private, on the device and nowhere else.',
       ],
@@ -329,7 +329,7 @@ export const caseStudies: CaseStudy[] = [
         title: 'For people chatting',
         items: [
           'An inbox of people nearby, with requests to filter strangers.',
-          'One-on-one and group chats, relayed phone to phone across the group.',
+          'One-on-one and group chats with everyone in range.',
           'Photo sharing over a direct connection.',
           'Five built-in two-player games for when you’re offline anyway.',
           'Go invisible any time.',
@@ -338,7 +338,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: 'Under the hood',
         items: [
-          'Peer-to-peer connections with a range of roughly 100 metres per hop.',
+          'Direct peer-to-peer connections between phones in range.',
           'Chats stay on the device and resume automatically when people are back in range.',
           'Runs on iPhone, iPad, Mac and Apple Vision.',
           'Available in English, Spanish and Russian.',
@@ -363,7 +363,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: 'Nothing to go down',
         body:
-          'There is no server behind Nearby. Every phone in range helps carry the conversation, so it works where other chat apps can’t.',
+          'There is no server behind Nearby. Phones connect directly to each other, so it works where other chat apps can’t.',
       },
       {
         title: 'Private by design',
@@ -376,7 +376,7 @@ export const caseStudies: CaseStudy[] = [
           'Low-energy connections keep it running in the background without draining the battery.',
       },
     ],
-    tags: ['iOS', 'Peer-to-peer', 'Mesh networking', 'Privacy', 'Offline-first', 'AI-powered workflow'],
+    tags: ['iOS', 'Peer-to-peer', 'Group chat', 'Games', 'Privacy', 'Offline-first'],
   },
 ];
 export type WorkflowStep = { n: string; title: string; body: string };

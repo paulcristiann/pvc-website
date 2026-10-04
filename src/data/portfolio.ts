@@ -165,12 +165,12 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    name: 'Nearby: P2P mesh chatting',
+    name: 'Nearby: offline P2P chat',
     kind: 'Side project',
     icon: '/icons/nearbychat.jpg',
     description:
-      'Chat with people around you, no internet required. Nearby links nearby devices into a peer-to-peer mesh network, so conversations flow directly from phone to phone.',
-    tags: ['P2P', 'Mesh Networking', 'Offline Chat'],
+      'Chat, start group chats and play games with people around you, no internet required. Nearby connects phones directly, peer to peer.',
+    tags: ['P2P', 'Group chat', 'Offline games'],
     website: 'https://nearbychat.app',
     appStore: 'https://apps.apple.com/app/nearby-p2p-mesh-chatting/id6789983060',
   },
