@@ -1,0 +1,31 @@
+---
+// Wraps a claim that still needs Paul's confirmation (see src/data/confirm.ts).
+// Confirmed claims render as plain content.
+import { claims, type ClaimKey } from '../data/confirm';
+
+interface Props {
+  claim?: ClaimKey;
+}
+
+const { claim } = Astro.props;
+const pending = claim ? !claims[claim].confirmed : false;
+---
+
+{
+  pending ? (
+    <span class="tbc" title={`To confirm: ${claim && claims[claim].note}`}>
+      <slot />
+    </span>
+  ) : (
+    <slot />
+  )
+}
+
+<style>
+  .tbc {
+    text-decoration: underline dashed #e8a200;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
+    cursor: help;
+  }
+</style>

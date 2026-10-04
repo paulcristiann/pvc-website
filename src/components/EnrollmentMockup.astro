@@ -1,0 +1,282 @@
+---
+// Stylized, data-free mockup: a course filling up, an ID scan filling the
+// enrollment form, and the form signed on screen.
+const fields = ['Full name', 'ID number', 'Address'];
+---
+
+<div class="enr" aria-hidden="true">
+  <div class="enr-course">
+    <span class="enr-badge mono">Accredited</span>
+    <p class="enr-title">Cybersecurity Specialist</p>
+    <p class="enr-sub">Online course</p>
+    <div class="enr-group">
+      <span class="mono">Group</span>
+      <span class="mono enr-count">18 / 20</span>
+    </div>
+    <span class="enr-bar"><span></span></span>
+    <span class="enr-btn">Enrol</span>
+  </div>
+
+  <div class="enr-form">
+    <div class="enr-scan">
+      <span class="enr-id">
+        <span class="enr-id-photo"></span>
+        <span class="enr-id-lines"><i></i><i></i></span>
+      </span>
+      <span class="mono enr-scan-label">ID scanned</span>
+    </div>
+    <ul class="enr-fields">
+      {
+        fields.map((f, i) => (
+          <li style={`--i:${i}`}>
+            <span class="enr-field-label">{f}</span>
+            <span class="enr-field">
+              <i />
+              <span class="enr-ok">✓</span>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="enr-sign">
+      <svg class="enr-sig" viewBox="0 0 160 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+        <path d="M6 28c10-14 18-20 22-14s-6 18 2 16 14-22 20-18-4 16 4 14 10-12 16-10 0 10 8 8 12-8 18-6"></path>
+      </svg>
+      <span class="enr-signed mono">Signed</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .enr {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    align-items: center;
+  }
+  .enr-course,
+  .enr-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Course card */
+  .enr-course {
+    padding: 14px;
+    transform: rotate(-2deg) translateX(8px);
+    transition: transform 0.6s var(--ease);
+  }
+  .enr-badge {
+    display: inline-block;
+    font-size: 0.56rem;
+    color: var(--signal);
+    border: 1px solid currentColor;
+    border-radius: 5px;
+    padding: 1px 5px;
+    margin-bottom: 8px;
+  }
+  .enr-title {
+    font-size: 0.82rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  .enr-sub {
+    font-size: 0.66rem;
+    color: var(--text-tertiary);
+    margin: 2px 0 10px;
+  }
+  .enr-group {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.58rem;
+    color: var(--text-tertiary);
+    margin-bottom: 4px;
+  }
+  .enr-count {
+    color: var(--text-secondary);
+  }
+  .enr-bar {
+    display: block;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--surface-3);
+    overflow: hidden;
+  }
+  .enr-bar span {
+    display: block;
+    height: 100%;
+    width: 90%;
+    border-radius: inherit;
+    background: var(--accent);
+    transition: width 1.1s var(--ease) 0.2s;
+  }
+  .enr-btn {
+    display: block;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    border-radius: 980px;
+    padding: 5px 0;
+  }
+
+  /* Enrollment form */
+  .enr-form {
+    position: relative;
+    z-index: 1;
+    padding: 12px 14px 10px;
+    transform: rotate(1.5deg);
+    transition: transform 0.6s var(--ease);
+  }
+  :global(.case-card:hover) .enr-course {
+    transform: rotate(0deg) translateX(8px);
+  }
+  :global(.case-card:hover) .enr-form {
+    transform: rotate(0deg) translateY(-2px);
+  }
+  .enr-scan {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .enr-id {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    width: 52px;
+    height: 32px;
+    padding: 5px;
+    border-radius: 5px;
+    background: var(--surface-2);
+    border: 1px dashed var(--accent);
+  }
+  .enr-id-photo {
+    width: 14px;
+    height: 18px;
+    border-radius: 3px;
+    background: var(--surface-3);
+    flex-shrink: 0;
+  }
+  .enr-id-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+  .enr-id-lines i,
+  .enr-field i {
+    display: block;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--surface-3);
+  }
+  .enr-id-lines i:last-child {
+    width: 60%;
+  }
+  .enr-scan-label {
+    white-space: nowrap;
+    font-size: 0.6rem;
+    color: var(--accent);
+  }
+  .enr-fields {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .enr-fields li {
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    align-items: center;
+    gap: 6px;
+  }
+  .enr-field-label {
+    font-size: 0.6rem;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+  }
+  .enr-field {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 16px;
+    padding: 0 6px;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+  }
+  .enr-field i {
+    flex: 1;
+    background: var(--text-tertiary);
+    opacity: 0.45;
+    transform-origin: left;
+    transition: transform 0.5s var(--ease);
+    transition-delay: calc(0.5s + var(--i) * 180ms);
+  }
+  .enr-ok {
+    font-size: 0.6rem;
+    color: var(--signal);
+    transition: opacity 0.3s ease;
+    transition-delay: calc(0.8s + var(--i) * 180ms);
+  }
+  .enr-sign {
+    position: relative;
+    margin-top: 8px;
+    padding-top: 4px;
+    border-top: 1px dashed var(--border-strong);
+  }
+  .enr-sig {
+    color: var(--accent);
+    width: 62%;
+    height: 22px;
+    stroke-dasharray: 260;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1.2s var(--ease) 1.4s;
+  }
+  .enr-signed {
+    position: absolute;
+    right: 0;
+    bottom: 2px;
+    font-size: 0.58rem;
+    color: var(--signal);
+    border: 1px solid currentColor;
+    padding: 1px 5px;
+    border-radius: 5px;
+    transition: opacity 0.3s ease 2.4s;
+  }
+
+  /* Initial state, before the card scrolls into view */
+  :global(.reveal:not(.is-visible)) .enr-bar span {
+    width: 40%;
+  }
+  :global(.reveal:not(.is-visible)) .enr-field i {
+    transform: scaleX(0);
+  }
+  :global(.reveal:not(.is-visible)) .enr-ok,
+  :global(.reveal:not(.is-visible)) .enr-signed {
+    opacity: 0;
+  }
+  :global(.reveal:not(.is-visible)) .enr-sig {
+    stroke-dashoffset: 260;
+  }
+  /* The two cards need ~260px; scale down on the narrowest phones */
+  @media (max-width: 360px) {
+    .enr {
+      zoom: 0.8;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .enr *,
+    .enr-course,
+    .enr-form {
+      transition: none !important;
+    }
+  }
+</style>

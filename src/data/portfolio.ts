@@ -5,32 +5,35 @@
 
 export const profile = {
   name: 'Paul Vasile',
-  role: 'Engineer · Architect · Product Builder',
+  role: 'Fullstack Engineer',
+  eyebrow: 'Fullstack engineer · 10+ years shipping · AI-powered workflow',
   tagline:
-    'I build scalable, secure, high-performance mobile software — from architecture to App Store.',
+    'I design, build and run complete products, from web platforms and backends to mobile apps, for teams that can’t afford for them to fail. Years of engineering make it solid; AI makes me faster than ever.',
   location: 'Bucharest, Romania',
   email: 'paulcristian04@proton.me',
   // WhatsApp click-to-chat: digits only, international format, no + or spaces.
   whatsappNumber: '40756850399',
 
   about:
-    'Senior Software Engineer specializing in iOS with 9+ years of experience ' +
-    'delivering mobile applications for startups, enterprise organizations, and ' +
-    'fintech. As a Toptal engineer, I’ve partnered with international clients to ' +
-    'build scalable, secure, and high-performance software. My expertise spans iOS ' +
-    'development, software architecture, networking, application security, and ' +
-    'modernizing complex codebases.',
+    'I’ve been a fullstack engineer my whole career, shipping web platforms, backends ' +
+    'and mobile apps. My work spans security at a digital-native bank, fiscal compliance ' +
+    'across European markets, retail and real estate apps used at scale, payments, and ' +
+    'national-scale systems at Romania’s institute for informatics. Today I build whole ' +
+    'products, from database to deployment, and I use AI as a force multiplier inside a ' +
+    'process designed so that speed never costs reliability.',
   socials: [
-    { label: 'GitHub', href: 'https://github.com/paulcristiann' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/paul-vasile' },
     { label: 'Toptal', href: 'https://www.toptal.com/developers/resume/paul-vasile' },
   ],
 };
 
+// Sourced from the Toptal profile or the repos only. Never add usage metrics
+// here without a source.
 export const stats: { value: string; label: string }[] = [
-  { value: '9+', label: 'Years of engineering experience' },
+  { value: '10+', label: 'Years shipping software' },
   { value: 'Top 3%', label: 'Of global talent, vetted by Toptal' },
-  { value: '10+', label: 'Client engagements worldwide' },
+  { value: 'CEH', label: 'Certified Ethical Hacker, so security is built in from day one' },
+  { value: '6', label: 'Industries: banking, retail, real estate, compliance, education, health' },
 ];
 
 export type Publication = {
@@ -44,56 +47,63 @@ export type Experience = {
   company: string;
   summary: string;
   highlights: string[];
-  tags: string[];
   publications?: Publication[];
 };
 
+// Roles and dates follow the Toptal profile.
 export const experience: Experience[] = [
   {
+    role: 'Fullstack Engineer',
+    company: 'Independent · client platforms',
+    summary:
+      'Designing, building and running complete platforms for clients, using AI to move fast and engineering discipline to keep them reliable.',
+    highlights: [],
+  },
+  {
     role: 'Senior Software Engineer',
+    company: 'Marks & Spencer',
+    summary:
+      'Building one of the UK’s largest retail apps alongside many teams shipping every week, with AI tools part of my daily workflow.',
+    highlights: [
+      'Core part of the product detail page rearchitecture; helped refactor the entire basket module in under two months.',
+      'Accessible, polished UI (VoiceOver, Dynamic Type) and rendering performance work.',
+      'GraphQL integration and asynchronous data flows, backed by unit and UI tests.',
+    ],
+  },
+  {
+    role: 'Senior Security Engineer',
+    company: 'Salt Bank',
+    summary: 'Helped lay the mobile security foundation of one of Romania’s first digital-native banks.',
+    highlights: [
+      'Runtime self-protection and jailbreak/root detection.',
+      'Source code security reviews and MASVS-compliant penetration testing.',
+      'Evaluated and selected the bank’s mobile security vendors.',
+    ],
+  },
+  {
+    role: 'Senior Fullstack Engineer · Top 3%',
     company: 'Toptal',
     summary:
-      'Hand-picked into Toptal’s network of the top 3% of global engineering talent. 10+ engagements for startups and enterprise organizations, spanning iOS development, software architecture, application security, and networking.',
+      'Hand-picked into Toptal’s network of the top 3% of global engineering talent. Engagements for startups and enterprises across real estate, fintech, compliance and consumer apps, delivered with an AI-powered workflow.',
     highlights: [
-      'Trusted by international clients including Property Finder, a leading real-estate marketplace, and fiskaly/fiskaltrust, specialists in fiscal compliance.',
-      'Modernized complex legacy codebases into scalable, maintainable architectures.',
-      'Delivered secure, high-performance software across real estate, fintech, and compliance domains.',
+      'Property Finder (MENA’s leading real-estate marketplace): principal engineer; shipped remotely configurable SSL pinning and performance work.',
+      'fiskaltrust: adapted point-of-sale compliance software for the Spanish and Italian markets, including a receipt-printing engine and a move to new hardware security modules.',
+      'Payments and marketplaces: Stripe and Plaid cashback flows for an eco-products marketplace, and payments plus Apple/Google sign-in for a subscription product.',
+      'Mobile and back-end lead on an MVP built on AWS and PostgreSQL, from product concept to scheduled launch; more fintech MVPs as lead architect.',
     ],
-    tags: ['Swift', 'SwiftUI', 'Software Architecture', 'Application Security'],
   },
   {
-    role: 'Senior iOS Engineer',
-    company: 'Mindera · Marks & Spencer',
+    role: 'Senior Researcher · Head of Cybersecurity',
+    company: 'National Institute for Research & Development in Informatics (ICI)',
     summary:
-      'Core contributor to one of the UK’s largest retail applications, engineering at enterprise scale.',
+      'Research and development on national and European Commission-funded projects, growing from engineer to leading the cybersecurity team.',
     highlights: [
-      'Core part of the product detail page (PDP) rearchitecture and refactoring initiative.',
-      'Helped refactor the entire basket module in under two months.',
-      'Modernized legacy components with the latest Apple technologies.',
+      'Architected a scalable, microservice-based system with a cryptography provider that validates the authenticity of sales data from Romania’s next-generation cash registers.',
+      'Led security audits and introduced a vulnerability-analysis method that made the work about 50% faster.',
+      'Built a digital identity wallet with biometric authentication and encryption.',
+      'Co-authored a comparative study of AI-driven cybersecurity solutions.',
+      'Mentored junior researchers; co-authored research on verifiable credentials.',
     ],
-    tags: ['SwiftUI', 'GraphQL', 'Performance Optimization', 'Code Refactoring'],
-  },
-  {
-    role: 'Mobile Security Engineer',
-    company: 'Salt Bank',
-    summary:
-      'Helped lay the mobile security foundation of one of Romania’s first digital-native banks.',
-    highlights: [
-      'Researched and evaluated mobile security vendors to define the bank’s security stack.',
-      'Balanced engineering trade-offs against security capabilities and integration complexity.',
-    ],
-    tags: ['Mobile Security', 'Application Security', 'Technology Strategy'],
-  },
-  {
-    role: 'Software Engineer',
-    company: 'ICI Bucharest',
-    summary:
-      'Software research & development at Romania’s national institute for informatics, contributing to national and European Commission–funded projects.',
-    highlights: [
-      'Built R&D software for European and national research programs.',
-      'Grew from junior engineer to leading a cybersecurity team.',
-    ],
-    tags: ['Software R&D', 'European Projects', 'Cybersecurity'],
     publications: [
       {
         title:
@@ -108,7 +118,7 @@ export const experience: Experience[] = [
         href: 'https://icvl.eu/documents/51/art._10_S2_Dinu_Vasile2.pdf',
       },
       {
-        title: 'eDIS — Electronic Diploma Integrity Service',
+        title: 'eDIS: Electronic Diploma Integrity Service',
         venue: 'Romanian Cyber Security Journal · 2021',
         href: 'https://rocys.ici.ro/documents/19/2021_fall_article_6.pdf',
       },
@@ -140,12 +150,12 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    name: 'Nearby: P2P mesh chatting',
+    name: 'Nearby: offline P2P chat',
     kind: 'Side project',
     icon: '/icons/nearbychat.jpg',
     description:
-      'Chat with people around you — no internet required. Nearby links nearby devices into a peer-to-peer mesh network, so conversations flow directly from phone to phone.',
-    tags: ['P2P', 'Mesh Networking', 'Offline Chat'],
+      'Chat, start group chats and play games with people around you, no internet required. Nearby connects phones directly, peer to peer.',
+    tags: ['P2P', 'Group chat', 'Offline games'],
     website: 'https://nearbychat.app',
     appStore: 'https://apps.apple.com/app/nearby-p2p-mesh-chatting/id6789983060',
   },
@@ -154,7 +164,7 @@ export const projects: Project[] = [
     kind: 'Client work',
     icon: '/icons/ai-filter.jpg',
     description:
-      'AI magic for your photos. Upload a picture, describe the change you want, and let AI do the rest — pre-made filters for instant results or a fully custom mode for creative edits. Built for GlowUp.com.',
+      'AI magic for your photos. Upload a picture, describe the change you want, and let AI do the rest, with pre-made filters for instant results or a fully custom mode for creative edits. Built for GlowUp.com.',
     tags: ['AI', 'Image Generation', 'In-App Purchases'],
     appStore: 'https://apps.apple.com/ro/app/ai-filter/id6741488330',
   },
@@ -177,7 +187,7 @@ export const clientApps: ClientApp[] = [
   },
   {
     name: 'M&S',
-    descriptor: 'Marks & Spencer — fashion, food & homeware',
+    descriptor: 'Marks & Spencer: fashion, food & homeware',
     icon: '/icons/ms.jpg',
     href: 'https://apps.apple.com/ro/app/m-s-fashion-food-homeware/id538410698',
   },
@@ -194,6 +204,8 @@ export const clientApps: ClientApp[] = [
     href: 'https://videowidget.com',
   },
 ];
+
+export const certifications = ['Certified Ethical Hacker (EC-Council)'];
 
 export const education: { school: string; degree: string; field: string }[] = [
   {

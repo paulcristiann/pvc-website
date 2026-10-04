@@ -1,0 +1,197 @@
+---
+// Stylized mockup of AI Filter: a photo transforming as a prompt is applied.
+const filters = ['Golden hour', 'Oil painting', 'Anime', 'Custom'];
+---
+
+<div class="aif" aria-hidden="true">
+  <div class="aif-photo">
+    <div class="aif-before">
+      <span class="aif-sun"></span>
+      <span class="aif-hill h1"></span>
+      <span class="aif-hill h2"></span>
+    </div>
+    <div class="aif-after">
+      <span class="aif-sun"></span>
+      <span class="aif-hill h1"></span>
+      <span class="aif-hill h2"></span>
+    </div>
+    <span class="aif-scan"></span>
+    <span class="aif-badge mono">AI</span>
+  </div>
+  <div class="aif-prompt">
+    <span class="aif-prompt-text">make it a warm golden-hour shot</span>
+    <span class="aif-go">↑</span>
+  </div>
+  <div class="aif-filters">
+    {filters.map((f, i) => <span class:list={['aif-chip', { on: i === 0 }]}>{f}</span>)}
+  </div>
+</div>
+
+<style>
+  .aif {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .aif-photo {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    max-width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .aif-before,
+  .aif-after {
+    position: absolute;
+    inset: 0;
+  }
+  .aif-before {
+    background: linear-gradient(#b9c6d3, #dfe5ea 60%, #c8d0c4);
+  }
+  .aif-after {
+    background: linear-gradient(#f59e42, #f7c87a 55%, #e2a35c);
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 1.6s var(--ease) 0.3s;
+  }
+  :global(.reveal:not(.is-visible)) .aif-after {
+    clip-path: inset(0 100% 0 0);
+  }
+  .aif-sun {
+    position: absolute;
+    width: 22%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    left: 62%;
+    top: 18%;
+    background: #f4f6f8;
+  }
+  .aif-after .aif-sun {
+    background: #fff2c9;
+    box-shadow: 0 0 40px 12px rgba(255, 220, 140, 0.8);
+    top: 30%;
+  }
+  .aif-hill {
+    position: absolute;
+    border-radius: 50%;
+    bottom: -40%;
+  }
+  .aif-hill.h1 {
+    width: 90%;
+    height: 80%;
+    left: -20%;
+    background: #8fa38c;
+  }
+  .aif-hill.h2 {
+    width: 100%;
+    height: 70%;
+    right: -30%;
+    background: #6f8770;
+  }
+  .aif-after .h1 {
+    background: #a8653a;
+  }
+  .aif-after .h2 {
+    background: #7d4528;
+  }
+  .aif-scan {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 0 12px 2px rgba(255, 255, 255, 0.9);
+    opacity: 0;
+  }
+  :global(.reveal.is-visible) .aif-scan {
+    animation: aif-scan 1.6s var(--ease) 0.3s;
+  }
+  @keyframes aif-scan {
+    0% {
+      left: 0;
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+  .aif-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 0.62rem;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+    padding: 3px 7px;
+    border-radius: 6px;
+  }
+  .aif-prompt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 980px;
+    padding: 6px 6px 6px 14px;
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+  }
+  .aif-prompt-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+  .aif-go {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.72rem;
+  }
+  .aif-filters {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .aif-chip {
+    font-size: 0.68rem;
+    padding: 4px 9px;
+    border-radius: 980px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+  .aif-chip.on {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  @media (max-width: 420px) {
+    .aif-chip:nth-child(4) {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .aif-after {
+      clip-path: none;
+      transition: none;
+    }
+    .aif-scan {
+      display: none;
+    }
+  }
+</style>

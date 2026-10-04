@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
+import CommandPalette from '../components/CommandPalette.astro';
 import { profile } from '../data/portfolio';
+import { pendingClaims } from '../data/confirm';
 
 interface Props {
   title?: string;
@@ -8,16 +10,25 @@ interface Props {
 }
 
 const {
-  title = `${profile.name} — ${profile.role}`,
+  title = `${profile.name} · ${profile.role}`,
   description = profile.tagline,
 } = Astro.props;
 
+// Never publish unconfirmed claims. Preview locally with ALLOW_UNCONFIRMED=1.
+if (import.meta.env.PROD && pendingClaims.length && process.env.ALLOW_UNCONFIRMED !== '1') {
+  throw new Error(
+    `Unconfirmed claims would go live. Confirm or remove them in src/data/confirm.ts:\n` +
+      pendingClaims.map((c) => `  - ${c.key}: ${c.note}`).join('\n'),
+  );
+}
+
+const home = Astro.url.pathname === '/' ? '' : '/';
 const nav = [
-  { label: 'About', href: '#about' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Apps', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Work', href: `${home}#work` },
+  { label: 'How I work', href: `${home}#workflow` },
+  { label: 'Experience', href: `${home}#experience` },
 ];
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -28,13 +39,13 @@ const nav = [
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="canonical" href={Astro.site} />
+    <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={Astro.site} />
+    <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -54,13 +65,31 @@ const nav = [
     />
   </head>
   <body>
+    {
+      pendingClaims.length > 0 && (
+        <div class="preview-banner mono" role="note">
+          Preview · {pendingClaims.length} claims marked <span class="tbc-sample">like this</span> await
+          confirmation
+        </div>
+      )
+    }
     <header class="nav">
       <div class="nav-inner container">
-        <a class="nav-brand" href="#top">{profile.name}</a>
-        <nav class="nav-links">
+        <a class="nav-brand" href="/">{profile.name}</a>
+        <nav class="nav-links" aria-label="Sections">
           {nav.map((item) => <a href={item.href}>{item.label}</a>)}
         </nav>
-        <a class="nav-cta" href="#contact">Get in touch</a>
+        <div class="nav-actions">
+          <button class="nav-k" type="button" data-cmdk-open aria-label="Open menu and search">
+            <svg class="nav-k-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"
+              ><path d="M4 7h16M4 12h16M4 17h10"></path></svg
+            >
+            <span class="nav-k-label">Search</span>
+            <span class="nav-k-label-m">Menu</span>
+            <kbd>⌘K</kbd>
+          </button>
+          <a class="nav-cta" href={`${home}#contact`}>Get in touch</a>
+        </div>
       </div>
     </header>
 
@@ -69,12 +98,27 @@ const nav = [
     </main>
 
     <footer class="footer">
-      <div class="container">
-        <p>© {new Date().getFullYear()} {profile.name}. Built with Astro.</p>
+      <div class="container footer-inner">
+        <p>© {new Date().getFullYear()} {profile.name} · {profile.role}</p>
+        <nav class="footer-links" aria-label="Footer">
+          {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+          <a href="#top">Back to top ↑</a>
+        </nav>
       </div>
     </footer>
 
+    <CommandPalette />
+
     <script>
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Fresh page loads always start at the top. Some embedding hosts keep the
+      // previous page's scroll offset; scrollIntoView also moves those ancestors.
+      const navEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+      if (!location.hash && navEntry?.type === 'navigate') {
+        document.documentElement.scrollIntoView({ block: 'start', behavior: 'instant' });
+      }
+
       // Reveal-on-scroll
       const observer = new IntersectionObserver(
         (entries) => {
@@ -94,9 +138,45 @@ const nav = [
       const onScroll = () => nav?.classList.toggle('scrolled', window.scrollY > 12);
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
+
+      // Pointer spotlight: one listener, positions written as CSS vars
+      if (!reduced) {
+        document.addEventListener(
+          'pointermove',
+          (e) => {
+            const el = (e.target as Element | null)?.closest<HTMLElement>('.spot');
+            if (!el) return;
+            const r = el.getBoundingClientRect();
+            el.style.setProperty('--x', `${e.clientX - r.left}px`);
+            el.style.setProperty('--y', `${e.clientY - r.top}px`);
+          },
+          { passive: true },
+        );
+      }
     </script>
 
     <style>
+      .preview-banner {
+        position: fixed;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 200;
+        font-size: 0.74rem;
+        padding: 8px 14px;
+        border-radius: 980px;
+        background: var(--surface);
+        border: 1px solid #e8a200;
+        color: var(--text-secondary);
+        box-shadow: var(--shadow-md);
+        width: max-content;
+        max-width: calc(100vw - 32px);
+        text-align: center;
+      }
+      .tbc-sample {
+        text-decoration: underline dashed #e8a200;
+        text-underline-offset: 3px;
+      }
       .nav {
         position: fixed;
         top: 0;
@@ -117,6 +197,7 @@ const nav = [
         align-items: center;
         justify-content: space-between;
         height: 56px;
+        gap: 16px;
       }
       .nav-brand {
         font-weight: 600;
@@ -125,7 +206,7 @@ const nav = [
       }
       .nav-links {
         display: flex;
-        gap: 30px;
+        gap: 28px;
       }
       .nav-links a {
         font-size: 0.9rem;
@@ -134,6 +215,29 @@ const nav = [
       }
       .nav-links a:hover {
         color: var(--text);
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .nav-k {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font: inherit;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 980px;
+        padding: 5px 6px 5px 12px;
+        cursor: pointer;
+        transition: border-color 0.2s ease, color 0.2s ease;
+      }
+      .nav-k:hover {
+        color: var(--text);
+        border-color: var(--border-strong);
       }
       .nav-cta {
         font-size: 0.9rem;
@@ -148,14 +252,55 @@ const nav = [
         background: var(--accent-hover);
       }
       .footer {
-        padding: 40px 0;
+        padding: 40px 0 72px;
         border-top: 1px solid var(--border);
         color: var(--text-tertiary);
         font-size: 0.85rem;
-        text-align: center;
       }
-      @media (max-width: 640px) {
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 22px;
+      }
+      .footer-links a {
+        color: var(--text-secondary);
+        transition: color 0.2s ease;
+      }
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+      .nav-k-icon,
+      .nav-k-label-m {
+        display: none;
+      }
+      /* Below 860px the section links are hidden, so the palette doubles as the menu */
+      @media (max-width: 860px) {
         .nav-links {
+          display: none;
+        }
+        .nav-k {
+          gap: 6px;
+          padding: 6px 13px 6px 11px;
+          color: var(--text);
+        }
+        .nav-k-icon,
+        .nav-k-label-m {
+          display: inline;
+        }
+        .nav-k-label,
+        .nav-k kbd {
+          display: none;
+        }
+      }
+      @media (max-width: 480px) {
+        .nav-cta {
           display: none;
         }
       }
