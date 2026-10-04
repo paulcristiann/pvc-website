@@ -48,7 +48,6 @@ export type Experience = {
   period?: string;
   summary: string;
   highlights: string[];
-  tags: string[];
   publications?: Publication[];
 };
 
@@ -60,7 +59,6 @@ export const experience: Experience[] = [
     summary:
       'Designing, building and running complete platforms for clients, using AI to move fast and engineering discipline to keep them reliable.',
     highlights: [],
-    tags: ['Next.js', 'React', 'PostgreSQL', 'Supabase', 'Docker', 'AI-powered workflow'],
   },
   {
     role: 'Senior Software Engineer',
@@ -73,7 +71,6 @@ export const experience: Experience[] = [
       'Accessible, polished UI (VoiceOver, Dynamic Type) and rendering performance work.',
       'GraphQL integration and asynchronous data flows, backed by unit and UI tests.',
     ],
-    tags: ['Mobile', 'GraphQL', 'Performance', 'Accessibility', 'AI-powered workflow'],
   },
   {
     role: 'Senior Security Engineer',
@@ -85,7 +82,6 @@ export const experience: Experience[] = [
       'Source code security reviews and MASVS-compliant penetration testing.',
       'Evaluated and selected the bank’s mobile security vendors.',
     ],
-    tags: ['Mobile Security', 'Penetration Testing', 'Banking'],
   },
   {
     role: 'Senior Fullstack Engineer · Top 3%',
@@ -99,7 +95,6 @@ export const experience: Experience[] = [
       'Payments and marketplaces: Stripe and Plaid cashback flows for an eco-products marketplace, and payments plus Apple/Google sign-in for a subscription product.',
       'Mobile and back-end lead on an MVP built on AWS and PostgreSQL, from product concept to scheduled launch; more fintech MVPs as lead architect.',
     ],
-    tags: ['Fullstack', 'Stripe', 'AWS', 'PostgreSQL', 'React', 'AI-powered workflow'],
   },
   {
     role: 'Senior Researcher · Head of Cybersecurity',
@@ -114,7 +109,6 @@ export const experience: Experience[] = [
       'Co-authored a comparative study of AI-driven cybersecurity solutions.',
       'Mentored junior researchers; co-authored research on verifiable credentials.',
     ],
-    tags: ['Software Architecture', 'Cryptography', 'Cybersecurity', 'AI', 'Docker', 'CI/CD'],
     publications: [
       {
         title:

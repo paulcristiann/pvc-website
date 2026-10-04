@@ -187,11 +187,6 @@ import { caseStudies, workflow, moreWork } from '../data/work';
                   ))}
                 </ul>
               )}
-              <div class="timeline-tags">
-                {job.tags.map((t) => (
-                  <span class="tag">{t}</span>
-                ))}
-              </div>
               {job.publications && (
                 <details class="pubs">
                   <summary>
@@ -685,12 +680,6 @@ import { caseStudies, workflow, moreWork } from '../data/work';
     position: absolute;
     left: 0;
     color: var(--text-tertiary);
-  }
-  .timeline-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 14px;
   }
   .pubs {
     margin-top: 16px;
