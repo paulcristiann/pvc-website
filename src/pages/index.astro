@@ -84,17 +84,17 @@ import { caseStudies, workflow, moreWork } from '../data/work';
 
       <div id="more" class="more">
         <h3 class="more-title reveal">More of my work</h3>
-        <div class="more-grid">
+        <div class="more-list">
           {
             moreWork.map((w) => (
-              <article class="more-card card spot reveal">
-                <p class="more-client mono">{w.client}</p>
-                <h4>{w.title}</h4>
-                <p class="more-body">{w.body}</p>
-                <div class="more-tags">
-                  {w.tags.map((t) => (
-                    <span class="tag">{t}</span>
-                  ))}
+              <article class="more-row card spot reveal">
+                <div class="more-head">
+                  <p class="more-client mono">{w.client}</p>
+                  <h4>{w.title}</h4>
+                </div>
+                <div>
+                  <p class="more-body">{w.body}</p>
+                  <p class="more-tags mono">{w.tags.join(' · ')}</p>
                 </div>
               </article>
             ))
@@ -465,49 +465,41 @@ import { caseStudies, workflow, moreWork } from '../data/work';
     letter-spacing: -0.025em;
     margin-bottom: 24px;
   }
-  .more-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
-  }
-  .more-card {
-    flex: 0 1 calc((100% - 48px) / 4);
-    padding: 22px;
+  .more-list {
     display: flex;
     flex-direction: column;
-    min-width: 0;
+    gap: 10px;
+  }
+  .more-row {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) 2.2fr;
+    gap: 8px 32px;
+    align-items: baseline;
+    padding: 20px 24px;
   }
   .more-client {
     font-size: 0.7rem;
     color: var(--text-tertiary);
-    margin-bottom: 10px;
+    margin-bottom: 4px;
   }
-  .more-card h4 {
+  .more-row h4 {
     font-size: 1.02rem;
     font-weight: 650;
     letter-spacing: -0.015em;
-    margin-bottom: 8px;
   }
   .more-body {
     color: var(--text-secondary);
-    font-size: 0.88rem;
-    flex: 1;
+    font-size: 0.92rem;
   }
   .more-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 14px;
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    margin-top: 8px;
   }
-  @media (max-width: 980px) {
-    .more-card {
-      flex-basis: calc((100% - 16px) / 2);
-    }
-  }
-  @media (max-width: 560px) {
-    .more-card {
-      flex-basis: 100%;
+  @media (max-width: 860px) {
+    .more-row {
+      grid-template-columns: 1fr;
+      padding: 18px 20px;
     }
   }
 
