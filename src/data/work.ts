@@ -445,12 +445,6 @@ export const moreWork: MoreWork[] = [
     tags: ['Fullstack', 'Stripe', 'Plaid'],
   },
   {
-    title: 'AI photo products',
-    client: 'AI Filter · GlowUp',
-    body: 'Prompt-based generative photo editing, designed and launched end to end, plus new AI generation features and stability fixes on GlowUp.',
-    tags: ['AI', 'iOS', 'App Store'],
-  },
-  {
     title: 'Digital identity wallet',
     client: 'Research & development',
     body: 'A mobile wallet for managing and verifying digital identities, secured with biometric authentication and encryption.',

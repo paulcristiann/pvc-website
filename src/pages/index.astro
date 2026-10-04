@@ -466,11 +466,13 @@ import { caseStudies, workflow, moreWork } from '../data/work';
     margin-bottom: 24px;
   }
   .more-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 16px;
   }
   .more-card {
+    flex: 0 1 calc((100% - 48px) / 4);
     padding: 22px;
     display: flex;
     flex-direction: column;
@@ -499,13 +501,13 @@ import { caseStudies, workflow, moreWork } from '../data/work';
     margin-top: 14px;
   }
   @media (max-width: 980px) {
-    .more-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .more-card {
+      flex-basis: calc((100% - 16px) / 2);
     }
   }
   @media (max-width: 560px) {
-    .more-grid {
-      grid-template-columns: 1fr;
+    .more-card {
+      flex-basis: 100%;
     }
   }
 
