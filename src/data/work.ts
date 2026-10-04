@@ -125,7 +125,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'wecare',
-    name: 'WeCare',
+    name: 'wecarecompany.ro',
     nameClaim: 'wecareName',
     roleClaim: 'wecareRole',
     role: 'Designed, built and maintained end to end',
@@ -216,7 +216,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'ai-filter',
-    name: 'AI Filter',
+    name: 'AI Filter · App Store',
     role: 'Architecture, app and launch, end to end',
     url: 'https://apps.apple.com/ro/app/ai-filter/id6741488330',
     linkLabel: 'App Store',
@@ -297,7 +297,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'nearby',
-    name: 'Nearby',
+    name: 'nearbychat.app',
     role: 'My own product: idea, design, build and release',
     url: 'https://apps.apple.com/app/nearby-p2p-mesh-chatting/id6789983060',
     linkLabel: 'App Store',
