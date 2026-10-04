@@ -214,20 +214,21 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'ai-filter',
-    name: 'AI Filter · App Store',
+    name: 'ai-filter.aesthetic.me',
     role: 'Architecture, app and launch, end to end',
-    url: 'https://apps.apple.com/ro/app/ai-filter/id6741488330',
-    linkLabel: 'App Store',
+    url: 'https://ai-filter.aesthetic.me',
+    linkLabel: 'ai-filter.aesthetic.me',
     visit: {
       title: 'Try it yourself',
-      body: 'Download AI Filter on iPhone or Mac and describe your first edit.',
-      cta: 'Get it on the App Store',
+      body: 'Download AI Filter on your iPhone and describe your first edit.',
+      cta: 'Visit ai-filter.aesthetic.me',
+      secondary: { label: 'App Store', url: 'https://apps.apple.com/ro/app/ai-filter/id6741488330' },
     },
-    kind: 'iOS & Mac app',
+    kind: 'iOS app',
     sector: 'Consumer AI · photo editing',
     headline: 'Generative photo editing, as simple as a filter',
     pitch:
-      'An iPhone and Mac app where people upload a photo, describe the change in plain words and let AI transform it in seconds, with one-tap filters for instant results. Built for GlowUp and shipped from concept to the App Store.',
+      'An iPhone app where people upload a photo, describe the change in plain words or pick a suggestion, and AI reimagines it in seconds. No sliders, no learning curve. Built for GlowUp and shipped from concept to the App Store.',
     visual: 'ai',
     client:
       'GlowUp makes AI photo and avatar apps. They wanted a new app that makes generative editing feel as simple as applying a filter.',
@@ -247,14 +248,14 @@ export const caseStudies: CaseStudy[] = [
         items: [
           'Upload, preview and apply edits in a few taps.',
           'A custom mode: describe any change in plain words.',
-          'Pre-made filters for instant results.',
-          'Runs on iPhone and on Apple silicon Macs.',
+          'Dozens of suggested prompts for one-tap results.',
+          'A personal gallery, high-resolution saving and direct sharing to social media.',
         ],
       },
       {
         title: 'For the business',
         items: [
-          'Pro and Ultra subscription tiers, monthly or yearly.',
+          'Free, Pro and Ultra plans, with saving and sharing included on every plan.',
           'An architecture that lets new AI services plug in without rewriting the app.',
           'A product lifecycle owned end to end, from first concept to App Store release and updates.',
         ],
@@ -266,8 +267,8 @@ export const caseStudies: CaseStudy[] = [
         body: 'Shipping regularly, with updates through 2025 and 2026.',
       },
       {
-        title: 'Rated 4.9 on the App Store',
-        body: 'Early reviews are close to perfect.',
+        title: 'Trusted by 10,000+ users',
+        body: 'Reviews single out how easy it is to get a great result.',
       },
       {
         title: 'Concept to launch, one owner',
