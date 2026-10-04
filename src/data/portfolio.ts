@@ -6,7 +6,7 @@
 export const profile = {
   name: 'Paul Vasile',
   role: 'Fullstack Engineer',
-  eyebrow: 'Fullstack engineer · AI-assisted delivery · Bucharest, Romania',
+  eyebrow: 'AI-native fullstack engineer · Bucharest, Romania',
   tagline:
     'I design, build and run complete products, from web platforms and backends to mobile apps, for teams that can’t afford for them to fail. AI makes me fast. Engineering discipline makes it safe.',
   location: 'Bucharest, Romania',
@@ -66,7 +66,7 @@ export const experience: Experience[] = [
       'An online enrollment platform for a national IT research institute, with signed official documents and ID-scan onboarding.',
       'An all-in-one platform for a veterinary clinic: public site, online booking, medical records, invoicing and payroll reports.',
     ],
-    tags: ['Next.js', 'React', 'PostgreSQL', 'Supabase', 'Docker', 'AI-assisted development'],
+    tags: ['Next.js', 'React', 'PostgreSQL', 'Supabase', 'Docker', 'AI-native engineering'],
   },
   {
     role: 'Senior iOS Engineer',

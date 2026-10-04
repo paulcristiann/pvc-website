@@ -108,7 +108,7 @@ export const caseStudies: CaseStudy[] = [
         body: 'No cookies, no session recording, nothing personal sent to vendors.',
       },
     ],
-    tags: ['Full-stack', 'Next.js', 'PostgreSQL', 'Docker', 'Education', 'GDPR', 'AI-assisted development'],
+    tags: ['Full-stack', 'Next.js', 'PostgreSQL', 'Docker', 'Education', 'GDPR', 'AI-native engineering'],
   },
   {
     slug: 'wecare',
@@ -189,7 +189,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     quote:
       'AI lets me build in weeks what used to take months. The engineering discipline around it is what makes it safe to run a real business on.',
-    tags: ['Full-stack', 'Next.js', 'React', 'TypeScript', 'Supabase', 'Healthcare', 'AI-assisted development'],
+    tags: ['Full-stack', 'Next.js', 'React', 'TypeScript', 'Supabase', 'Healthcare', 'AI-native engineering'],
   },
 ];
 
