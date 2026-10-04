@@ -34,6 +34,7 @@ export const profile = {
 export const stats: { value: string; label: string }[] = [
   { value: '10+', label: 'Years shipping software' },
   { value: 'Top 3%', label: 'Of global talent, vetted by Toptal' },
+  { value: 'CEH', label: 'Certified Ethical Hacker, so security is built in from day one' },
   { value: '6', label: 'Industries: banking, retail, real estate, compliance, education, health' },
 ];
 
