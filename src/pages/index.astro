@@ -828,7 +828,13 @@ import { caseStudies, workflow, promises, moreWork } from '../data/work';
     font-size: 0.9rem;
   }
   .timeline-highlights li::before {
-    content: '–';
+    content: '';
+    width: 5px;
+    height: 5px;
+    top: 0.62em;
+    left: 3px;
+    border-radius: 50%;
+    background: var(--text-tertiary);
     position: absolute;
     left: 0;
     color: var(--text-tertiary);

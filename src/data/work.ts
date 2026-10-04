@@ -199,7 +199,7 @@ export const workflow: WorkflowStep[] = [
   {
     n: '01',
     title: 'Understand the stakes',
-    body: 'We agree on what must never go wrong — a double booking, a lost document, a leaked record — and the plan is written down before any code is.',
+    body: 'We agree on what must never go wrong, like a double booking, a lost document or a leaked record, and write the plan down before any code.',
   },
   {
     n: '02',

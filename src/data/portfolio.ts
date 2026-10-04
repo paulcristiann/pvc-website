@@ -59,7 +59,7 @@ export const experience: Experience[] = [
   {
     role: 'Fullstack Engineer',
     company: 'Independent · client platforms',
-    period: '2026 – now',
+    period: 'Since 2026',
     summary:
       'Designing, building and running complete platforms for clients, using AI to move fast and engineering discipline to keep them reliable.',
     highlights: [
@@ -71,7 +71,7 @@ export const experience: Experience[] = [
   {
     role: 'Senior iOS Engineer',
     company: 'Marks & Spencer',
-    period: '2025 – now',
+    period: 'Since 2025',
     summary: 'Building one of the UK’s largest retail apps alongside many teams shipping every week.',
     highlights: [
       'Core part of the product detail page rearchitecture; helped refactor the entire basket module in under two months.',
@@ -95,7 +95,7 @@ export const experience: Experience[] = [
   {
     role: 'Freelance Engineer · Top 3%',
     company: 'Toptal',
-    period: '2023 – now',
+    period: 'Since 2023',
     summary:
       'Hand-picked into Toptal’s network of the top 3% of global engineering talent. Engagements for startups and enterprises across real estate, fintech, compliance and consumer apps.',
     highlights: [
@@ -109,9 +109,9 @@ export const experience: Experience[] = [
   {
     role: 'Senior Researcher · Head of Cybersecurity',
     company: 'National Institute for Research & Development in Informatics (ICI)',
-    period: '2020 – 2025',
+    period: '2020 to 2025',
     summary:
-      'Research and development on national and European Commission–funded projects, growing from engineer to leading the cybersecurity team.',
+      'Research and development on national and European Commission-funded projects, growing from engineer to leading the cybersecurity team.',
     highlights: [
       'Architected a scalable, microservice-based system with a cryptography provider that validates the authenticity of sales data from Romania’s next-generation cash registers.',
       'Led security audits and introduced a vulnerability-analysis method that made the work about 50% faster.',
@@ -133,7 +133,7 @@ export const experience: Experience[] = [
         href: 'https://icvl.eu/documents/51/art._10_S2_Dinu_Vasile2.pdf',
       },
       {
-        title: 'eDIS — Electronic Diploma Integrity Service',
+        title: 'eDIS: Electronic Diploma Integrity Service',
         venue: 'Romanian Cyber Security Journal · 2021',
         href: 'https://rocys.ici.ro/documents/19/2021_fall_article_6.pdf',
       },
@@ -169,7 +169,7 @@ export const projects: Project[] = [
     kind: 'Side project',
     icon: '/icons/nearbychat.jpg',
     description:
-      'Chat with people around you — no internet required. Nearby links nearby devices into a peer-to-peer mesh network, so conversations flow directly from phone to phone.',
+      'Chat with people around you, no internet required. Nearby links nearby devices into a peer-to-peer mesh network, so conversations flow directly from phone to phone.',
     tags: ['P2P', 'Mesh Networking', 'Offline Chat'],
     website: 'https://nearbychat.app',
     appStore: 'https://apps.apple.com/app/nearby-p2p-mesh-chatting/id6789983060',
@@ -179,7 +179,7 @@ export const projects: Project[] = [
     kind: 'Client work',
     icon: '/icons/ai-filter.jpg',
     description:
-      'AI magic for your photos. Upload a picture, describe the change you want, and let AI do the rest — pre-made filters for instant results or a fully custom mode for creative edits. Built for GlowUp.com.',
+      'AI magic for your photos. Upload a picture, describe the change you want, and let AI do the rest, with pre-made filters for instant results or a fully custom mode for creative edits. Built for GlowUp.com.',
     tags: ['AI', 'Image Generation', 'In-App Purchases'],
     appStore: 'https://apps.apple.com/ro/app/ai-filter/id6741488330',
   },
@@ -202,7 +202,7 @@ export const clientApps: ClientApp[] = [
   },
   {
     name: 'M&S',
-    descriptor: 'Marks & Spencer — fashion, food & homeware',
+    descriptor: 'Marks & Spencer: fashion, food & homeware',
     icon: '/icons/ms.jpg',
     href: 'https://apps.apple.com/ro/app/m-s-fashion-food-homeware/id538410698',
   },
