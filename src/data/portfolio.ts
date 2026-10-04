@@ -59,10 +59,7 @@ export const experience: Experience[] = [
     company: 'Independent · client platforms',
     summary:
       'Designing, building and running complete platforms for clients, using AI to move fast and engineering discipline to keep them reliable.',
-    highlights: [
-      'An online enrollment platform for a national IT research institute, with signed official documents and ID-scan onboarding.',
-      'An all-in-one platform for a veterinary clinic: public site, online booking, medical records, invoicing and payroll reports.',
-    ],
+    highlights: [],
     tags: ['Next.js', 'React', 'PostgreSQL', 'Supabase', 'Docker', 'AI-powered workflow'],
   },
   {
