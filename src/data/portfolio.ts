@@ -45,7 +45,6 @@ export type Publication = {
 export type Experience = {
   role: string;
   company: string;
-  period?: string;
   summary: string;
   highlights: string[];
   publications?: Publication[];
@@ -63,7 +62,6 @@ export const experience: Experience[] = [
   {
     role: 'Senior Software Engineer',
     company: 'Marks & Spencer',
-    period: 'Since 2025',
     summary:
       'Building one of the UK’s largest retail apps alongside many teams shipping every week, with AI tools part of my daily workflow.',
     highlights: [
@@ -75,7 +73,6 @@ export const experience: Experience[] = [
   {
     role: 'Senior Security Engineer',
     company: 'Salt Bank',
-    period: '2025',
     summary: 'Helped lay the mobile security foundation of one of Romania’s first digital-native banks.',
     highlights: [
       'Runtime self-protection and jailbreak/root detection.',
@@ -86,7 +83,6 @@ export const experience: Experience[] = [
   {
     role: 'Senior Fullstack Engineer · Top 3%',
     company: 'Toptal',
-    period: 'Since 2023',
     summary:
       'Hand-picked into Toptal’s network of the top 3% of global engineering talent. Engagements for startups and enterprises across real estate, fintech, compliance and consumer apps, delivered with an AI-powered workflow.',
     highlights: [
@@ -99,7 +95,6 @@ export const experience: Experience[] = [
   {
     role: 'Senior Researcher · Head of Cybersecurity',
     company: 'National Institute for Research & Development in Informatics (ICI)',
-    period: '2020 to 2025',
     summary:
       'Research and development on national and European Commission-funded projects, growing from engineer to leading the cybersecurity team.',
     highlights: [

@@ -176,7 +176,6 @@ import { caseStudies, workflow, moreWork } from '../data/work';
         {
           experience.map((job) => (
             <li class="timeline-item reveal">
-              {job.period && <p class="timeline-period mono">{job.period}</p>}
               <h3>{job.role}</h3>
               <p class="timeline-company">{job.company}</p>
               <p class="timeline-summary">{job.summary}</p>
@@ -636,11 +635,6 @@ import { caseStudies, workflow, moreWork } from '../data/work';
   }
   .timeline-item:last-child {
     padding-bottom: 0;
-  }
-  .timeline-period {
-    font-size: 0.72rem;
-    color: var(--text-tertiary);
-    margin-bottom: 2px;
   }
   .timeline-item h3 {
     font-size: 1.15rem;
