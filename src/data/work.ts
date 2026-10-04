@@ -314,7 +314,7 @@ export const caseStudies: CaseStudy[] = [
     visual: 'nearby',
     clientHeading: 'The idea',
     client:
-      'Nearby is my own product. Some of the moments we most want to message each other, on a plane, on a train abroad, in a packed crowd, are exactly when there is no signal.',
+      'I built Nearby for the moments regular chat apps fail: on a flight, at a festival or abroad without data. The people you want to talk to are often right next to you, so Nearby connects your phones directly.',
     challenge: {
       intro: 'Building a chat app without the internet means solving everything a server normally does. Nearby had to:',
       needs: [
