@@ -252,6 +252,14 @@ const canLink = !c.nameClaim || claims[c.nameClaim].confirmed;
     max-width: 760px;
   }
 
+  .cs-visual :global(.cl) {
+    zoom: 1.4;
+  }
+  @media (max-width: 600px) {
+    .cs-visual :global(.cl) {
+      zoom: 1;
+    }
+  }
   .cs-section {
     padding: 56px 0;
   }
