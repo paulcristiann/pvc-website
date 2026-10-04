@@ -210,8 +210,6 @@ export const caseStudies: CaseStudy[] = [
           'Security updates and dependency checks keep running, so the clinic’s system stays safe without anyone there having to think about it.',
       },
     ],
-    quote:
-      'AI lets me build in weeks what used to take months. The engineering discipline around it is what makes it safe to run a real business on.',
     tags: ['Full-stack', 'Next.js', 'React', 'TypeScript', 'Supabase', 'Healthcare', 'AI-powered workflow'],
   },
   {
