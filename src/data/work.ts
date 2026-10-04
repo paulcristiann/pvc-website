@@ -16,6 +16,7 @@ export type CaseStudy = {
   role: string;
   url: string;
   linkLabel: string;
+  visit: { title: string; body: string; cta: string; secondary?: { label: string; url: string } };
   kind: string;
   sector: string;
   headline: string;
@@ -41,6 +42,11 @@ export const caseStudies: CaseStudy[] = [
     role: 'Designed, built and operated end to end',
     url: 'https://cursuri.ici.ro',
     linkLabel: 'cursuri.ici.ro',
+    visit: {
+      title: 'See it live',
+      body: 'Browse the live course catalog and walk through enrollment from the student’s side.',
+      cta: 'Visit cursuri.ici.ro',
+    },
     kind: 'Web platform',
     sector: 'Education · professional training',
     headline: 'Paperless enrollment for accredited courses',
@@ -123,6 +129,11 @@ export const caseStudies: CaseStudy[] = [
     role: 'Designed, built and maintained end to end',
     url: 'https://www.wecarecompany.ro',
     linkLabel: 'wecarecompany.ro',
+    visit: {
+      title: 'See it live',
+      body: 'Visit the clinic’s site and book an appointment the way pet owners do.',
+      cta: 'Visit wecarecompany.ro',
+    },
     kind: 'Web platform',
     sector: 'Healthcare · veterinary clinic',
     headline: 'One platform. The whole clinic.',
@@ -204,6 +215,11 @@ export const caseStudies: CaseStudy[] = [
     role: 'Architecture, app and launch, end to end',
     url: 'https://apps.apple.com/ro/app/ai-filter/id6741488330',
     linkLabel: 'App Store',
+    visit: {
+      title: 'Try it yourself',
+      body: 'Download AI Filter on iPhone or Mac and describe your first edit.',
+      cta: 'Get it on the App Store',
+    },
     kind: 'iOS & Mac app',
     sector: 'Consumer AI · photo editing',
     headline: 'Describe the change. AI does the rest.',
@@ -278,6 +294,12 @@ export const caseStudies: CaseStudy[] = [
     role: 'My own product: idea, design, build and release',
     url: 'https://apps.apple.com/app/nearby-p2p-mesh-chatting/id6789983060',
     linkLabel: 'App Store',
+    visit: {
+      title: 'Try it yourself',
+      body: 'Get Nearby on your iPhone, switch on airplane mode and message a friend next to you.',
+      cta: 'Get it on the App Store',
+      secondary: { label: 'nearbychat.app', url: 'https://nearbychat.app' },
+    },
     kind: 'iOS app',
     sector: 'Messaging · peer-to-peer',
     headline: 'Chat with people around you. No internet needed.',

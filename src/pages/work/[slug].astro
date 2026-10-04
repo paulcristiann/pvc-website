@@ -121,6 +121,34 @@ const canLink = !c.nameClaim || claims[c.nameClaim].confirmed;
       </div>
     </section>
 
+    {
+      canLink && (
+        <section class="cs-section cs-visit-wrap">
+          <div class="container">
+            <div class="cs-visit card spot reveal">
+              <div>
+                <p class="cs-visit-eyebrow mono">
+                  <span class="status-dot" /> Live
+                </p>
+                <h2 class="cs-visit-title">{c.visit.title}</h2>
+                <p class="cs-visit-body">{c.visit.body}</p>
+              </div>
+              <div class="cs-visit-actions">
+                <a class="cs-visit-btn" href={c.url} target="_blank" rel="noopener">
+                  {c.visit.cta} <span aria-hidden="true">↗</span>
+                </a>
+                {c.visit.secondary && (
+                  <a class="cs-visit-alt" href={c.visit.secondary.url} target="_blank" rel="noopener">
+                    {c.visit.secondary.label} ↗
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      )
+    }
+
     <section class="cs-section">
       <div class="container cs-grid">
         <h2 class="cs-h">Built to hold up</h2>
@@ -161,15 +189,6 @@ const canLink = !c.nameClaim || claims[c.nameClaim].confirmed;
         </section>
       )
     }
-
-    <section class="cs-section">
-      <div class="container cs-grid">
-        <h2 class="cs-h">Built with</h2>
-        <div class="cs-tags">
-          {c.tags.map((t) => <span class="tag">{t}</span>)}
-        </div>
-      </div>
-    </section>
 
     <nav class="cs-next" aria-label="Next case study">
       <div class="container">
@@ -330,6 +349,65 @@ const canLink = !c.nameClaim || claims[c.nameClaim].confirmed;
     color: var(--text-secondary);
     font-size: 0.95rem;
   }
+  .cs-visit-wrap {
+    padding-top: 72px;
+  }
+  .cs-visit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px 40px;
+    flex-wrap: wrap;
+    padding: clamp(28px, 4vw, 44px);
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%),
+      var(--surface);
+  }
+  .cs-visit-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.74rem;
+    color: var(--signal);
+    margin-bottom: 10px;
+  }
+  .cs-visit-title {
+    font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+  .cs-visit-body {
+    color: var(--text-secondary);
+    max-width: 48ch;
+  }
+  .cs-visit-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .cs-visit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 980px;
+    background: var(--accent);
+    color: #fff;
+    transition: background 0.2s ease, transform 0.2s var(--ease);
+  }
+  .cs-visit-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+  .cs-visit-alt {
+    font-size: 0.9rem;
+    color: var(--accent);
+    padding-left: 4px;
+  }
   .cs-build {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -360,11 +438,6 @@ const canLink = !c.nameClaim || claims[c.nameClaim].confirmed;
   .pull p {
     border-left: 3px solid var(--accent);
     padding-left: 22px;
-  }
-  .cs-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
   }
   .cs-next {
     padding: 40px 0 104px;

@@ -8,7 +8,7 @@
 
 export const claims = {
   iciName: {
-    confirmed: false,
+    confirmed: true, // Paul, 2026-10-04
     note: 'Client permission to name ICI / cursuri.ici.ro and describe the system publicly',
   },
   iciRole: {
