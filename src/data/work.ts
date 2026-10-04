@@ -138,9 +138,9 @@ export const caseStudies: CaseStudy[] = [
     },
     kind: 'Web platform',
     sector: 'Healthcare · veterinary clinic',
-    headline: 'One platform. The whole clinic.',
+    headline: 'All-in-one management for veterinary clinics',
     pitch:
-      'From online booking to medical records, invoicing and payroll reports, one reliable system runs a veterinary practice that has been caring for pets since 2005.',
+      'A platform that runs a clinic end to end: online booking, a shared doctor schedule, digital medical records, invoicing and payroll reports. Built for WeCare, a Bucharest veterinary clinic caring for pets since 2005.',
     visual: 'clinic',
     client:
       'WeCare is a well-established veterinary clinic in Bucharest: open since 2005, 8 specialists, a 4.9 Google rating and more than 1,000 patients a year.',
@@ -227,9 +227,9 @@ export const caseStudies: CaseStudy[] = [
     },
     kind: 'iOS & Mac app',
     sector: 'Consumer AI · photo editing',
-    headline: 'Describe the change. AI does the rest.',
+    headline: 'Generative photo editing, as simple as a filter',
     pitch:
-      'A photo app where you upload a picture, type what you want, and generative AI transforms it in seconds. Built for GlowUp and shipped from concept to the App Store.',
+      'An iPhone and Mac app where people upload a photo, describe the change in plain words and let AI transform it in seconds, with one-tap filters for instant results. Built for GlowUp and shipped from concept to the App Store.',
     visual: 'ai',
     client:
       'GlowUp makes AI photo and avatar apps. They wanted a new app that makes generative editing feel as simple as applying a filter.',
@@ -309,9 +309,9 @@ export const caseStudies: CaseStudy[] = [
     },
     kind: 'iOS app',
     sector: 'Messaging · peer-to-peer',
-    headline: 'Chat with people around you. No internet needed.',
+    headline: 'Offline messaging over a peer-to-peer mesh',
     pitch:
-      'Nearby links phones into a peer-to-peer mesh, so messages travel directly from phone to phone, on a flight, at a festival or anywhere without signal.',
+      'A chat app that links nearby phones into a mesh, so messages hop from phone to phone with no internet, servers or accounts. My own product, made for flights, festivals and anywhere without signal.',
     visual: 'mesh',
     clientHeading: 'The idea',
     client:
