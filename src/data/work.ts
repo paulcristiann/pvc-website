@@ -23,7 +23,6 @@ export type CaseStudy = {
   pitch: string;
   visual: 'enrollment' | 'calendar' | 'ai' | 'mesh';
   clientHeading?: string;
-  highlights: string[];
   client: string;
   challenge: { intro: string; needs: string[] };
   delivered: { title: string; items: string[] }[];
@@ -53,7 +52,6 @@ export const caseStudies: CaseStudy[] = [
     pitch:
       'A course platform that takes students from browsing to a signed, verified enrollment file, on any device. Built for a national research institute that wanted paper out of its accredited training for good.',
     visual: 'enrollment',
-    highlights: ['ID scan fills the forms', 'Signed on screen', 'Self-hosted, GDPR-first'],
     client:
       'ICI, Romania’s national institute for informatics research, runs around thirty accredited professional courses, from cybersecurity and AI to GDPR and programming. Their goal: move enrollment fully online, onto infrastructure they own, without cutting corners on compliance.',
     challenge: {
@@ -144,7 +142,6 @@ export const caseStudies: CaseStudy[] = [
     pitch:
       'From online booking to medical records, invoicing and payroll reports, one reliable system runs a veterinary practice that has been caring for pets since 2005.',
     visual: 'calendar',
-    highlights: ['24/7 online booking', 'One system instead of many', 'Idea → launch in ~1 month'],
     client:
       'WeCare is a well-established veterinary clinic in Bucharest: open since 2005, 8 specialists, a 4.9 Google rating and more than 1,000 patients a year.',
     challenge: {
@@ -234,7 +231,6 @@ export const caseStudies: CaseStudy[] = [
     pitch:
       'A photo app where you upload a picture, type what you want, and generative AI transforms it in seconds. Built for GlowUp and shipped from concept to the App Store.',
     visual: 'ai',
-    highlights: ['Prompt-based editing', 'Instant pre-made filters', 'Subscriptions built in'],
     client:
       'GlowUp makes AI photo and avatar apps. They wanted a new app that makes generative editing feel as simple as applying a filter.',
     challenge: {
@@ -318,7 +314,6 @@ export const caseStudies: CaseStudy[] = [
       'Nearby links phones into a peer-to-peer mesh, so messages travel directly from phone to phone, on a flight, at a festival or anywhere without signal.',
     visual: 'mesh',
     clientHeading: 'The idea',
-    highlights: ['No servers, no accounts', 'Phone-to-phone relay', 'Works in airplane mode'],
     client:
       'Nearby is my own product. Some of the moments we most want to message each other, on a plane, on a train abroad, in a packed crowd, are exactly when there is no signal.',
     challenge: {

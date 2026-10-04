@@ -67,18 +67,12 @@ import { caseStudies, workflow, moreWork } from '../data/work';
               </div>
               <div class="case-body">
                 <p class="case-meta mono">
-                  <span class="case-kind">{c.kind}</span>
                   <span>
                     <Tbc claim={c.nameClaim}>{c.name}</Tbc>
                   </span>
                 </p>
                 <h3 class="case-title">{c.headline}</h3>
                 <p class="case-pitch">{c.pitch}</p>
-                <ul class="case-chips">
-                  {c.highlights.map((h) => (
-                    <li class="chip">{h}</li>
-                  ))}
-                </ul>
                 <span class="case-link">
                   Read the case study <span class="arrow">→</span>
                 </span>
@@ -416,12 +410,6 @@ import { caseStudies, workflow, moreWork } from '../data/work';
     color: var(--text-tertiary);
     margin-bottom: 10px;
   }
-  .case-kind {
-    color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 9%, transparent);
-    padding: 2px 8px;
-    border-radius: 6px;
-  }
   .case-title {
     font-size: clamp(1.3rem, 2.4vw, 1.6rem);
     font-weight: 700;
@@ -433,19 +421,8 @@ import { caseStudies, workflow, moreWork } from '../data/work';
   .case-pitch {
     color: var(--text-secondary);
     font-size: 0.95rem;
-    margin-bottom: 18px;
-    flex: 1;
-  }
-  .case-chips {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
     margin-bottom: 20px;
-  }
-  .case-chips .chip {
-    font-size: 0.72rem;
-    padding: 5px 10px;
+    flex: 1;
   }
   .case-link {
     font-weight: 500;
