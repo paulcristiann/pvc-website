@@ -391,7 +391,7 @@ import { caseStudies, workflow, moreWork } from '../data/work';
 
   .stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 0;
     margin-top: 80px;
     border-top: 1px solid var(--border);
@@ -417,8 +417,13 @@ import { caseStudies, workflow, moreWork } from '../data/work';
       gap: 40px;
     }
     .stats {
-      grid-template-columns: repeat(2, 1fr);
       row-gap: 24px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .stats {
+      grid-template-columns: 1fr;
     }
   }
 
