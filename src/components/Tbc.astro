@@ -4,16 +4,16 @@
 import { claims, type ClaimKey } from '../data/confirm';
 
 interface Props {
-  claim: ClaimKey;
+  claim?: ClaimKey;
 }
 
 const { claim } = Astro.props;
-const pending = !claims[claim].confirmed;
+const pending = claim ? !claims[claim].confirmed : false;
 ---
 
 {
   pending ? (
-    <span class="tbc" title={`To confirm: ${claims[claim].note}`}>
+    <span class="tbc" title={`To confirm: ${claim && claims[claim].note}`}>
       <slot />
     </span>
   ) : (

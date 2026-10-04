@@ -1,11 +1,16 @@
 ---
 import CalendarMockup from './CalendarMockup.astro';
 import EnrollmentMockup from './EnrollmentMockup.astro';
+import AiFilterMockup from './AiFilterMockup.astro';
+import MeshMockup from './MeshMockup.astro';
 
 interface Props {
-  visual: 'enrollment' | 'calendar';
+  visual: 'enrollment' | 'calendar' | 'ai' | 'mesh';
 }
 const { visual } = Astro.props;
 ---
 
-{visual === 'calendar' ? <CalendarMockup /> : <EnrollmentMockup />}
+{visual === 'calendar' && <CalendarMockup />}
+{visual === 'enrollment' && <EnrollmentMockup />}
+{visual === 'ai' && <AiFilterMockup />}
+{visual === 'mesh' && <MeshMockup />}

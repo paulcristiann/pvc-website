@@ -6,7 +6,6 @@ import CaseVisual from '../components/CaseVisual.astro';
 import {
   profile,
   experience,
-  projects,
   clientApps,
   stats,
   education,
@@ -53,19 +52,25 @@ import { caseStudies, workflow, moreWork } from '../data/work';
   <section id="work">
     <div class="container">
       <p class="eyebrow reveal">Selected work</p>
-      <h2 class="section-title reveal">Software people rely on every day</h2>
+      <h2 class="section-title reveal">Products people rely on every day</h2>
       <p class="section-lead reveal">
-        Two recent platforms I designed, built and look after, followed by a wider look at what I’ve
-        built for banks, retailers, marketplaces and startups.
+        Web platforms and apps I designed, built and look after, from legal paperwork and medical
+        records to generative AI and offline messaging.
       </p>
 
       <div class="cases">
         {
-          caseStudies.map((c, i) => (
-            <a class:list={['case-card card spot reveal', { flip: i % 2 }]} href={`/work/${c.slug}/`}>
+          caseStudies.map((c) => (
+            <a class="case-card card spot reveal" href={`/work/${c.slug}/`}>
+              <div class="case-visual">
+                <CaseVisual visual={c.visual} />
+              </div>
               <div class="case-body">
                 <p class="case-meta mono">
-                  <Tbc claim={c.nameClaim}>{c.name}</Tbc> · {c.sector}
+                  <span class="case-kind">{c.kind}</span>
+                  <span>
+                    <Tbc claim={c.nameClaim}>{c.name}</Tbc>
+                  </span>
                 </p>
                 <h3 class="case-title">{c.headline}</h3>
                 <p class="case-pitch">{c.pitch}</p>
@@ -77,9 +82,6 @@ import { caseStudies, workflow, moreWork } from '../data/work';
                 <span class="case-link">
                   Read the case study <span class="arrow">→</span>
                 </span>
-              </div>
-              <div class="case-visual">
-                <CaseVisual visual={c.visual} />
               </div>
             </a>
           ))
@@ -105,6 +107,30 @@ import { caseStudies, workflow, moreWork } from '../data/work';
           }
         </div>
       </div>
+      <p class="clients-label mono reveal">On the App Store with client teams</p>
+      <ul class="client-apps reveal">
+        {
+          clientApps.map((app) => (
+            <li>
+              <a class="client-app" href={app.href} target="_blank" rel="noopener" title={app.descriptor}>
+                <img
+                  class="app-icon"
+                  src={app.icon}
+                  alt=""
+                  width="44"
+                  height="44"
+                  loading="lazy"
+                />
+                <span>
+                  <span class="client-app-name">{app.name}</span>
+                  <span class="client-app-desc">{app.descriptor}</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
     </div>
   </section>
 
@@ -149,6 +175,10 @@ import { caseStudies, workflow, moreWork } from '../data/work';
         <div class="exp-badge reveal">
           <ToptalBadge />
         </div>
+        <p class="edu reveal">
+          {education.map((e) => `${e.degree} in ${e.field}`).join(' · ')}, {education[0].school} ·{' '}
+          {certifications.join(' · ')}
+      </p>
       </div>
       <ol class="timeline">
         {
@@ -188,80 +218,6 @@ import { caseStudies, workflow, moreWork } from '../data/work';
           ))
         }
       </ol>
-    </div>
-  </section>
-
-  {/* ───────────── Apps ───────────── */}
-  <section id="apps" class="apps-section">
-    <div class="container">
-      <p class="eyebrow reveal">Apps</p>
-      <h2 class="section-title reveal">Still shipping to the App Store</h2>
-      <p class="section-lead reveal">
-        Mobile is where I started, and it still sharpens how I think about the people on the other side
-        of the screen.
-      </p>
-      <div class="project-grid">
-        {
-          projects.map((p) => (
-            <article class="card spot project-card reveal">
-              <img
-                class="app-icon"
-                src={p.icon}
-                alt={`${p.name} app icon`}
-                width="56"
-                height="56"
-                loading="lazy"
-              />
-              <div>
-                <p class="project-kind mono">{p.kind}</p>
-                <h3>{p.name}</h3>
-                <p class="project-desc">{p.description}</p>
-                <div class="project-links">
-                  {p.appStore && (
-                    <a href={p.appStore} target="_blank" rel="noopener">
-                      App Store ↗
-                    </a>
-                  )}
-                  {p.website && (
-                    <a href={p.website} target="_blank" rel="noopener">
-                      Website ↗
-                    </a>
-                  )}
-                </div>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-
-      <p class="clients-label mono reveal">With client teams</p>
-      <ul class="client-apps reveal">
-        {
-          clientApps.map((app) => (
-            <li>
-              <a class="client-app" href={app.href} target="_blank" rel="noopener" title={app.descriptor}>
-                <img
-                  class="app-icon"
-                  src={app.icon}
-                  alt=""
-                  width="44"
-                  height="44"
-                  loading="lazy"
-                />
-                <span>
-                  <span class="client-app-name">{app.name}</span>
-                  <span class="client-app-desc">{app.descriptor}</span>
-                </span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-
-      <p class="edu reveal">
-        {education.map((e) => `${e.degree} in ${e.field}`).join(' · ')}, {education[0].school} ·{' '}
-        {certifications.join(' · ')}
-      </p>
     </div>
   </section>
 
@@ -424,44 +380,72 @@ import { caseStudies, workflow, moreWork } from '../data/work';
 
   /* Cases */
   .cases {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
   .case-card {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 40px;
-    align-items: center;
-    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
     border-radius: var(--radius-lg);
     overflow: hidden;
+    min-width: 0;
   }
-  .case-card.flip .case-body {
-    order: 2;
+  .case-visual {
+    background: var(--surface-2);
+    border-radius: calc(var(--radius-lg) - 8px);
+    padding: 28px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .case-body {
+    padding: 22px 14px 12px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
   }
   .case-meta {
-    font-size: 0.76rem;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 0.74rem;
     color: var(--text-tertiary);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+  }
+  .case-kind {
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 9%, transparent);
+    padding: 2px 8px;
+    border-radius: 6px;
   }
   .case-title {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.3rem, 2.4vw, 1.6rem);
     font-weight: 700;
     letter-spacing: -0.03em;
-    line-height: 1.15;
-    margin-bottom: 14px;
+    line-height: 1.18;
+    margin-bottom: 10px;
+    text-wrap: balance;
   }
   .case-pitch {
     color: var(--text-secondary);
-    margin-bottom: 22px;
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+    flex: 1;
   }
   .case-chips {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 26px;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .case-chips .chip {
+    font-size: 0.72rem;
+    padding: 5px 10px;
   }
   .case-link {
     font-weight: 500;
@@ -470,24 +454,27 @@ import { caseStudies, workflow, moreWork } from '../data/work';
   .case-card:hover .arrow {
     transform: translateX(3px);
   }
-  .case-visual {
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 26px;
-    min-height: 260px;
-    display: flex;
-    align-items: center;
-  }
   @media (max-width: 860px) {
-    .case-card {
+    .cases {
       grid-template-columns: 1fr;
-      padding: 26px;
-      gap: 28px;
     }
-    .case-card.flip .case-body {
-      order: 0;
+    .case-visual {
+      height: 240px;
+      padding: 20px;
     }
+  }
+
+  /* Keep the AI Filter mockup inside the fixed-height card visual */
+  .case-visual :global(.aif-photo) {
+    aspect-ratio: 2 / 1;
+  }
+  .case-visual :global(.aif-filters) {
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+  .case-visual :global(.aif-chip) {
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 
   /* More work */
@@ -796,51 +783,6 @@ import { caseStudies, workflow, moreWork } from '../data/work';
     }
   }
 
-  /* Apps */
-  .apps-section {
-    background: var(--surface-2);
-  }
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-  }
-  .project-card {
-    display: flex;
-    gap: 18px;
-    padding: 24px;
-    align-items: flex-start;
-  }
-  .app-icon {
-    flex-shrink: 0;
-    border-radius: 23%;
-    border: 1px solid var(--border);
-    object-fit: cover;
-  }
-  .project-kind {
-    font-size: 0.7rem;
-    color: var(--text-tertiary);
-  }
-  .project-card h3 {
-    font-size: 1.1rem;
-    font-weight: 650;
-    letter-spacing: -0.02em;
-    margin: 2px 0 6px;
-  }
-  .project-desc {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-  }
-  .project-links {
-    display: flex;
-    gap: 16px;
-    margin-top: 12px;
-  }
-  .project-links a {
-    color: var(--accent);
-    font-size: 0.88rem;
-    font-weight: 500;
-  }
   .clients-label {
     font-size: 0.74rem;
     color: var(--text-tertiary);
@@ -880,13 +822,11 @@ import { caseStudies, workflow, moreWork } from '../data/work';
     color: var(--text-tertiary);
   }
   @media (max-width: 860px) {
-    .project-grid,
     .client-apps {
       grid-template-columns: 1fr 1fr;
     }
   }
   @media (max-width: 560px) {
-    .project-grid,
     .client-apps {
       grid-template-columns: 1fr;
     }

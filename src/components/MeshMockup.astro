@@ -1,0 +1,128 @@
+---
+// Stylized mockup of Nearby's mesh: a message hops phone to phone.
+// Nodes in a 300x200 box; the message travels A → B → C → D.
+const nodes = [
+  { x: 40, y: 150, label: 'You' },
+  { x: 110, y: 70 },
+  { x: 190, y: 130 },
+  { x: 265, y: 50, label: 'Ana' },
+  { x: 230, y: 175 },
+  { x: 60, y: 40 },
+];
+const links: [number, number][] = [
+  [0, 1],
+  [1, 2],
+  [2, 3],
+  [1, 5],
+  [2, 4],
+  [0, 5],
+];
+const route = 'M40 150 L110 70 L190 130 L265 50';
+---
+
+<div class="mesh" aria-hidden="true">
+  <svg viewBox="0 0 300 200" class="mesh-svg">
+    {
+      links.map(([a, b]) => (
+        <line x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y} class="mesh-link" />
+      ))
+    }
+    <path d={route} class="mesh-route" pathLength="1"></path>
+    {
+      nodes.map((n, i) => (
+        <g class:list={['mesh-node', { me: i === 0, dest: i === 3 }]}>
+          <circle cx={n.x} cy={n.y} r="16" class="mesh-range" />
+          <rect x={n.x - 7} y={n.y - 11} width="14" height="22" rx="3.5" class="mesh-phone" />
+          {n.label && (
+            <text x={n.x} y={n.y + (n.y > 100 ? 32 : -22)} class="mesh-label">
+              {n.label}
+            </text>
+          )}
+        </g>
+      ))
+    }
+  </svg>
+  <span class="mesh-msg">Landing in 10 min</span>
+  <span class="mesh-offline mono">No signal · 3 hops</span>
+</div>
+
+<style>
+  .mesh {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  .mesh-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .mesh-link {
+    stroke: var(--border-strong);
+    stroke-width: 1.5;
+    stroke-dasharray: 3 4;
+  }
+  .mesh-route {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1.8s var(--ease) 0.3s;
+  }
+  :global(.reveal:not(.is-visible)) .mesh-route {
+    stroke-dashoffset: 1;
+  }
+  .mesh-range {
+    fill: color-mix(in srgb, var(--accent) 8%, transparent);
+    stroke: none;
+  }
+  .mesh-phone {
+    fill: var(--surface);
+    stroke: var(--text-tertiary);
+    stroke-width: 1.5;
+  }
+  .me .mesh-phone,
+  .dest .mesh-phone {
+    stroke: var(--accent);
+    fill: color-mix(in srgb, var(--accent) 15%, var(--surface));
+  }
+  .mesh-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    fill: var(--text-secondary);
+    text-anchor: middle;
+  }
+  .mesh-msg {
+    position: absolute;
+    right: 0;
+    top: 30%;
+    font-size: 0.74rem;
+    background: var(--accent);
+    color: #fff;
+    padding: 6px 11px;
+    border-radius: 14px 14px 4px 14px;
+    box-shadow: var(--shadow-sm);
+    transition: opacity 0.4s ease 1.9s, transform 0.4s var(--ease) 1.9s;
+  }
+  :global(.reveal:not(.is-visible)) .mesh-msg {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  .mesh-offline {
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    font-size: 0.66rem;
+    color: var(--text-tertiary);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mesh-route,
+    .mesh-msg {
+      transition: none;
+    }
+  }
+</style>

@@ -11,14 +11,17 @@ import type { ClaimKey } from './confirm';
 export type CaseStudy = {
   slug: string;
   name: string;
-  nameClaim: ClaimKey;
-  roleClaim: ClaimKey;
+  nameClaim?: ClaimKey;
+  roleClaim?: ClaimKey;
   role: string;
   url: string;
+  linkLabel: string;
+  kind: string;
   sector: string;
   headline: string;
   pitch: string;
-  visual: 'enrollment' | 'calendar';
+  visual: 'enrollment' | 'calendar' | 'ai' | 'mesh';
+  clientHeading?: string;
   highlights: string[];
   client: string;
   challenge: { intro: string; needs: string[] };
@@ -37,6 +40,8 @@ export const caseStudies: CaseStudy[] = [
     roleClaim: 'iciRole',
     role: 'Designed, built and operated end to end',
     url: 'https://cursuri.ici.ro',
+    linkLabel: 'cursuri.ici.ro',
+    kind: 'Web platform',
     sector: 'Education · national research institute',
     headline: 'Online enrollment for a national IT research institute',
     pitch:
@@ -117,6 +122,8 @@ export const caseStudies: CaseStudy[] = [
     roleClaim: 'wecareRole',
     role: 'Designed, built and maintained end to end',
     url: 'https://www.wecarecompany.ro',
+    linkLabel: 'wecarecompany.ro',
+    kind: 'Web platform',
     sector: 'Healthcare · veterinary clinic',
     headline: 'One platform. The whole clinic.',
     pitch:
@@ -191,8 +198,157 @@ export const caseStudies: CaseStudy[] = [
       'AI lets me build in weeks what used to take months. The engineering discipline around it is what makes it safe to run a real business on.',
     tags: ['Full-stack', 'Next.js', 'React', 'TypeScript', 'Supabase', 'Healthcare', 'AI-powered workflow'],
   },
+  {
+    slug: 'ai-filter',
+    name: 'AI Filter',
+    role: 'Architecture, app and launch, end to end',
+    url: 'https://apps.apple.com/ro/app/ai-filter/id6741488330',
+    linkLabel: 'App Store',
+    kind: 'iOS & Mac app',
+    sector: 'Consumer AI · photo editing',
+    headline: 'Describe the change. AI does the rest.',
+    pitch:
+      'A photo app where you upload a picture, type what you want, and generative AI transforms it in seconds. Built for GlowUp and shipped from concept to the App Store.',
+    visual: 'ai',
+    highlights: ['Prompt-based editing', 'Instant pre-made filters', 'Subscriptions built in'],
+    client:
+      'GlowUp makes AI photo and avatar apps. They wanted a new app that makes generative editing feel as simple as applying a filter.',
+    challenge: {
+      intro:
+        'Generative image models are powerful but slow and unpredictable, and most people don’t know how to write a good prompt. The app had to:',
+      needs: [
+        'turn a photo and a sentence into a great result, with no learning curve,',
+        'feel responsive while the AI works in the background,',
+        'offer one-tap results for people who don’t want to type,',
+        'earn its keep with subscriptions that feel fair.',
+      ],
+    },
+    delivered: [
+      {
+        title: 'For people editing photos',
+        items: [
+          'Upload, preview and apply edits in a few taps.',
+          'A custom mode: describe any change in plain words.',
+          'Pre-made filters for instant results.',
+          'Runs on iPhone and on Apple silicon Macs.',
+        ],
+      },
+      {
+        title: 'For the business',
+        items: [
+          'Pro and Ultra subscription tiers, monthly or yearly.',
+          'An architecture that lets new AI services plug in without rewriting the app.',
+          'A product lifecycle owned end to end, from first concept to App Store release and updates.',
+        ],
+      },
+    ],
+    results: [
+      {
+        title: 'Live on the App Store',
+        body: 'Shipping regularly, with updates through 2025 and 2026.',
+      },
+      {
+        title: 'Rated 4.9 on the App Store',
+        body: 'Early reviews are close to perfect.',
+      },
+      {
+        title: 'Concept to launch, one owner',
+        body: 'Architecture, UI, AI integration and release, all handled by me.',
+      },
+    ],
+    howIBuild: [
+      {
+        title: 'Fast while the AI thinks',
+        body: 'Uploads, previews and AI processing run in the background so the app never freezes.',
+      },
+      {
+        title: 'Ready for the next model',
+        body: 'AI services sit behind a clean boundary, so better models can be adopted without a rebuild.',
+      },
+      {
+        title: 'Built for the App Store',
+        body: 'Purchases, subscriptions and review requirements handled from day one.',
+      },
+    ],
+    tags: ['iOS', 'macOS', 'SwiftUI', 'Generative AI', 'Subscriptions', 'AI-powered workflow'],
+  },
+  {
+    slug: 'nearby',
+    name: 'Nearby',
+    role: 'My own product: idea, design, build and release',
+    url: 'https://apps.apple.com/app/nearby-p2p-mesh-chatting/id6789983060',
+    linkLabel: 'App Store',
+    kind: 'iOS app',
+    sector: 'Messaging · peer-to-peer',
+    headline: 'Chat with people around you. No internet needed.',
+    pitch:
+      'Nearby links phones into a peer-to-peer mesh, so messages travel directly from phone to phone, on a flight, at a festival or anywhere without signal.',
+    visual: 'mesh',
+    clientHeading: 'The idea',
+    highlights: ['No servers, no accounts', 'Phone-to-phone relay', 'Works in airplane mode'],
+    client:
+      'Nearby is my own product. Some of the moments we most want to message each other, on a plane, on a train abroad, in a packed crowd, are exactly when there is no signal.',
+    challenge: {
+      intro: 'Building a chat app without the internet means solving everything a server normally does. Nearby had to:',
+      needs: [
+        'find people nearby and connect automatically, without accounts or phone numbers,',
+        'carry messages further than one phone can reach by relaying them through others,',
+        'keep running in the background without draining the battery,',
+        'keep every conversation private, on the device and nowhere else.',
+      ],
+    },
+    delivered: [
+      {
+        title: 'For people chatting',
+        items: [
+          'An inbox of people nearby, with requests to filter strangers.',
+          'One-on-one and group chats, relayed phone to phone across the group.',
+          'Photo sharing over a direct connection.',
+          'Five built-in two-player games for when you’re offline anyway.',
+          'Go invisible any time.',
+        ],
+      },
+      {
+        title: 'Under the hood',
+        items: [
+          'Peer-to-peer connections with a range of roughly 100 metres per hop.',
+          'Chats stay on the device and resume automatically when people are back in range.',
+          'Runs on iPhone, iPad, Mac and Apple Vision.',
+          'Available in English, Spanish and Russian.',
+        ],
+      },
+    ],
+    results: [
+      {
+        title: 'Zero data collected',
+        body: 'The App Store privacy label confirms it: no servers, no accounts, no tracking.',
+      },
+      {
+        title: 'Shipped and updated',
+        body: 'Live on the App Store as a one-time purchase, no subscription.',
+      },
+      {
+        title: 'Four Apple platforms',
+        body: 'Runs on iPhone, iPad, Mac and Apple Vision.',
+      },
+    ],
+    howIBuild: [
+      {
+        title: 'No single point of failure',
+        body: 'There is no server to go down. Every phone in range helps carry the conversation.',
+      },
+      {
+        title: 'Private by architecture',
+        body: 'Messages never touch the cloud, so there is nothing to leak.',
+      },
+      {
+        title: 'Easy on the battery',
+        body: 'Low-energy connections keep it running in the background all day.',
+      },
+    ],
+    tags: ['iOS', 'Peer-to-peer', 'Mesh networking', 'Privacy', 'Offline-first', 'AI-powered workflow'],
+  },
 ];
-
 export type WorkflowStep = { n: string; title: string; body: string };
 
 export const workflow: WorkflowStep[] = [

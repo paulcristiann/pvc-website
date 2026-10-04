@@ -19,7 +19,7 @@ interface Props {
 
 const { c, next } = Astro.props;
 // Link the live site only once the client has agreed to be named.
-const canLink = claims[c.nameClaim].confirmed;
+const canLink = !c.nameClaim || claims[c.nameClaim].confirmed;
 ---
 
 <Layout title={`${c.headline} · Paul Vasile`} description={c.pitch}>
@@ -38,16 +38,20 @@ const canLink = claims[c.nameClaim].confirmed;
             <dd><Tbc claim={c.roleClaim}>{c.role}</Tbc></dd>
           </div>
           <div>
+            <dt class="mono">Type</dt>
+            <dd>{c.kind}</dd>
+          </div>
+          <div>
             <dt class="mono">Industry</dt>
             <dd>{c.sector}</dd>
           </div>
           {
             canLink && (
               <div>
-                <dt class="mono">Live</dt>
+                <dt class="mono">See it</dt>
                 <dd>
                   <a href={c.url} target="_blank" rel="noopener">
-                    {new URL(c.url).hostname.replace(/^www\./, '')} ↗
+                    {c.linkLabel} ↗
                   </a>
                 </dd>
               </div>
@@ -62,7 +66,7 @@ const canLink = claims[c.nameClaim].confirmed;
 
     <section class="cs-section">
       <div class="container cs-grid">
-        <h2 class="cs-h">The client</h2>
+        <h2 class="cs-h">{c.clientHeading ?? 'The client'}</h2>
         <div>
           <p class="cs-lead"><Tbc claim={c.nameClaim}>{c.client}</Tbc></p>
         </div>
