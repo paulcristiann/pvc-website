@@ -4,6 +4,7 @@ import Tbc from '../../components/Tbc.astro';
 import CaseVisual from '../../components/CaseVisual.astro';
 import { caseStudies, type CaseStudy } from '../../data/work';
 import { claims } from '../../data/confirm';
+import { caseStudyGraph } from '../../data/seo';
 
 export function getStaticPaths() {
   return caseStudies.map((c, i) => ({
@@ -22,7 +23,12 @@ const { c, next } = Astro.props;
 const canLink = !c.nameClaim || claims[c.nameClaim].confirmed;
 ---
 
-<Layout title={`${c.headline} · Paul Vasile`} description={c.pitch}>
+<Layout
+  title={`${c.name}: ${c.headline} · Paul Vasile`}
+  description={c.pitch}
+  ogType="article"
+  schema={caseStudyGraph(c.slug)}
+>
   <article>
     <header class="cs-hero">
       <div class="container">
