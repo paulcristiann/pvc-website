@@ -38,8 +38,8 @@ const canLink = claims[c.nameClaim].confirmed;
             <dd><Tbc claim={c.roleClaim}>{c.role}</Tbc></dd>
           </div>
           <div>
-            <dt class="mono">Status</dt>
-            <dd class="live"><span class="status-dot"></span> In production</dd>
+            <dt class="mono">Industry</dt>
+            <dd>{c.sector}</dd>
           </div>
           {
             canLink && (

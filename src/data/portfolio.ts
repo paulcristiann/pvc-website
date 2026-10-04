@@ -6,7 +6,7 @@
 export const profile = {
   name: 'Paul Vasile',
   role: 'Fullstack Engineer',
-  eyebrow: 'Fullstack engineer · AI-assisted delivery · Production systems',
+  eyebrow: 'Fullstack engineer · AI-assisted delivery · Bucharest, Romania',
   tagline:
     'I design, build and run complete products, from web platforms and backends to mobile apps, for teams that can’t afford for them to fail. AI makes me fast. Engineering discipline makes it safe.',
   location: 'Bucharest, Romania',
@@ -15,9 +15,10 @@ export const profile = {
   whatsappNumber: '40756850399',
 
   about:
-    'Nine years of shipping software where mistakes are expensive: mobile security ' +
-    'at a digital-native bank, fiscal compliance, retail at enterprise scale, and R&D ' +
-    'at Romania’s national institute for informatics. I started on iOS and still ship ' +
+    'My work spans security at a ' +
+    'digital-native bank, fiscal compliance across European markets, retail and real ' +
+    'estate apps used at scale, payments, and national-scale systems at Romania’s ' +
+    'institute for informatics. I started on iOS and still ship ' +
     'there. Today I build whole products, from database to deployment, and I use AI ' +
     'as a force multiplier inside a process designed so that speed never costs ' +
     'reliability.',
@@ -28,13 +29,13 @@ export const profile = {
   ],
 };
 
-// Repo-derived or already-public numbers only. Never add usage metrics here
-// without a source.
+// Sourced from the Toptal profile or the repos only. Never add usage metrics
+// here without a source.
 export const stats: { value: string; label: string }[] = [
-  { value: '9+', label: 'Years shipping production software' },
+  { value: '9+', label: 'Years shipping software' },
   { value: 'Top 3%', label: 'Of global talent, vetted by Toptal' },
-  { value: '2', label: 'Production platforms built with AI agents in 2026' },
-  { value: '~1 mo', label: 'From idea to production for a clinic platform' },
+  { value: '10+', label: 'Client engagements, startups to enterprise' },
+  { value: '6', label: 'Industries: banking, retail, real estate, compliance, education, health' },
 ];
 
 export type Publication = {
@@ -46,71 +47,78 @@ export type Publication = {
 export type Experience = {
   role: string;
   company: string;
+  period: string;
   summary: string;
   highlights: string[];
   tags: string[];
   publications?: Publication[];
 };
 
+// Roles and dates follow the Toptal profile.
 export const experience: Experience[] = [
   {
     role: 'Fullstack Engineer',
     company: 'Independent · client platforms',
+    period: '2026 – now',
     summary:
-      'Designing, building and running fullstack platforms for clients, using AI to move fast and engineering discipline to keep them reliable.',
+      'Designing, building and running complete platforms for clients, using AI to move fast and engineering discipline to keep them reliable.',
     highlights: [
-      'An enrollment and records platform for a national research institute: signed official documents, OCR-assisted onboarding, self-hosted deploys.',
+      'An online enrollment platform for a national IT research institute, with signed official documents and ID-scan onboarding.',
       'An all-in-one platform for a veterinary clinic: public site, online booking, medical records, invoicing and payroll reports.',
-      'AI-accelerated delivery with automated checks on every change, so speed never costs reliability.',
     ],
     tags: ['Next.js', 'React', 'PostgreSQL', 'Supabase', 'Docker', 'AI-assisted development'],
   },
   {
-    role: 'Senior Software Engineer',
-    company: 'Toptal',
-    summary:
-      'Hand-picked into Toptal’s network of the top 3% of global engineering talent. 10+ engagements for startups and enterprise organizations, spanning software architecture, application security, networking and mobile.',
-    highlights: [
-      'Trusted by international clients including Property Finder, a leading real-estate marketplace, and fiskaly/fiskaltrust, specialists in fiscal compliance.',
-      'Modernized complex legacy codebases into scalable, maintainable architectures.',
-      'Delivered secure, high-performance software across real estate, fintech, and compliance domains.',
-    ],
-    tags: ['Software Architecture', 'Application Security', 'Swift', 'Fintech & Compliance'],
-  },
-  {
     role: 'Senior iOS Engineer',
-    company: 'Mindera · Marks & Spencer',
-    summary:
-      'Core contributor to one of the UK’s largest retail apps: large-scale refactors on a codebase many teams ship to every week.',
+    company: 'Marks & Spencer',
+    period: '2025 – now',
+    summary: 'Building one of the UK’s largest retail apps alongside many teams shipping every week.',
     highlights: [
-      'Core part of the product detail page (PDP) rearchitecture and refactoring initiative.',
-      'Helped refactor the entire basket module in under two months.',
-      'Modernized legacy components with the latest Apple technologies.',
+      'Core part of the product detail page rearchitecture; helped refactor the entire basket module in under two months.',
+      'Accessible, polished UI (VoiceOver, Dynamic Type) and rendering performance work.',
+      'GraphQL integration and asynchronous data flows, backed by unit and UI tests.',
     ],
-    tags: ['SwiftUI', 'GraphQL', 'Performance Optimization', 'Code Refactoring'],
+    tags: ['SwiftUI', 'GraphQL', 'Performance', 'Accessibility'],
   },
   {
     role: 'Mobile Security Engineer',
     company: 'Salt Bank',
-    summary:
-      'Helped lay the mobile security foundation of one of Romania’s first digital-native banks.',
+    period: '2025',
+    summary: 'Helped lay the mobile security foundation of one of Romania’s first digital-native banks.',
     highlights: [
-      'Researched and evaluated mobile security vendors to define the bank’s security stack.',
-      'Balanced engineering trade-offs against security capabilities and integration complexity.',
+      'Runtime self-protection and jailbreak/root detection.',
+      'Source code security reviews and MASVS-compliant penetration testing.',
+      'Evaluated and selected the bank’s mobile security vendors.',
     ],
-    tags: ['Mobile Security', 'Application Security', 'Technology Strategy'],
+    tags: ['Mobile Security', 'Penetration Testing', 'Banking'],
   },
   {
-    role: 'Software Engineer',
-    company: 'ICI Bucharest',
+    role: 'Freelance Engineer · Top 3%',
+    company: 'Toptal',
+    period: '2023 – now',
     summary:
-      'Software research & development at Romania’s national institute for informatics, contributing to national and European Commission–funded projects.',
+      'Hand-picked into Toptal’s network of the top 3% of global engineering talent. Engagements for startups and enterprises across real estate, fintech, compliance and consumer apps.',
     highlights: [
-      'Built R&D software for European and national research programs.',
-      'Grew from junior engineer to leading a cybersecurity team.',
-      'Co-authored research on AI-driven cybersecurity and verifiable credentials.',
+      'Property Finder (MENA’s leading real-estate marketplace): principal iOS engineer; shipped remotely configurable SSL pinning and performance work.',
+      'fiskaltrust: adapted point-of-sale compliance software for the Spanish and Italian markets, including a receipt-printing engine and a move to new hardware security modules.',
+      'Payments and marketplaces: Stripe and Plaid cashback flows for an eco-products marketplace, and payments plus Apple/Google sign-in for a subscription product.',
+      'Mobile and back-end lead on an MVP built on AWS and PostgreSQL, from product concept to scheduled launch; more fintech MVPs as lead architect.',
     ],
-    tags: ['Software R&D', 'European Projects', 'Cybersecurity'],
+    tags: ['Fullstack', 'Stripe', 'AWS', 'PostgreSQL', 'Swift', 'React'],
+  },
+  {
+    role: 'Senior Researcher · Head of Cybersecurity',
+    company: 'National Institute for Research & Development in Informatics (ICI)',
+    period: '2020 – 2025',
+    summary:
+      'Research and development on national and European Commission–funded projects, growing from engineer to leading the cybersecurity team.',
+    highlights: [
+      'Architected a scalable, microservice-based system with a cryptography provider that validates the authenticity of sales data from Romania’s next-generation cash registers.',
+      'Led security audits and introduced a vulnerability-analysis method that made the work about 50% faster.',
+      'Built a digital identity wallet with biometric authentication and encryption.',
+      'Mentored junior researchers; co-authored research on AI-driven cybersecurity and verifiable credentials.',
+    ],
+    tags: ['Software Architecture', 'Cryptography', 'Cybersecurity', 'Docker', 'CI/CD'],
     publications: [
       {
         title:
@@ -211,6 +219,8 @@ export const clientApps: ClientApp[] = [
     href: 'https://videowidget.com',
   },
 ];
+
+export const certifications = ['Certified Ethical Hacker (EC-Council)'];
 
 export const education: { school: string; degree: string; field: string }[] = [
   {

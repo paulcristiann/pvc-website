@@ -3,8 +3,25 @@ import Layout from '../layouts/Layout.astro';
 import ToptalBadge from '../components/ToptalBadge.astro';
 import Tbc from '../components/Tbc.astro';
 import CaseVisual from '../components/CaseVisual.astro';
-import { profile, experience, projects, clientApps, stats, education } from '../data/portfolio';
-import { caseStudies, workflow, promises } from '../data/work';
+import {
+  profile,
+  experience,
+  projects,
+  clientApps,
+  stats,
+  education,
+  certifications,
+} from '../data/portfolio';
+import { caseStudies, workflow, promises, moreWork } from '../data/work';
+import type { ClaimKey } from '../data/confirm';
+
+const heroClients: { name: string; desc: string; href: string; claim?: ClaimKey }[] = [
+  ...caseStudies.map((c) => ({ name: c.name, desc: c.sector, href: `/work/${c.slug}/`, claim: c.nameClaim })),
+  { name: 'Marks & Spencer', desc: 'Retail · UK', href: '#more' },
+  { name: 'Property Finder', desc: 'Real estate · MENA', href: '#more' },
+  { name: 'fiskaltrust', desc: 'Fiscal compliance · Europe', href: '#more' },
+  { name: 'Salt Bank', desc: 'Digital banking · Romania', href: '#more' },
+];
 ---
 
 <Layout>
@@ -25,22 +42,21 @@ import { caseStudies, workflow, promises } from '../data/work';
         </div>
       </div>
 
-      <aside class="systems card reveal" aria-label="Systems in production">
+      <aside class="systems card reveal" aria-label="Selected clients">
         <p class="systems-head mono">
-          <span>In production</span>
-          <span class="systems-sub">{caseStudies.length} platforms</span>
+          <span>Selected clients</span>
+          <span class="systems-sub">9+ years</span>
         </p>
         <ul>
           {
-            caseStudies.map((c) => (
+            heroClients.map((c) => (
               <li>
-                <a href={`/work/${c.slug}/`} class="systems-row">
-                  <span class="status-dot" />
+                <a href={c.href} class="systems-row">
                   <span class="systems-name">
-                    <span class="mono">
-                      <Tbc claim={c.nameClaim}>{c.name}</Tbc>
+                    <span class="systems-title">
+                      {c.claim ? <Tbc claim={c.claim}>{c.name}</Tbc> : c.name}
                     </span>
-                    <span class="systems-desc">{c.sector}</span>
+                    <span class="systems-desc">{c.desc}</span>
                   </span>
                   <span class="arrow">→</span>
                 </a>
@@ -48,7 +64,7 @@ import { caseStudies, workflow, promises } from '../data/work';
             ))
           }
         </ul>
-        <p class="systems-foot mono">Built with AI · run with discipline</p>
+        <a class="systems-foot mono" href="#more">And more across fintech, payments and AI →</a>
       </aside>
     </div>
 
@@ -70,10 +86,10 @@ import { caseStudies, workflow, promises } from '../data/work';
   <section id="work">
     <div class="container">
       <p class="eyebrow reveal">Selected work</p>
-      <h2 class="section-title reveal">Real systems, running every day</h2>
+      <h2 class="section-title reveal">Software people rely on every day</h2>
       <p class="section-lead reveal">
-        Two platforms I designed, built and look after, used by real people for things that can’t go
-        wrong: legal paperwork and medical records.
+        Two recent platforms I designed, built and look after, followed by a wider look at what I’ve
+        built for banks, retailers, marketplaces and startups.
       </p>
 
       <div class="cases">
@@ -101,6 +117,26 @@ import { caseStudies, workflow, promises } from '../data/work';
             </a>
           ))
         }
+      </div>
+
+      <div id="more" class="more">
+        <h3 class="more-title reveal">More of my work</h3>
+        <div class="more-grid">
+          {
+            moreWork.map((w) => (
+              <article class="more-card card spot reveal">
+                <p class="more-client mono">{w.client}</p>
+                <h4>{w.title}</h4>
+                <p class="more-body">{w.body}</p>
+                <div class="more-tags">
+                  {w.tags.map((t) => (
+                    <span class="tag">{t}</span>
+                  ))}
+                </div>
+              </article>
+            ))
+          }
+        </div>
       </div>
     </div>
   </section>
@@ -142,7 +178,7 @@ import { caseStudies, workflow, promises } from '../data/work';
       <p class="eyebrow reveal">Built to hold up</p>
       <h2 class="section-title reveal">Promises my systems actually keep</h2>
       <p class="section-lead reveal">
-        Each of these is running in production today. Hover a card to see how.
+        Each of these is live in a system I built. Hover a card to see how.
       </p>
       <div class="promises">
         {
@@ -178,6 +214,7 @@ import { caseStudies, workflow, promises } from '../data/work';
         {
           experience.map((job) => (
             <li class="timeline-item reveal">
+              <p class="timeline-period mono">{job.period}</p>
               <h3>{job.role}</h3>
               <p class="timeline-company">{job.company}</p>
               <p class="timeline-summary">{job.summary}</p>
@@ -282,7 +319,8 @@ import { caseStudies, workflow, promises } from '../data/work';
       </ul>
 
       <p class="edu reveal">
-        {education.map((e) => `${e.degree} in ${e.field}`).join(' · ')}, {education[0].school}
+        {education.map((e) => `${e.degree} in ${e.field}`).join(' · ')}, {education[0].school} ·{' '}
+        {certifications.join(' · ')}
       </p>
     </div>
   </section>
@@ -452,12 +490,21 @@ import { caseStudies, workflow, promises } from '../data/work';
   .systems-row .arrow {
     color: var(--text-tertiary);
   }
+  .systems-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
   .systems-foot {
+    display: block;
     font-size: 0.72rem;
     color: var(--text-tertiary);
     padding: 10px 6px 2px;
     border-top: 1px solid var(--border);
     margin-top: 6px;
+    transition: color 0.2s ease;
+  }
+  .systems-foot:hover {
+    color: var(--accent);
   }
 
   .stats {
@@ -558,6 +605,61 @@ import { caseStudies, workflow, promises } from '../data/work';
     }
     .case-card.flip .case-body {
       order: 0;
+    }
+  }
+
+  /* More work */
+  .more {
+    margin-top: 72px;
+    scroll-margin-top: 90px;
+  }
+  .more-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 24px;
+  }
+  .more-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .more-card {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .more-client {
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    margin-bottom: 10px;
+  }
+  .more-card h4 {
+    font-size: 1.02rem;
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    margin-bottom: 8px;
+  }
+  .more-body {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    flex: 1;
+  }
+  .more-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+  @media (max-width: 980px) {
+    .more-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .more-grid {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -783,6 +885,11 @@ import { caseStudies, workflow, promises } from '../data/work';
   }
   .timeline-item:last-child {
     padding-bottom: 0;
+  }
+  .timeline-period {
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    margin-bottom: 2px;
   }
   .timeline-item h3 {
     font-size: 1.15rem;

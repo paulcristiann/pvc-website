@@ -122,7 +122,7 @@ export const caseStudies: CaseStudy[] = [
     pitch:
       'From online booking to medical records, invoicing and payroll reports, one reliable system runs a veterinary practice that has been caring for pets since 2005.',
     visual: 'calendar',
-    highlights: ['24/7 online booking', 'One system instead of many', 'Idea → production in ~1 month'],
+    highlights: ['24/7 online booking', 'One system instead of many', 'Idea → launch in ~1 month'],
     client:
       'WeCare is a well-established veterinary clinic in Bucharest: open since 2005, 8 specialists, a 4.9 Google rating and more than 1,000 patients a year.',
     challenge: {
@@ -166,7 +166,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: 'Built fast',
-        body: 'The core platform went from idea to production in about one month.',
+        body: 'The core platform went from idea to launch in about one month.',
       },
     ],
     howIBuild: [
@@ -254,8 +254,62 @@ export const promises: Promise[] = [
   },
   {
     title: 'Fixed at the root',
-    body: 'Production-only bugs get diagnosed and fixed for good, not patched over.',
+    body: 'Hard-to-reproduce bugs get diagnosed and fixed for good, not patched over.',
     how: 'Fixes ship with automated tests so the same problem doesn’t come back.',
     where: 'Both platforms',
+  },
+];
+
+export type MoreWork = { title: string; client: string; body: string; tags: string[] };
+
+// Work beyond the two case studies, from the Toptal profile.
+export const moreWork: MoreWork[] = [
+  {
+    title: 'Fiscal data validation',
+    client: 'National scale · Romania',
+    body: 'A microservice system with its own cryptography provider that checks the authenticity and integrity of sales data from the country’s next-generation cash registers.',
+    tags: ['Architecture', 'Cryptography', 'Microservices'],
+  },
+  {
+    title: 'Retail at enterprise scale',
+    client: 'Marks & Spencer',
+    body: 'Product page and basket rebuilds in one of the UK’s largest retail apps, with accessibility and performance built in.',
+    tags: ['iOS', 'GraphQL', 'Accessibility'],
+  },
+  {
+    title: 'Real-estate marketplace',
+    client: 'Property Finder',
+    body: 'Principal engineer on MENA’s leading property app: remotely configurable SSL pinning, performance tuning and new features.',
+    tags: ['iOS', 'Security', 'Performance'],
+  },
+  {
+    title: 'Point-of-sale compliance',
+    client: 'fiskaltrust',
+    body: 'Fiscal compliance software adapted for Spain and Italy, including a receipt-printing engine and a move to new hardware security modules.',
+    tags: ['Compliance', 'CI/CD', 'Hardware security'],
+  },
+  {
+    title: 'Digital banking security',
+    client: 'Salt Bank',
+    body: 'Runtime protection, jailbreak detection, code reviews and penetration testing for one of Romania’s first digital-native banks.',
+    tags: ['Mobile security', 'Pentesting'],
+  },
+  {
+    title: 'Payments & marketplaces',
+    client: 'US startups',
+    body: 'Stripe and Plaid cashback payments for an eco-products marketplace; payments and Apple/Google sign-in that lifted trial conversion for a subscription app.',
+    tags: ['Fullstack', 'Stripe', 'Plaid'],
+  },
+  {
+    title: 'AI photo products',
+    client: 'AI Filter · GlowUp',
+    body: 'Prompt-based generative photo editing, designed and launched end to end, plus new AI generation features and stability fixes on GlowUp.',
+    tags: ['AI', 'iOS', 'App Store'],
+  },
+  {
+    title: 'Digital identity wallet',
+    client: 'Research & development',
+    body: 'A mobile wallet for managing and verifying digital identities, secured with biometric authentication and encryption.',
+    tags: ['Identity', 'Biometrics', 'Encryption'],
   },
 ];
