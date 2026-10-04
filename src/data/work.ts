@@ -42,22 +42,22 @@ export const caseStudies: CaseStudy[] = [
     url: 'https://cursuri.ici.ro',
     linkLabel: 'cursuri.ici.ro',
     kind: 'Web platform',
-    sector: 'Education · national research institute',
-    headline: 'Online enrollment for a national IT research institute',
+    sector: 'Education · professional training',
+    headline: 'Paperless enrollment for accredited courses',
     pitch:
-      'From browsing an accredited course to a signed, archived enrollment file, entirely online. Running on the institute’s own servers, with the paperwork handled correctly every time.',
+      'A course platform that takes students from browsing to a signed, verified enrollment file, on any device. Built for a national research institute that wanted paper out of its accredited training for good.',
     visual: 'enrollment',
-    highlights: ['Paper intake → self-service', 'Signed documents in-app', 'Runs on client infrastructure'],
+    highlights: ['ID scan fills the forms', 'Signed on screen', 'Self-hosted, GDPR-first'],
     client:
-      'Romania’s National Institute for Research & Development in Informatics runs around thirty accredited professional courses, from cybersecurity and AI to GDPR and programming, authorised by the Ministries of Labour and Education.',
+      'ICI, Romania’s national institute for informatics research, runs around thirty accredited professional courses, from cybersecurity and AI to GDPR and programming. Their goal: move enrollment fully online, onto infrastructure they own, without cutting corners on compliance.',
     challenge: {
       intro:
-        'Enrolling one student meant identity checks, several official forms, a training contract and a hand-off into the institute’s records system. Courses only start once a group fills up. The institute needed one system that:',
+        'Enrolling in an accredited course means identity checks, several official forms, a training contract and a hand-off into a records system, and a course only starts once its group fills up. The platform had to:',
       needs: [
-        'lets students enrol, sign and upload everything online, on a phone or a laptop,',
-        'produces the official documents correctly, every time,',
-        'keeps personal data strictly scoped and handled under GDPR,',
-        'runs on the institute’s own infrastructure, not a third-party cloud.',
+        'let students enrol, sign and upload everything themselves, on a phone or a laptop,',
+        'produce legally valid documents, correct every time,',
+        'keep personal data strictly scoped and GDPR compliant,',
+        'run on the client’s own servers, not a third-party cloud.',
       ],
     },
     delivered: [
@@ -71,11 +71,11 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
-        title: 'For the institute',
+        title: 'For the course team',
         items: [
           'Course and group management, from forming to finalised and archived.',
           'Enrollment review, contracts and a clear history for every student.',
-          'Approved students flow into the institute’s records system automatically.',
+          'Approved students flow into the client’s records system automatically.',
           'Course administrators see only their own courses.',
           'Self-service website content: banners, announcements, pages.',
         ],

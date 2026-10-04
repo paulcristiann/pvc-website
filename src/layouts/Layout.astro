@@ -105,6 +105,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <script>
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+      // Fresh page loads always start at the top. Some embedding hosts keep the
+      // previous page's scroll offset; scrollIntoView also moves those ancestors.
+      const navEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+      if (!location.hash && navEntry?.type === 'navigate') {
+        document.documentElement.scrollIntoView({ block: 'start', behavior: 'instant' });
+      }
+
       // Reveal-on-scroll
       const observer = new IntersectionObserver(
         (entries) => {
