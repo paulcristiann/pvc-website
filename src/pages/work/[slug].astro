@@ -156,7 +156,7 @@ const canLink = !c.nameClaim || claims[c.nameClaim].confirmed;
           {
             c.howIBuild.map((b) => (
               <div class="cs-build-item reveal">
-                <span class:list={['status-dot', { 'is-ai': b.ai }]} />
+                <span class="status-dot" />
                 <div>
                   <h3>{b.title}</h3>
                   <p>{b.body}</p>
@@ -407,18 +407,6 @@ const canLink = !c.nameClaim || claims[c.nameClaim].confirmed;
     display: flex;
     gap: 16px;
     align-items: baseline;
-  }
-  .cs-build-item:has(.is-ai) {
-    grid-column: 1 / -1;
-  }
-  .cs-build-item:has(.is-ai) p {
-    max-width: 70ch;
-  }
-  .cs-build-item .is-ai {
-    background: var(--accent);
-  }
-  .cs-build-item .is-ai::after {
-    background: var(--accent);
   }
   .cs-build-item h3 {
     font-size: 1.02rem;

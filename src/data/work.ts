@@ -28,7 +28,7 @@ export type CaseStudy = {
   challenge: { intro: string; needs: string[] };
   delivered: { title: string; items: string[] }[];
   results: { title: string; body: string }[];
-  howIBuild: { title: string; body: string; ai?: boolean }[];
+  howIBuild: { title: string; body: string }[];
   quote?: string;
   tags: string[];
 };
@@ -122,12 +122,6 @@ export const caseStudies: CaseStudy[] = [
         body:
           'Analytics are anonymous and cookie-free, and no personal data is shared with outside vendors.',
       },
-      {
-        title: 'AI that speeds delivery, not risk',
-        body:
-          'AI coding agents did much of the building, under written rules on what they must never skip. Bigger changes start as an approved plan, and every change passes hundreds of automated tests on desktop and mobile before I review and release it.',
-        ai: true,
-      },
     ],
     tags: ['Full-stack', 'Next.js', 'PostgreSQL', 'Docker', 'Education', 'GDPR', 'AI-powered workflow'],
   },
@@ -218,12 +212,6 @@ export const caseStudies: CaseStudy[] = [
         body:
           'Security updates and dependency checks keep running, so the clinic’s system stays safe without anyone there having to think about it.',
       },
-      {
-        title: 'AI-built, gate-checked',
-        body:
-          'AI agents work from a written brief on how the platform and its rules fit together. Nothing they produce ships until it passes code checks, automated tests and a security audit of every dependency, and I sign off on every release.',
-        ai: true,
-      },
     ],
     quote:
       'AI lets me build in weeks what used to take months. The engineering discipline around it is what makes it safe to run a real business on.',
@@ -307,12 +295,6 @@ export const caseStudies: CaseStudy[] = [
         title: 'Earning from the first release',
         body:
           'Subscriptions, purchases and App Store review requirements were built in from day one.',
-      },
-      {
-        title: 'AI as co-pilot, not autopilot',
-        body:
-          'AI sped up building and testing, while the architecture, the privacy decisions and every release stayed in my hands.',
-        ai: true,
       },
     ],
     tags: ['iOS', 'macOS', 'SwiftUI', 'Generative AI', 'Subscriptions', 'AI-powered workflow'],
@@ -398,12 +380,6 @@ export const caseStudies: CaseStudy[] = [
         title: 'Built to run all day',
         body:
           'Low-energy connections keep it running in the background without draining the battery.',
-      },
-      {
-        title: 'Fast to build, careful to ship',
-        body:
-          'AI sped up prototyping and iteration, while the design, the privacy model and every release decision stayed with me.',
-        ai: true,
       },
     ],
     tags: ['iOS', 'Peer-to-peer', 'Mesh networking', 'Privacy', 'Offline-first', 'AI-powered workflow'],
