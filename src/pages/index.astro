@@ -101,7 +101,11 @@ import { caseStudies, workflow, moreWork } from '../data/work';
           }
         </div>
       </div>
-      <p class="clients-label mono reveal">On the App Store with client teams</p>
+      <h3 class="more-title clients-title reveal">Apps I helped ship with client teams</h3>
+      <p class="clients-lead reveal">
+        Live on the App Store. I worked inside each client’s engineering team, building features and
+        shipping releases alongside them.
+      </p>
       <ul class="client-apps reveal">
         {
           clientApps.map((app) => (
@@ -754,10 +758,13 @@ import { caseStudies, workflow, moreWork } from '../data/work';
     }
   }
 
-  .clients-label {
-    font-size: 0.74rem;
-    color: var(--text-tertiary);
-    margin: 48px 0 16px;
+  .clients-title {
+    margin: 64px 0 6px;
+  }
+  .clients-lead {
+    color: var(--text-secondary);
+    max-width: 60ch;
+    margin-bottom: 20px;
   }
   .client-apps {
     list-style: none;
