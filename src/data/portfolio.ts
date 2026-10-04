@@ -6,7 +6,7 @@
 export const profile = {
   name: 'Paul Vasile',
   role: 'Fullstack Engineer',
-  eyebrow: 'Fullstack engineer · 9+ years shipping · AI-powered workflow',
+  eyebrow: 'Fullstack engineer · 10+ years shipping · AI-powered workflow',
   tagline:
     'I design, build and run complete products, from web platforms and backends to mobile apps, for teams that can’t afford for them to fail. Years of engineering make it solid; AI makes me faster than ever.',
   location: 'Bucharest, Romania',
@@ -32,7 +32,7 @@ export const profile = {
 // Sourced from the Toptal profile or the repos only. Never add usage metrics
 // here without a source.
 export const stats: { value: string; label: string }[] = [
-  { value: '9+', label: 'Years shipping software' },
+  { value: '10+', label: 'Years shipping software' },
   { value: 'Top 3%', label: 'Of global talent, vetted by Toptal' },
   { value: '10+', label: 'Client engagements, startups to enterprise' },
   { value: '6', label: 'Industries: banking, retail, real estate, compliance, education, health' },
