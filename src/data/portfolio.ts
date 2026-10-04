@@ -23,7 +23,6 @@ export const profile = {
     'as a force multiplier inside a process designed so that speed never costs ' +
     'reliability.',
   socials: [
-    { label: 'GitHub', href: 'https://github.com/paulcristiann' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/paul-vasile' },
     { label: 'Toptal', href: 'https://www.toptal.com/developers/resume/paul-vasile' },
   ],
