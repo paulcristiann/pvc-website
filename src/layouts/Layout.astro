@@ -26,7 +26,6 @@ const home = Astro.url.pathname === '/' ? '' : '/';
 const nav = [
   { label: 'Work', href: `${home}#work` },
   { label: 'How I work', href: `${home}#workflow` },
-  { label: 'Reliability', href: `${home}#reliability` },
   { label: 'Experience', href: `${home}#experience` },
 ];
 const canonical = new URL(Astro.url.pathname, Astro.site);

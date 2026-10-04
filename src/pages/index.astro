@@ -12,7 +12,7 @@ import {
   education,
   certifications,
 } from '../data/portfolio';
-import { caseStudies, workflow, promises, moreWork } from '../data/work';
+import { caseStudies, workflow, moreWork } from '../data/work';
 ---
 
 <Layout>
@@ -136,33 +136,6 @@ import { caseStudies, workflow, promises, moreWork } from '../data/work';
           what makes it safe to run a real business on.”
         </p>
       </blockquote>
-    </div>
-  </section>
-
-  {/* ───────────── Reliability ───────────── */}
-  <section id="reliability">
-    <div class="container">
-      <p class="eyebrow reveal">Built to hold up</p>
-      <h2 class="section-title reveal">Promises my systems actually keep</h2>
-      <p class="section-lead reveal">
-        Each of these is live in a system I built. Hover a card to see how.
-      </p>
-      <div class="promises">
-        {
-          promises.map((p) => (
-            <article class="promise card spot reveal" tabindex="0">
-              <p class="promise-where mono">
-                <span class="status-dot" /> {p.where}
-              </p>
-              <h3>{p.title}</h3>
-              <p class="promise-body">{p.body}</p>
-              <p class="promise-how">
-                <span class="mono">How</span> {p.how}
-              </p>
-            </article>
-          ))
-        }
-      </div>
     </div>
   </section>
 
@@ -678,78 +651,6 @@ import { caseStudies, workflow, promises, moreWork } from '../data/work';
   .pull p {
     border-left: 3px solid var(--accent);
     padding-left: 22px;
-  }
-
-  /* Promises */
-  .promises {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-  .promise {
-    padding: 24px 24px 22px;
-    outline: none;
-    display: flex;
-    flex-direction: column;
-  }
-  .promise:focus-visible {
-    border-color: var(--accent);
-  }
-  .promise-where {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.72rem;
-    color: var(--text-tertiary);
-    margin-bottom: 16px;
-  }
-  .promise h3 {
-    font-size: 1.12rem;
-    font-weight: 650;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-  }
-  .promise-body {
-    color: var(--text-secondary);
-    font-size: 0.94rem;
-    flex: 1;
-  }
-  .promise-how {
-    font-size: 0.86rem;
-    color: var(--text);
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px dashed var(--border-strong);
-    opacity: 0.45;
-    filter: blur(4px);
-    transition: opacity 0.35s ease, filter 0.35s var(--ease);
-  }
-  .promise-how .mono {
-    font-size: 0.7rem;
-    color: var(--accent);
-    margin-right: 6px;
-  }
-  .promise:hover .promise-how,
-  .promise:focus-within .promise-how,
-  .promise:focus .promise-how {
-    opacity: 1;
-    filter: none;
-  }
-  @media (hover: none), (prefers-reduced-motion: reduce) {
-    .promise-how {
-      opacity: 1;
-      filter: none;
-    }
-  }
-  @media (max-width: 860px) {
-    .promises {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  @media (max-width: 560px) {
-    .promises {
-      grid-template-columns: 1fr;
-    }
   }
 
   /* Experience */

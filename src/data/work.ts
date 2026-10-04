@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-//  Case studies, "how I work" and reliability promises.
+//  Case studies, "how I work" and more work.
 //  Marketing tone: outcomes first, light on technical detail,
 //  no AI model or tool names. Every statement is backed by the
 //  codebases or confirmed by Paul. Usage metrics stay out until
@@ -215,48 +215,6 @@ export const workflow: WorkflowStep[] = [
     n: '04',
     title: 'Run it and keep it healthy',
     body: 'Monitoring, safe releases and ongoing updates after launch. The product keeps working while your team gets on with theirs.',
-  },
-];
-
-export type Promise = { title: string; body: string; how: string; where: string };
-
-// Reliability, in plain language. `how` is revealed on hover / focus.
-export const promises: Promise[] = [
-  {
-    title: 'No double bookings. Ever.',
-    body: 'Two people can click the same slot at the same moment. Only one gets it.',
-    how: 'The rule lives in the database itself, not only on the screen.',
-    where: 'Clinic platform',
-  },
-  {
-    title: 'Releases that can’t lose data',
-    body: 'Every update backs up first, and nothing goes live until it proves it’s healthy.',
-    how: 'Automatic backup before every release, then a health check gate.',
-    where: 'Enrollment platform',
-  },
-  {
-    title: 'Partners fail. Your product doesn’t.',
-    body: 'When an outside service goes down, users get a fallback instead of an error.',
-    how: 'Every integration has a safe default and a retry path.',
-    where: 'Enrollment platform',
-  },
-  {
-    title: 'Private by default',
-    body: 'Medical and personal records are visible only to the people who should see them.',
-    how: 'Invite-only access, checks at every layer, logged access to sensitive files.',
-    where: 'Both platforms',
-  },
-  {
-    title: 'Problems reach me first',
-    body: 'If something breaks, I know before your customers do.',
-    how: 'Error monitoring across browser, server and edge.',
-    where: 'Both platforms',
-  },
-  {
-    title: 'Fixed at the root',
-    body: 'Hard-to-reproduce bugs get diagnosed and fixed for good, not patched over.',
-    how: 'Fixes ship with automated tests so the same problem doesn’t come back.',
-    where: 'Both platforms',
   },
 ];
 
