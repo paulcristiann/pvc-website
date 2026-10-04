@@ -12,6 +12,8 @@ import {
   certifications,
 } from '../data/portfolio';
 import { caseStudies, workflow, moreWork } from '../data/work';
+
+const eyebrowParts = profile.eyebrow.split(' · ');
 ---
 
 <Layout>
@@ -19,7 +21,16 @@ import { caseStudies, workflow, moreWork } from '../data/work';
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <p class="eyebrow reveal">{profile.eyebrow}</p>
+        <p class="eyebrow eyebrow-split reveal">
+          {
+            eyebrowParts.map((part, i) => (
+              <>
+                {i > 0 && <span class:list={['eb-sep', { 'eb-break': i === eyebrowParts.length - 1 }]}>&nbsp;· </span>}
+                <span class:list={['eb-part', { 'eb-line': i === eyebrowParts.length - 1 }]}>{part}</span>
+              </>
+            ))
+          }
+        </p>
         <h1 class="hero-title reveal">
           Software that holds up <em>when it matters.</em>
         </h1>
@@ -446,6 +457,17 @@ import { caseStudies, workflow, moreWork } from '../data/work';
   .case-visual :global(.aif-chip) {
     flex-shrink: 0;
     white-space: nowrap;
+  }
+
+  /* Narrowest phones: scale the dense mockups so nothing gets clipped */
+  @media (max-width: 360px) {
+    .case-visual :global(.cl),
+    .case-visual :global(.nb) {
+      zoom: 0.8;
+    }
+    .case-visual :global(.aif-chip:nth-child(n + 3)) {
+      display: none;
+    }
   }
 
   /* More work */

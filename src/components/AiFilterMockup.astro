@@ -180,6 +180,11 @@ const filters = ['Golden hour', 'Oil painting', 'Anime', 'Custom'];
     border-color: var(--accent);
     color: var(--accent);
   }
+  @media (max-width: 420px) {
+    .aif-chip:nth-child(4) {
+      display: none;
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     .aif-after {
       clip-path: none;

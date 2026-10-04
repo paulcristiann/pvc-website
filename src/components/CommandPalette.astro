@@ -39,6 +39,7 @@ const groups = [...new Set(items.map((i) => i.group))];
         spellcheck="false"
       />
       <kbd>esc</kbd>
+      <button class="cmdk-close" type="button" data-cmdk-close>Close</button>
     </div>
     <div class="cmdk-list" id="cmdk-list" role="listbox">
       {
@@ -98,7 +99,9 @@ const groups = [...new Set(items.map((i) => i.group))];
     input.value = '';
     filter();
     dialog.showModal();
-    input.focus();
+    // On touch screens, don't pop the keyboard over the list; people mostly tap an item
+    if (matchMedia('(pointer: fine)').matches) input.focus();
+    else (document.activeElement as HTMLElement | null)?.blur();
   };
   const run = async (item: HTMLAnchorElement) => {
     if (item.dataset.action === 'copy-email') {
@@ -145,6 +148,7 @@ const groups = [...new Set(items.map((i) => i.group))];
       }
     });
   });
+  dialog.querySelector('[data-cmdk-close]')!.addEventListener('click', () => dialog.close());
   // Click on the backdrop closes
   dialog.addEventListener('click', (e) => {
     if (e.target === dialog) dialog.close();
@@ -202,6 +206,37 @@ const groups = [...new Set(items.map((i) => i.group))];
     font: inherit;
     font-size: 1rem;
     color: var(--text);
+  }
+  .cmdk-close {
+    display: none;
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--accent);
+    background: none;
+    border: none;
+    padding: 4px 2px;
+    cursor: pointer;
+  }
+  @media (pointer: coarse) {
+    .cmdk-search kbd {
+      display: none;
+    }
+    .cmdk-close {
+      display: inline;
+    }
+  }
+  @media (max-width: 600px) {
+    .cmdk {
+      margin-top: 10vh;
+      max-height: 80vh;
+    }
+    .cmdk-list {
+      max-height: 64vh;
+    }
+    .cmdk-hint {
+      display: none;
+    }
   }
   .cmdk-list {
     max-height: min(420px, 56vh);

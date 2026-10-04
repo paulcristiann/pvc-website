@@ -80,8 +80,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           {nav.map((item) => <a href={item.href}>{item.label}</a>)}
         </nav>
         <div class="nav-actions">
-          <button class="nav-k" type="button" data-cmdk-open aria-label="Open command menu">
+          <button class="nav-k" type="button" data-cmdk-open aria-label="Open menu and search">
+            <svg class="nav-k-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"
+              ><path d="M4 7h16M4 12h16M4 17h10"></path></svg
+            >
             <span class="nav-k-label">Search</span>
+            <span class="nav-k-label-m">Menu</span>
             <kbd>⌘K</kbd>
           </button>
           <a class="nav-cta" href={`${home}#contact`}>Get in touch</a>
@@ -272,13 +276,30 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       .footer-links a:hover {
         color: var(--accent);
       }
+      .nav-k-icon,
+      .nav-k-label-m {
+        display: none;
+      }
+      /* Below 860px the section links are hidden, so the palette doubles as the menu */
       @media (max-width: 860px) {
         .nav-links {
           display: none;
         }
+        .nav-k {
+          gap: 6px;
+          padding: 6px 13px 6px 11px;
+          color: var(--text);
+        }
+        .nav-k-icon,
+        .nav-k-label-m {
+          display: inline;
+        }
+        .nav-k-label,
+        .nav-k kbd {
+          display: none;
+        }
       }
       @media (max-width: 480px) {
-        .nav-k-label,
         .nav-cta {
           display: none;
         }

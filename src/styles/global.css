@@ -126,6 +126,35 @@ section {
   color: var(--text-tertiary);
 }
 
+/* Multi-part eyebrows: hanging indent under the "// " prefix. On phones a
+   part marked .eb-line drops to its own line rather than a line starting
+   with a dot. */
+.eyebrow-split {
+  padding-left: 3ch;
+  text-indent: -3ch;
+}
+.eb-part {
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .eb-sep.eb-break {
+    display: none;
+  }
+  .eb-line {
+    display: block;
+    text-indent: 0;
+  }
+}
+@media (max-width: 360px) {
+  .eyebrow-split .eb-sep {
+    display: none;
+  }
+  .eyebrow-split .eb-part:not(:first-child) {
+    display: block;
+    text-indent: 0;
+  }
+}
+
 .section-title {
   font-size: clamp(1.8rem, 4vw, 2.6rem);
   font-weight: 700;

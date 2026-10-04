@@ -266,6 +266,12 @@ const fields = ['Full name', 'ID number', 'Address'];
   :global(.reveal:not(.is-visible)) .enr-sig {
     stroke-dashoffset: 260;
   }
+  /* The two cards need ~260px; scale down on the narrowest phones */
+  @media (max-width: 360px) {
+    .enr {
+      zoom: 0.8;
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     .enr *,
     .enr-course,

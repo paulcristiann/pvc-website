@@ -27,8 +27,10 @@ const canLink = !c.nameClaim || claims[c.nameClaim].confirmed;
     <header class="cs-hero">
       <div class="container">
         <a class="back mono" href="/#work">← All work</a>
-        <p class="eyebrow">
-          <Tbc claim={c.nameClaim}>{c.name}</Tbc> · {c.sector}
+        <p class="eyebrow eyebrow-split">
+          <span class="eb-part"><Tbc claim={c.nameClaim}>{c.name}</Tbc></span><span class="eb-sep eb-break"
+            >&nbsp;· </span
+          ><span class="eb-line">{c.sector}</span>
         </p>
         <h1 class="cs-title">{c.headline}</h1>
         <p class="cs-pitch">{c.pitch}</p>
@@ -262,6 +264,12 @@ const canLink = !c.nameClaim || claims[c.nameClaim].confirmed;
       zoom: 1;
     }
   }
+  @media (max-width: 360px) {
+    .cs-visual :global(.cl),
+    .cs-visual :global(.nb) {
+      zoom: 0.85;
+    }
+  }
   .cs-section {
     padding: 56px 0;
   }
@@ -478,6 +486,14 @@ const canLink = !c.nameClaim || claims[c.nameClaim].confirmed;
     }
     .results {
       grid-template-columns: 1fr;
+    }
+    .cs-grid .cs-h {
+      margin-bottom: 0;
+    }
+  }
+  @media (max-width: 600px) {
+    .cs-section {
+      padding: 44px 0;
     }
   }
 </style>
