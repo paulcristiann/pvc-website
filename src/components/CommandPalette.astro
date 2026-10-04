@@ -1,0 +1,247 @@
+---
+// ⌘K command menu on a native <dialog>. Opens with ⌘K / Ctrl+K, "/" or the nav button.
+import { profile } from '../data/portfolio';
+import { caseStudies } from '../data/work';
+
+type Item = { group: string; label: string; hint?: string; href?: string; action?: string };
+
+const items: Item[] = [
+  { group: 'Go to', label: 'Selected work', href: '/#work' },
+  { group: 'Go to', label: 'How I work', href: '/#workflow' },
+  { group: 'Go to', label: 'Built to hold up', href: '/#reliability' },
+  { group: 'Go to', label: 'Experience', href: '/#experience' },
+  { group: 'Go to', label: 'Apps', href: '/#apps' },
+  { group: 'Go to', label: 'Contact', href: '/#contact' },
+  ...caseStudies.map((c) => ({
+    group: 'Case studies',
+    label: c.headline,
+    hint: c.slug,
+    href: `/work/${c.slug}/`,
+  })),
+  { group: 'Actions', label: 'Copy email address', hint: profile.email, action: 'copy-email' },
+  { group: 'Actions', label: 'Email me', href: `mailto:${profile.email}` },
+  ...profile.socials.map((s) => ({ group: 'Profiles', label: s.label, hint: '↗', href: s.href })),
+];
+const groups = [...new Set(items.map((i) => i.group))];
+---
+
+<dialog class="cmdk" aria-label="Command menu" data-email={profile.email}>
+  <div class="cmdk-panel">
+    <div class="cmdk-search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
+        ><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg
+      >
+      <input
+        type="text"
+        placeholder="Type a command or search…"
+        aria-label="Search commands"
+        aria-controls="cmdk-list"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <kbd>esc</kbd>
+    </div>
+    <div class="cmdk-list" id="cmdk-list" role="listbox">
+      {
+        groups.map((g) => (
+          <div class="cmdk-group" data-group>
+            <p class="cmdk-group-label mono">{g}</p>
+            {items
+              .filter((i) => i.group === g)
+              .map((i) => (
+                <a
+                  class="cmdk-item"
+                  role="option"
+                  href={i.href ?? '#'}
+                  data-action={i.action}
+                  data-search={`${i.label} ${i.hint ?? ''} ${g}`.toLowerCase()}
+                  {...(i.href?.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}
+                >
+                  <span>{i.label}</span>
+                  {i.hint && <span class="cmdk-hint mono">{i.hint}</span>}
+                </a>
+              ))}
+          </div>
+        ))
+      }
+      <p class="cmdk-empty mono" hidden>No results</p>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('dialog.cmdk')!;
+  const input = dialog.querySelector('input')!;
+  const items = [...dialog.querySelectorAll<HTMLAnchorElement>('.cmdk-item')];
+  const empty = dialog.querySelector<HTMLElement>('.cmdk-empty')!;
+  let active = 0;
+
+  const visible = () => items.filter((i) => !i.hidden);
+  const highlight = (n: number) => {
+    const v = visible();
+    if (!v.length) return;
+    active = (n + v.length) % v.length;
+    items.forEach((i) => i.setAttribute('aria-selected', 'false'));
+    v[active].setAttribute('aria-selected', 'true');
+    v[active].scrollIntoView({ block: 'nearest' });
+  };
+  const filter = () => {
+    const q = input.value.trim().toLowerCase();
+    items.forEach((i) => (i.hidden = !!q && !q.split(/\s+/).every((w) => i.dataset.search!.includes(w))));
+    dialog.querySelectorAll<HTMLElement>('[data-group]').forEach((g) => {
+      g.hidden = !g.querySelector('.cmdk-item:not([hidden])');
+    });
+    empty.hidden = visible().length > 0;
+    highlight(0);
+  };
+  const open = () => {
+    if (dialog.open) return;
+    input.value = '';
+    filter();
+    dialog.showModal();
+    input.focus();
+  };
+  const run = async (item: HTMLAnchorElement) => {
+    if (item.dataset.action === 'copy-email') {
+      await navigator.clipboard?.writeText(dialog.dataset.email!);
+      const label = item.querySelector('span')!;
+      const prev = label.textContent;
+      label.textContent = 'Copied ✓';
+      setTimeout(() => {
+        label.textContent = prev;
+        dialog.close();
+      }, 700);
+      return;
+    }
+    dialog.close();
+    item.click();
+  };
+
+  document.addEventListener('keydown', (e) => {
+    const typing = (e.target as HTMLElement).closest('input, textarea, [contenteditable]');
+    if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !typing)) {
+      e.preventDefault();
+      dialog.open ? dialog.close() : open();
+    }
+  });
+  document.querySelectorAll('[data-cmdk-open]').forEach((b) => b.addEventListener('click', open));
+  input.addEventListener('input', filter);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') (e.preventDefault(), highlight(active + 1));
+    if (e.key === 'ArrowUp') (e.preventDefault(), highlight(active - 1));
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const v = visible()[active];
+      if (v) run(v);
+    }
+  });
+  items.forEach((item) => {
+    item.addEventListener('pointermove', () => highlight(visible().indexOf(item)));
+    item.addEventListener('click', (e) => {
+      if (item.dataset.action) {
+        e.preventDefault();
+        run(item);
+      } else if (dialog.open) {
+        dialog.close();
+      }
+    });
+  });
+  // Click on the backdrop closes
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+</script>
+
+<style>
+  .cmdk {
+    margin: 14vh auto 0;
+    width: min(560px, calc(100vw - 32px));
+    max-height: 70vh;
+    border: none;
+    background: transparent;
+    padding: 0;
+    color: var(--text);
+  }
+  .cmdk::backdrop {
+    background: rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(3px);
+  }
+  .cmdk[open] .cmdk-panel {
+    animation: cmdk-in 0.2s var(--ease);
+  }
+  @keyframes cmdk-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97) translateY(-6px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cmdk[open] .cmdk-panel {
+      animation: none;
+    }
+  }
+  .cmdk-panel {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+  .cmdk-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-tertiary);
+  }
+  .cmdk-search input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--text);
+  }
+  .cmdk-list {
+    max-height: min(420px, 56vh);
+    overflow-y: auto;
+    padding: 8px;
+  }
+  .cmdk-group-label {
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    padding: 10px 10px 6px;
+  }
+  .cmdk-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 0.93rem;
+    outline: none;
+  }
+  .cmdk-item[aria-selected='true'] {
+    background: var(--surface-2);
+  }
+  .cmdk-item[aria-selected='true'] span:first-child {
+    color: var(--accent);
+  }
+  .cmdk-hint {
+    font-size: 0.74rem;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 50%;
+  }
+  .cmdk-empty {
+    padding: 24px;
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+  }
+</style>

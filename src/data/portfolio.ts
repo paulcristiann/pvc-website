@@ -5,21 +5,22 @@
 
 export const profile = {
   name: 'Paul Vasile',
-  role: 'Engineer · Architect · Product Builder',
+  role: 'Fullstack Engineer',
+  eyebrow: 'Fullstack engineer · AI-assisted delivery · Production systems',
   tagline:
-    'I build scalable, secure, high-performance mobile software — from architecture to App Store.',
+    'I design, build and run complete products, from web platforms and backends to mobile apps, for teams that can’t afford for them to fail. AI makes me fast. Engineering discipline makes it safe.',
   location: 'Bucharest, Romania',
   email: 'paulcristian04@proton.me',
   // WhatsApp click-to-chat: digits only, international format, no + or spaces.
   whatsappNumber: '40756850399',
 
   about:
-    'Senior Software Engineer specializing in iOS with 9+ years of experience ' +
-    'delivering mobile applications for startups, enterprise organizations, and ' +
-    'fintech. As a Toptal engineer, I’ve partnered with international clients to ' +
-    'build scalable, secure, and high-performance software. My expertise spans iOS ' +
-    'development, software architecture, networking, application security, and ' +
-    'modernizing complex codebases.',
+    'Nine years of shipping software where mistakes are expensive: mobile security ' +
+    'at a digital-native bank, fiscal compliance, retail at enterprise scale, and R&D ' +
+    'at Romania’s national institute for informatics. I started on iOS and still ship ' +
+    'there. Today I build whole products, from database to deployment, and I use AI ' +
+    'as a force multiplier inside a process designed so that speed never costs ' +
+    'reliability.',
   socials: [
     { label: 'GitHub', href: 'https://github.com/paulcristiann' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/paul-vasile' },
@@ -27,10 +28,13 @@ export const profile = {
   ],
 };
 
+// Repo-derived or already-public numbers only. Never add usage metrics here
+// without a source.
 export const stats: { value: string; label: string }[] = [
-  { value: '9+', label: 'Years of engineering experience' },
+  { value: '9+', label: 'Years shipping production software' },
   { value: 'Top 3%', label: 'Of global talent, vetted by Toptal' },
-  { value: '10+', label: 'Client engagements worldwide' },
+  { value: '2', label: 'Production platforms built with AI agents in 2026' },
+  { value: '~1 mo', label: 'From idea to production for a clinic platform' },
 ];
 
 export type Publication = {
@@ -50,22 +54,34 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
+    role: 'Fullstack Engineer',
+    company: 'Independent · client platforms',
+    summary:
+      'Designing, building and running fullstack platforms for clients, using AI to move fast and engineering discipline to keep them reliable.',
+    highlights: [
+      'An enrollment and records platform for a national research institute: signed official documents, OCR-assisted onboarding, self-hosted deploys.',
+      'An all-in-one platform for a veterinary clinic: public site, online booking, medical records, invoicing and payroll reports.',
+      'AI-accelerated delivery with automated checks on every change, so speed never costs reliability.',
+    ],
+    tags: ['Next.js', 'React', 'PostgreSQL', 'Supabase', 'Docker', 'AI-assisted development'],
+  },
+  {
     role: 'Senior Software Engineer',
     company: 'Toptal',
     summary:
-      'Hand-picked into Toptal’s network of the top 3% of global engineering talent. 10+ engagements for startups and enterprise organizations, spanning iOS development, software architecture, application security, and networking.',
+      'Hand-picked into Toptal’s network of the top 3% of global engineering talent. 10+ engagements for startups and enterprise organizations, spanning software architecture, application security, networking and mobile.',
     highlights: [
       'Trusted by international clients including Property Finder, a leading real-estate marketplace, and fiskaly/fiskaltrust, specialists in fiscal compliance.',
       'Modernized complex legacy codebases into scalable, maintainable architectures.',
       'Delivered secure, high-performance software across real estate, fintech, and compliance domains.',
     ],
-    tags: ['Swift', 'SwiftUI', 'Software Architecture', 'Application Security'],
+    tags: ['Software Architecture', 'Application Security', 'Swift', 'Fintech & Compliance'],
   },
   {
     role: 'Senior iOS Engineer',
     company: 'Mindera · Marks & Spencer',
     summary:
-      'Core contributor to one of the UK’s largest retail applications, engineering at enterprise scale.',
+      'Core contributor to one of the UK’s largest retail apps: large-scale refactors on a codebase many teams ship to every week.',
     highlights: [
       'Core part of the product detail page (PDP) rearchitecture and refactoring initiative.',
       'Helped refactor the entire basket module in under two months.',
@@ -92,6 +108,7 @@ export const experience: Experience[] = [
     highlights: [
       'Built R&D software for European and national research programs.',
       'Grew from junior engineer to leading a cybersecurity team.',
+      'Co-authored research on AI-driven cybersecurity and verifiable credentials.',
     ],
     tags: ['Software R&D', 'European Projects', 'Cybersecurity'],
     publications: [

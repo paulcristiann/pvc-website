@@ -1,0 +1,11 @@
+---
+import CalendarMockup from './CalendarMockup.astro';
+import EnrollmentMockup from './EnrollmentMockup.astro';
+
+interface Props {
+  visual: 'enrollment' | 'calendar';
+}
+const { visual } = Astro.props;
+---
+
+{visual === 'calendar' ? <CalendarMockup /> : <EnrollmentMockup />}
