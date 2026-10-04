@@ -12,7 +12,7 @@ export const claims = {
     note: 'Client permission to name ICI / cursuri.ici.ro and describe the system publicly',
   },
   iciRole: {
-    confirmed: false,
+    confirmed: true, // Paul, 2026-10-04
     note: 'Sole engineer on cursuri.ici.ro, and still running its production operations',
   },
   wecareName: {

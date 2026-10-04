@@ -78,8 +78,8 @@ export const caseStudies: CaseStudy[] = [
     ],
     results: [
       {
-        title: 'Paperwork, digitised',
-        body: 'Enrollment that used to be document-driven now runs end to end online.',
+        title: 'Zero paper forms',
+        body: 'Enrollment that used to be handled by hand now runs end to end online.',
       },
       {
         title: 'Correct documents, every time',
