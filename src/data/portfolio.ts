@@ -15,13 +15,12 @@ export const profile = {
   whatsappNumber: '40756850399',
 
   about:
-    'My work spans security at a ' +
-    'digital-native bank, fiscal compliance across European markets, retail and real ' +
-    'estate apps used at scale, payments, and national-scale systems at Romania’s ' +
-    'institute for informatics. I started on iOS and still ship ' +
-    'there. Today I build whole products, from database to deployment, and I use AI ' +
-    'as a force multiplier inside a process designed so that speed never costs ' +
-    'reliability.',
+    'I’ve been a fullstack engineer my whole career, shipping web platforms, backends ' +
+    'and mobile apps. My work spans security at a digital-native bank, fiscal compliance ' +
+    'across European markets, retail and real estate apps used at scale, payments, and ' +
+    'national-scale systems at Romania’s institute for informatics. Today I build whole ' +
+    'products, from database to deployment, and I use AI as a force multiplier inside a ' +
+    'process designed so that speed never costs reliability.',
   socials: [
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/paul-vasile' },
     { label: 'Toptal', href: 'https://www.toptal.com/developers/resume/paul-vasile' },
@@ -68,19 +67,21 @@ export const experience: Experience[] = [
     tags: ['Next.js', 'React', 'PostgreSQL', 'Supabase', 'Docker', 'AI-powered workflow'],
   },
   {
-    role: 'Senior iOS Engineer',
+    role: 'Senior Software Engineer',
     company: 'Marks & Spencer',
     period: 'Since 2025',
-    summary: 'Building one of the UK’s largest retail apps alongside many teams shipping every week.',
+    summary:
+      'Building one of the UK’s largest retail apps alongside many teams shipping every week, with AI tools part of my daily workflow.',
     highlights: [
       'Core part of the product detail page rearchitecture; helped refactor the entire basket module in under two months.',
       'Accessible, polished UI (VoiceOver, Dynamic Type) and rendering performance work.',
       'GraphQL integration and asynchronous data flows, backed by unit and UI tests.',
+      'Using AI tools every day to speed up refactors, reviews and test writing, with every change still reviewed and tested.',
     ],
-    tags: ['SwiftUI', 'GraphQL', 'Performance', 'Accessibility'],
+    tags: ['Mobile', 'GraphQL', 'Performance', 'Accessibility', 'AI-powered workflow'],
   },
   {
-    role: 'Mobile Security Engineer',
+    role: 'Senior Security Engineer',
     company: 'Salt Bank',
     period: '2025',
     summary: 'Helped lay the mobile security foundation of one of Romania’s first digital-native banks.',
@@ -92,18 +93,19 @@ export const experience: Experience[] = [
     tags: ['Mobile Security', 'Penetration Testing', 'Banking'],
   },
   {
-    role: 'Freelance Engineer · Top 3%',
+    role: 'Senior Fullstack Engineer · Top 3%',
     company: 'Toptal',
     period: 'Since 2023',
     summary:
-      'Hand-picked into Toptal’s network of the top 3% of global engineering talent. Engagements for startups and enterprises across real estate, fintech, compliance and consumer apps.',
+      'Hand-picked into Toptal’s network of the top 3% of global engineering talent. Engagements for startups and enterprises across real estate, fintech, compliance and consumer apps, delivered with an AI-powered workflow.',
     highlights: [
-      'Property Finder (MENA’s leading real-estate marketplace): principal iOS engineer; shipped remotely configurable SSL pinning and performance work.',
+      'Property Finder (MENA’s leading real-estate marketplace): principal engineer; shipped remotely configurable SSL pinning and performance work.',
       'fiskaltrust: adapted point-of-sale compliance software for the Spanish and Italian markets, including a receipt-printing engine and a move to new hardware security modules.',
       'Payments and marketplaces: Stripe and Plaid cashback flows for an eco-products marketplace, and payments plus Apple/Google sign-in for a subscription product.',
       'Mobile and back-end lead on an MVP built on AWS and PostgreSQL, from product concept to scheduled launch; more fintech MVPs as lead architect.',
+      'Used AI tools across delivery to take MVPs from concept to launch faster, with automated tests and code review on every change.',
     ],
-    tags: ['Fullstack', 'Stripe', 'AWS', 'PostgreSQL', 'Swift', 'React'],
+    tags: ['Fullstack', 'Stripe', 'AWS', 'PostgreSQL', 'React', 'AI-powered workflow'],
   },
   {
     role: 'Senior Researcher · Head of Cybersecurity',
@@ -115,9 +117,10 @@ export const experience: Experience[] = [
       'Architected a scalable, microservice-based system with a cryptography provider that validates the authenticity of sales data from Romania’s next-generation cash registers.',
       'Led security audits and introduced a vulnerability-analysis method that made the work about 50% faster.',
       'Built a digital identity wallet with biometric authentication and encryption.',
-      'Mentored junior researchers; co-authored research on AI-driven cybersecurity and verifiable credentials.',
+      'Applied AI to security work and co-authored a comparative study of AI-driven cybersecurity solutions.',
+      'Mentored junior researchers; co-authored research on verifiable credentials.',
     ],
-    tags: ['Software Architecture', 'Cryptography', 'Cybersecurity', 'Docker', 'CI/CD'],
+    tags: ['Software Architecture', 'Cryptography', 'Cybersecurity', 'AI', 'Docker', 'CI/CD'],
     publications: [
       {
         title:

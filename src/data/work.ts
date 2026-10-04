@@ -418,13 +418,13 @@ export const moreWork: MoreWork[] = [
     title: 'Retail at enterprise scale',
     client: 'Marks & Spencer',
     body: 'Product page and basket rebuilds in one of the UK’s largest retail apps, with accessibility and performance built in.',
-    tags: ['iOS', 'GraphQL', 'Accessibility'],
+    tags: ['Mobile', 'GraphQL', 'Accessibility'],
   },
   {
     title: 'Real-estate marketplace',
     client: 'Property Finder',
     body: 'Principal engineer on MENA’s leading property app: remotely configurable SSL pinning, performance tuning and new features.',
-    tags: ['iOS', 'Security', 'Performance'],
+    tags: ['Mobile', 'Security', 'Performance'],
   },
   {
     title: 'Point-of-sale compliance',
