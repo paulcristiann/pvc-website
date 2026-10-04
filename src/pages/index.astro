@@ -176,7 +176,7 @@ import { caseStudies, workflow, moreWork } from '../data/work';
         {
           experience.map((job) => (
             <li class="timeline-item reveal">
-              <p class="timeline-period mono">{job.period}</p>
+              {job.period && <p class="timeline-period mono">{job.period}</p>}
               <h3>{job.role}</h3>
               <p class="timeline-company">{job.company}</p>
               <p class="timeline-summary">{job.summary}</p>

@@ -45,7 +45,7 @@ export type Publication = {
 export type Experience = {
   role: string;
   company: string;
-  period: string;
+  period?: string;
   summary: string;
   highlights: string[];
   tags: string[];
@@ -57,7 +57,6 @@ export const experience: Experience[] = [
   {
     role: 'Fullstack Engineer',
     company: 'Independent · client platforms',
-    period: 'Since 2026',
     summary:
       'Designing, building and running complete platforms for clients, using AI to move fast and engineering discipline to keep them reliable.',
     highlights: [
