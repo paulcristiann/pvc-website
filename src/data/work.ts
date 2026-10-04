@@ -28,7 +28,7 @@ export type CaseStudy = {
   challenge: { intro: string; needs: string[] };
   delivered: { title: string; items: string[] }[];
   results: { title: string; body: string }[];
-  howIBuild: { title: string; body: string }[];
+  howIBuild: { title: string; body: string; ai?: boolean }[];
   quote?: string;
   tags: string[];
 };
@@ -103,20 +103,30 @@ export const caseStudies: CaseStudy[] = [
     ],
     howIBuild: [
       {
-        title: 'Updates that can’t lose data',
-        body: 'Every release backs up the database first and only goes live after a health check passes.',
+        title: 'Updates never put records at risk',
+        body:
+          'Every update starts with a full backup of student records and only goes live once the platform confirms it is healthy.',
       },
       {
-        title: 'Partners can fail; enrollment won’t',
-        body: 'If an outside service is down, students fall back to a manual path and nothing they uploaded is lost.',
+        title: 'Enrollment keeps going when partners don’t',
+        body:
+          'If an outside service is unavailable, students continue on a manual path. No application gets stuck and no upload is lost.',
       },
       {
-        title: 'Locked down by default',
-        body: 'Every action checks who you are, uploads are verified, access to personal documents is logged, and the server holds no long-lived credentials.',
+        title: 'Personal data under lock and key',
+        body:
+          'Staff see only the courses they manage, every upload is checked, and every view of an identity document is logged, so the client can show exactly who accessed what.',
       },
       {
-        title: 'Privacy-first analytics',
-        body: 'No cookies, no session recording, nothing personal sent to vendors.',
+        title: 'Privacy that stands up to GDPR',
+        body:
+          'Analytics are anonymous and cookie-free, and no personal data is shared with outside vendors.',
+      },
+      {
+        title: 'AI that speeds delivery, not risk',
+        body:
+          'AI coding agents did much of the building, under written rules on what they must never skip. Bigger changes start as an approved plan, and every change passes hundreds of automated tests on desktop and mobile before I review and release it.',
+        ai: true,
       },
     ],
     tags: ['Full-stack', 'Next.js', 'PostgreSQL', 'Docker', 'Education', 'GDPR', 'AI-powered workflow'],
@@ -189,20 +199,30 @@ export const caseStudies: CaseStudy[] = [
     ],
     howIBuild: [
       {
-        title: 'Double bookings are impossible',
-        body: 'The system itself refuses a clash, not just the screen, even if two people click at the same moment.',
+        title: 'No double bookings, ever',
+        body:
+          'The booking system itself refuses a clash, even if two pet owners pick the same slot at the same second.',
       },
       {
-        title: 'Medical records stay private',
-        body: 'Access is invite-only, and every layer, down to the database, checks who you are.',
+        title: 'Medical records stay with the clinic',
+        body:
+          'Only invited staff can sign in, and the database checks who is asking on every request, so patient data never reaches the wrong hands.',
       },
       {
-        title: 'I hear about problems first',
-        body: 'Errors are monitored across the whole platform, so issues reach me before the clinic calls.',
+        title: 'Problems found before the phone rings',
+        body:
+          'Errors are monitored across the platform, so issues reach me before they reach the front desk.',
       },
       {
-        title: 'Still improving after launch',
-        body: 'Security updates and automated checks on every change keep the platform healthy long after go-live.',
+        title: 'Looked after long after launch',
+        body:
+          'Security updates and dependency checks keep running, so the clinic’s system stays safe without anyone there having to think about it.',
+      },
+      {
+        title: 'AI-built, gate-checked',
+        body:
+          'AI agents work from a written brief on how the platform and its rules fit together. Nothing they produce ships until it passes code checks, automated tests and a security audit of every dependency, and I sign off on every release.',
+        ai: true,
       },
     ],
     quote:
@@ -274,16 +294,25 @@ export const caseStudies: CaseStudy[] = [
     ],
     howIBuild: [
       {
-        title: 'Fast while the AI thinks',
-        body: 'Uploads, previews and AI processing run in the background so the app never freezes.',
+        title: 'Responsive while the AI works',
+        body:
+          'Uploads and AI processing run in the background, so the app stays usable instead of freezing on a spinner.',
       },
       {
-        title: 'Ready for the next model',
-        body: 'AI services sit behind a clean boundary, so better models can be adopted without a rebuild.',
+        title: 'Ready for tomorrow’s models',
+        body:
+          'The AI provider sits behind a clean boundary, so GlowUp can adopt better models as they appear without rebuilding the app.',
       },
       {
-        title: 'Built for the App Store',
-        body: 'Purchases, subscriptions and review requirements handled from day one.',
+        title: 'Earning from the first release',
+        body:
+          'Subscriptions, purchases and App Store review requirements were built in from day one.',
+      },
+      {
+        title: 'AI as co-pilot, not autopilot',
+        body:
+          'AI sped up building and testing, while the architecture, the privacy decisions and every release stayed in my hands.',
+        ai: true,
       },
     ],
     tags: ['iOS', 'macOS', 'SwiftUI', 'Generative AI', 'Subscriptions', 'AI-powered workflow'],
@@ -356,16 +385,25 @@ export const caseStudies: CaseStudy[] = [
     ],
     howIBuild: [
       {
-        title: 'No single point of failure',
-        body: 'There is no server to go down. Every phone in range helps carry the conversation.',
+        title: 'Nothing to go down',
+        body:
+          'There is no server behind Nearby. Every phone in range helps carry the conversation, so it works where other chat apps can’t.',
       },
       {
-        title: 'Private by architecture',
-        body: 'Messages never touch the cloud, so there is nothing to leak.',
+        title: 'Private by design',
+        body:
+          'Messages travel directly between phones and never touch the cloud, so there is no central store of conversations to leak.',
       },
       {
-        title: 'Easy on the battery',
-        body: 'Low-energy connections keep it running in the background all day.',
+        title: 'Built to run all day',
+        body:
+          'Low-energy connections keep it running in the background without draining the battery.',
+      },
+      {
+        title: 'Fast to build, careful to ship',
+        body:
+          'AI sped up prototyping and iteration, while the design, the privacy model and every release decision stayed with me.',
+        ai: true,
       },
     ],
     tags: ['iOS', 'Peer-to-peer', 'Mesh networking', 'Privacy', 'Offline-first', 'AI-powered workflow'],
