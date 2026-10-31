@@ -1,847 +1,172 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ToptalBadge from '../components/ToptalBadge.astro';
 import Tbc from '../components/Tbc.astro';
-import CaseVisual from '../components/CaseVisual.astro';
-import {
-  profile,
-  experience,
-  clientApps,
-  stats,
-  education,
-  certifications,
-} from '../data/portfolio';
-import { caseStudies, workflow, moreWork } from '../data/work';
+import { profile, experience, clientApps, education, certifications } from '../data/portfolio';
+import { caseStudies, process } from '../data/work';
 
-const eyebrowParts = profile.eyebrow.split(' · ');
+const publications = experience.flatMap((job) => job.publications ?? []);
+const year = (venue: string) => venue.match(/\d{4}/)?.[0] ?? '';
+const shortCompany = (company: string) =>
+  company
+    .replace('National Institute for Research & Development in Informatics (ICI)', 'ICI Bucharest')
+    .replace(' · client platforms', '');
+const shortRole = (role: string) => role.replace(' · Top 3%', '');
 ---
 
 <Layout>
-  {/* ───────────── Hero ───────────── */}
-  <section class="hero">
-    <div class="container hero-grid">
+  <div class="container">
+    <section class="row intro" aria-labelledby="intro-title">
+      <p class="row-label">About</p>
       <div>
-        <p class="eyebrow eyebrow-split reveal">
-          {
-            eyebrowParts.map((part, i) => (
-              <>
-                {i > 0 && <span class:list={['eb-sep', { 'eb-break': i === eyebrowParts.length - 1 }]}>&nbsp;· </span>}
-                <span class:list={['eb-part', { 'eb-line': i === eyebrowParts.length - 1 }]}>{part}</span>
-              </>
-            ))
-          }
-        </p>
-        <h1 class="hero-title reveal">
-          Software that holds up <em>when it matters.</em>
-        </h1>
-        <p class="hero-tagline reveal">
-          I’m {profile.name}, a fullstack engineer. {profile.tagline}
-        </p>
-        <div class="hero-actions reveal">
-          <a class="btn btn-primary" href="#work">See the work <span class="arrow">→</span></a>
-          <a class="btn btn-ghost" href="#contact">Start a project</a>
-        </div>
+        <h1 id="intro-title">{profile.headline}</h1>
+        {profile.intro.map((line, i) => <p class:list={['lead', { 'lead-small': i > 0 }]}>{line}</p>)}
       </div>
+    </section>
 
-    </div>
-
-    <div class="container">
-      <dl class="stats reveal">
-        {
-          stats.map((s) => (
-            <div class="stat">
-              <dt class="stat-value">{s.value}</dt>
-              <dd class="stat-label">{s.label}</dd>
-            </div>
-          ))
-        }
-      </dl>
-    </div>
-  </section>
-
-  {/* ───────────── Selected work ───────────── */}
-  <section id="work">
-    <div class="container">
-      <p class="eyebrow reveal">Selected work</p>
-      <h2 class="section-title reveal">Products people rely on every day</h2>
-      <p class="section-lead reveal">
-        Web platforms and apps I designed, built and look after, from legal paperwork and medical
-        records to generative AI and offline messaging.
-      </p>
-
-      <div class="cases">
+    <section id="work" class="row" aria-labelledby="work-label">
+      <h2 id="work-label" class="row-label">Projects</h2>
+      <ul>
         {
           caseStudies.map((c) => (
-            <a class="case-card card spot reveal" href={`/work/${c.slug}/`}>
-              <div class="case-visual">
-                <CaseVisual visual={c.visual} />
-              </div>
-              <div class="case-body">
-                <p class="case-meta mono">
-                  <span>
-                    <Tbc claim={c.nameClaim}>{c.name}</Tbc>
-                  </span>
-                </p>
-                <h3 class="case-title">{c.headline}</h3>
-                <p class="case-pitch">{c.pitch}</p>
-                <span class="case-link">
-                  Read the case study <span class="arrow">→</span>
-                </span>
-              </div>
-            </a>
-          ))
-        }
-      </div>
-
-      <div id="more" class="more">
-        <h3 class="more-title reveal">More of my work</h3>
-        <div class="more-list">
-          {
-            moreWork.map((w) => (
-              <article class="more-row card spot reveal">
-                <div class="more-head">
-                  <p class="more-client mono">{w.client}</p>
-                  <h4>{w.title}</h4>
-                </div>
-                <div>
-                  <p class="more-body">{w.body}</p>
-                  <p class="more-tags mono">{w.tags.join(' · ')}</p>
-                </div>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-      <h3 class="more-title clients-title reveal">Apps I helped ship with client teams</h3>
-      <p class="clients-lead reveal">
-        Live on the App Store. I worked inside each client’s engineering team, building features and
-        shipping releases alongside them.
-      </p>
-      <ul class="client-apps reveal">
-        {
-          clientApps.map((app) => (
-            <li>
-              <a class="client-app" href={app.href} target="_blank" rel="noopener" title={app.descriptor}>
-                <img
-                  class="app-icon"
-                  src={app.icon}
-                  alt=""
-                  width="44"
-                  height="44"
-                  loading="lazy"
-                />
-                <span>
-                  <span class="client-app-name">{app.name}</span>
-                  <span class="client-app-desc">{app.descriptor}</span>
-                </span>
+            <li class="entry">
+              <a class="entry-name" href={`/work/${c.slug}/`}>
+                <Tbc claim={c.nameClaim}>{c.name}</Tbc>
               </a>
+              <span class="entry-meta">{c.kind}</span>
+              <p class="entry-desc">{c.short}</p>
             </li>
           ))
         }
       </ul>
+    </section>
 
-    </div>
-  </section>
-
-  {/* ───────────── How I work ───────────── */}
-  <section id="workflow" class="workflow-section">
-    <div class="container">
-      <p class="eyebrow reveal">How I work</p>
-      <h2 class="section-title reveal">AI for speed. Discipline for everything else.</h2>
-      <p class="section-lead reveal">
-        AI lets one engineer deliver what used to take a team. What makes it safe to run a business on
-        is the process around it.
-      </p>
-
-      <ol class="pipeline" data-pipeline>
+    <section class="row" aria-labelledby="clients-label">
+      <h2 id="clients-label" class="row-label">With client teams</h2>
+      <p class="plain">
         {
-          workflow.map((s) => (
-            <li class="pipe-step reveal">
-              <span class="pipe-n mono">{s.n}</span>
-              <h3>{s.title}</h3>
-              <p>{s.body}</p>
-            </li>
+          clientApps.map((app, i) => (
+            <>
+              <a href={app.href} target="_blank" rel="noopener" title={app.descriptor}>
+                {app.name === 'M&S' ? 'Marks & Spencer' : app.name}
+              </a>
+              {i < clientApps.length - 1 ? ', ' : '.'}
+            </>
           ))
         }
-      </ol>
-
-    </div>
-  </section>
-
-  {/* ───────────── Experience ───────────── */}
-  <section id="experience">
-    <div class="container exp-grid">
-      <div class="exp-intro">
-        <p class="eyebrow reveal">Experience</p>
-        <h2 class="section-title reveal">Ten years where mistakes are expensive</h2>
-        <p class="about-text reveal">{profile.about}</p>
-        <div class="exp-badge reveal">
-          <ToptalBadge />
-        </div>
-        <p class="edu reveal">
-          {education.map((e) => `${e.degree} in ${e.field}`).join(' · ')}, {education[0].school} ·{' '}
-          {certifications.join(' · ')}
       </p>
-      </div>
-      <ol class="timeline">
+    </section>
+
+    <section id="experience" class="row" aria-labelledby="experience-label">
+      <h2 id="experience-label" class="row-label">Experience</h2>
+      <ul>
         {
           experience.map((job) => (
-            <li class="timeline-item reveal">
-              <h3>{job.role}</h3>
-              <p class="timeline-company">{job.company}</p>
-              <p class="timeline-summary">{job.summary}</p>
+            <li class="entry">
+              <span class="entry-name">{shortCompany(job.company)}</span>
+              <span class="entry-meta">{shortRole(job.role)}</span>
+              <p class="entry-desc">{job.summary}</p>
               {job.highlights.length > 0 && (
-                <ul class="timeline-highlights">
-                  {job.highlights.map((h) => (
-                    <li>{h}</li>
-                  ))}
-                </ul>
-              )}
-              {job.publications && (
-                <details class="pubs">
-                  <summary>
-                    <span class="mono">{job.publications.length} publications</span>
-                    <span class="pubs-chevron" aria-hidden="true">
-                      ›
-                    </span>
-                  </summary>
-                  {job.publications.map((pub) => (
-                    <a class="pub-item" href={pub.href} target="_blank" rel="noopener">
-                      <span class="pub-name">{pub.title}</span>
-                      <span class="pub-venue">{pub.venue}</span>
-                    </a>
-                  ))}
+                <details class="entry-desc">
+                  <summary>Details</summary>
+                  <ul class="bullets">
+                    {job.highlights.map((h) => (
+                      <li>{h}</li>
+                    ))}
+                  </ul>
                 </details>
               )}
             </li>
           ))
         }
-      </ol>
-    </div>
-  </section>
+      </ul>
+    </section>
 
-  {/* ───────────── Contact ───────────── */}
-  <section id="contact" class="contact">
-    <div class="container">
-      <p class="eyebrow reveal">Contact</p>
-      <h2 class="section-title reveal">Have something that has to work?</h2>
-      <p class="contact-text reveal">
-        A new product, a platform that needs to be rebuilt, or a system you can’t afford to have fail.
-        Tell me about it.
-      </p>
-      <div class="contact-actions reveal">
-        <a class="btn btn-primary contact-btn" href={`mailto:${profile.email}`}>
-          <svg
-            viewBox="0 0 24 24"
-            width="19"
-            height="19"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <rect x="2" y="4" width="20" height="16" rx="3"></rect>
-            <path d="m3 6 9 7 9-7"></path>
-          </svg>
-          {profile.email}
-        </a>
-        <a
-          class="btn btn-whatsapp contact-btn"
-          href={`https://wa.me/${profile.whatsappNumber}`}
-          target="_blank"
-          rel="noopener"
-        >
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true">
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-            ></path>
-          </svg>
-          Chat on WhatsApp
-        </a>
-      </div>
-      <div class="socials reveal">
+    <section class="row" aria-labelledby="process-label">
+      <h2 id="process-label" class="row-label">Process</h2>
+      <p class="plain">{process}</p>
+    </section>
+
+    <section class="row" aria-labelledby="writing-label">
+      <h2 id="writing-label" class="row-label">Writing</h2>
+      <ul>
         {
-          profile.socials.map((s) => (
-            <a href={s.href} target="_blank" rel="noopener">
-              {s.label} ↗
-            </a>
+          publications.map((pub) => (
+            <li class="entry">
+              <a class="entry-name" href={pub.href} target="_blank" rel="noopener">
+                {pub.title}
+              </a>
+              <span class="entry-meta">{year(pub.venue)}</span>
+              <p class="entry-desc venue">{pub.venue.replace(/\s*·\s*\d{4}$/, '')}</p>
+            </li>
           ))
         }
+      </ul>
+    </section>
+
+    <section class="row" aria-labelledby="education-label">
+      <h2 id="education-label" class="row-label">Education</h2>
+      <p class="plain">
+        {education.map((e) => `${e.degree} in ${e.field}`).join(', ')}, {education[0].school}.{' '}
+        {certifications.join(', ')}.
+      </p>
+    </section>
+
+    <section id="contact" class="row" aria-labelledby="contact-label">
+      <h2 id="contact-label" class="row-label">Contact</h2>
+      <div>
+        <div class="links">
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          <a href={`https://wa.me/${profile.whatsappNumber}`} target="_blank" rel="noopener">WhatsApp</a>
+          {
+            profile.socials.map((s) => (
+              <a href={s.href} target="_blank" rel="noopener">
+                {s.label}
+              </a>
+            ))
+          }
+        </div>
+        <p class="location">{profile.location}</p>
       </div>
-      <p class="contact-meta mono reveal">{profile.location} · working with clients worldwide</p>
-    </div>
-  </section>
+    </section>
+  </div>
 </Layout>
 
-<script>
-  // Light up pipeline steps as the reader scrolls past them; the rail fills to match.
-  const pipe = document.querySelector<HTMLElement>('[data-pipeline]');
-  if (pipe) {
-    const steps = [...pipe.querySelectorAll<HTMLElement>('.pipe-step')];
-    const update = () => {
-      const mid = window.innerHeight * 0.6;
-      let last: HTMLElement | null = null;
-      steps.forEach((s) => {
-        const on = s.getBoundingClientRect().top < mid;
-        s.classList.toggle('lit', on);
-        if (on) last = s;
-      });
-      // Fill the rail up to the last lit step's dot (horizontal on desktop, vertical on mobile)
-      const vertical = getComputedStyle(pipe).gridTemplateColumns.split(' ').length === 1;
-      const done = last === steps[steps.length - 1];
-      const progress = !last
-        ? 0
-        : done
-          ? 1
-          : vertical
-            ? (last as HTMLElement).offsetTop / pipe.offsetHeight
-            : (last as HTMLElement).offsetLeft / pipe.offsetWidth;
-      pipe.style.setProperty('--progress', String(progress));
-    };
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update, { passive: true });
-  }
-</script>
-
 <style>
-  /* Hero */
-  .hero {
-    padding: 140px 0 72px;
-    background: radial-gradient(
-      90% 70% at 85% 0%,
-      color-mix(in srgb, var(--accent) 7%, transparent) 0%,
-      transparent 60%
-    );
+  .intro {
+    border-top: 0;
+    padding-top: 0;
   }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-  .hero-title {
-    font-size: clamp(2.6rem, 7vw, 4.6rem);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 1.02;
-    margin-bottom: 26px;
-    max-width: 16ch;
-  }
-  .hero-title em {
-    font-style: normal;
-    color: var(--text-tertiary);
-  }
-  .hero-tagline {
-    font-size: clamp(1.08rem, 2.2vw, 1.3rem);
-    color: var(--text-secondary);
-    max-width: 46ch;
-    margin-bottom: 34px;
-  }
-  .hero-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    margin-top: 80px;
-    border-top: 1px solid var(--border);
-  }
-  .stat {
-    padding: 22px 20px 0 0;
-  }
-  .stat-value {
-    font-size: clamp(1.7rem, 3.4vw, 2.3rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-  }
-  .stat-label {
-    margin-top: 6px;
-    font-size: 0.86rem;
-    color: var(--text-secondary);
-    max-width: 22ch;
-  }
-  @media (max-width: 860px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-    .stats {
-      grid-template-columns: repeat(2, 1fr);
-      row-gap: 24px;
-    }
-  }
-
-  /* Cases */
-  .cases {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  .case-card {
-    display: flex;
-    flex-direction: column;
-    padding: 14px;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    min-width: 0;
-  }
-  .case-visual {
-    background: var(--surface-2);
-    border-radius: calc(var(--radius-lg) - 8px);
-    padding: 28px;
-    height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .case-body {
-    padding: 22px 14px 12px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-  .case-meta {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    font-size: 0.74rem;
-    color: var(--text-tertiary);
-    margin-bottom: 10px;
-  }
-  .case-title {
-    font-size: clamp(1.3rem, 2.4vw, 1.6rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.18;
-    margin-bottom: 10px;
-    text-wrap: balance;
-  }
-  .case-pitch {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-    flex: 1;
-  }
-  .case-link {
+  h1 {
+    font-size: 1.5rem;
     font-weight: 500;
-    color: var(--accent);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
   }
-  .case-card:hover .arrow {
-    transform: translateX(3px);
-  }
-  @media (max-width: 860px) {
-    .cases {
-      grid-template-columns: 1fr;
-    }
-    .case-visual {
-      height: 240px;
-      padding: 20px;
-    }
-  }
-
-  /* Keep the AI Filter mockup inside the fixed-height card visual */
-  .case-visual :global(.aif-photo) {
-    aspect-ratio: 2 / 1;
-  }
-  .case-visual :global(.aif-filters) {
-    flex-wrap: nowrap;
-    overflow: hidden;
-  }
-  .case-visual :global(.aif-chip) {
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
-
-  /* Narrowest phones: scale the dense mockups so nothing gets clipped */
-  @media (max-width: 360px) {
-    .case-visual :global(.cl),
-    .case-visual :global(.nb) {
-      zoom: 0.8;
-    }
-    .case-visual :global(.aif-chip:nth-child(n + 3)) {
-      display: none;
-    }
-  }
-
-  /* More work */
-  .more {
-    margin-top: 72px;
-    scroll-margin-top: 90px;
-  }
-  .more-title {
-    font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    margin-bottom: 24px;
-  }
-  .more-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .more-row {
-    display: grid;
-    grid-template-columns: minmax(220px, 1fr) 2.2fr;
-    gap: 8px 32px;
-    align-items: baseline;
-    padding: 20px 24px;
-  }
-  .more-client {
-    font-size: 0.7rem;
-    color: var(--text-tertiary);
-    margin-bottom: 4px;
-  }
-  .more-row h4 {
-    font-size: 1.02rem;
-    font-weight: 650;
-    letter-spacing: -0.015em;
-  }
-  .more-body {
+  .lead {
+    font-size: 1.15rem;
     color: var(--text-secondary);
-    font-size: 0.92rem;
-  }
-  .more-tags {
-    font-size: 0.7rem;
-    color: var(--text-tertiary);
+    max-width: 56ch;
     margin-top: 8px;
   }
-  @media (max-width: 860px) {
-    .more-row {
-      grid-template-columns: 1fr;
-      padding: 18px 20px;
-    }
+  .lead-small {
+    font-size: 1rem;
+    margin-top: 12px;
   }
-
-  /* Workflow pipeline */
-  .workflow-section {
-    background: var(--surface-2);
+  .plain a {
+    color: var(--text);
+    text-underline-offset: 3px;
+    text-decoration-color: var(--line);
   }
-  .pipeline {
-    --progress: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 28px;
-    position: relative;
-    padding-top: 34px;
+  .plain a:hover {
+    text-decoration-color: currentColor;
   }
-  .pipeline::before,
-  .pipeline::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 2px;
-    border-radius: 2px;
-  }
-  .pipeline::before {
-    right: 0;
-    background: var(--surface-3);
-  }
-  .pipeline::after {
-    width: calc(var(--progress) * 100%);
-    background: var(--accent);
-    transition: width 0.6s var(--ease);
-  }
-  .pipe-step {
-    position: relative;
-  }
-  .pipe-step::before {
-    content: '';
-    position: absolute;
-    top: -40px;
-    left: 0;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--surface-2);
-    border: 2px solid var(--surface-3);
-    transition: border-color 0.4s ease, background 0.4s ease;
-  }
-  .pipe-step.lit::before {
-    border-color: var(--accent);
-    background: var(--accent);
-  }
-  .pipe-n {
-    font-size: 0.74rem;
-    color: var(--text-tertiary);
-    transition: color 0.4s ease;
-  }
-  .pipe-step.lit .pipe-n {
-    color: var(--accent);
-  }
-  .pipe-step h3 {
-    font-size: 1.12rem;
-    font-weight: 650;
-    letter-spacing: -0.02em;
-    margin: 6px 0 8px;
-  }
-  .pipe-step p {
-    color: var(--text-secondary);
-    font-size: 0.94rem;
-  }
-  @media (max-width: 860px) {
-    .pipeline {
-      grid-template-columns: 1fr;
-      padding: 0 0 0 30px;
-      gap: 30px;
-    }
-    .pipeline::before,
-    .pipeline::after {
-      top: 0;
-      left: 5px;
-      width: 2px;
-      height: auto;
-      bottom: 0;
-    }
-    .pipeline::before {
-      right: auto;
-    }
-    .pipeline::after {
-      bottom: auto;
-      height: calc(var(--progress) * 100%);
-      transition: height 0.6s var(--ease);
-    }
-    .pipe-step::before {
-      top: 4px;
-      left: -30px;
-    }
-  }
-
-  /* Experience */
-  .exp-grid {
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 64px;
-    align-items: start;
-  }
-  .exp-intro {
-    position: sticky;
-    top: 100px;
-  }
-  .about-text {
-    color: var(--text-secondary);
-    font-size: 1.02rem;
-    max-width: 46ch;
-  }
-  .exp-badge {
-    margin-top: 32px;
-  }
-  .timeline {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-  }
-  .timeline-item {
-    padding: 0 0 36px 26px;
-    border-left: 1px solid var(--border-strong);
-    position: relative;
-  }
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -5px;
-    top: 7px;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--bg);
-    border: 2px solid var(--accent);
-  }
-  .timeline-item:last-child {
-    padding-bottom: 0;
-  }
-  .timeline-item h3 {
-    font-size: 1.15rem;
-    font-weight: 650;
-    letter-spacing: -0.02em;
-  }
-  .timeline-company {
-    color: var(--accent);
-    font-size: 0.95rem;
-    font-weight: 500;
-  }
-  .timeline-summary {
-    margin: 10px 0;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-  }
-  .timeline-highlights {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .timeline-highlights li {
-    position: relative;
-    padding-left: 18px;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-  }
-  .timeline-highlights li::before {
-    content: '';
-    width: 5px;
-    height: 5px;
-    top: 0.62em;
-    left: 3px;
-    border-radius: 50%;
-    background: var(--text-tertiary);
-    position: absolute;
-    left: 0;
+  .venue {
+    font-size: 13px;
     color: var(--text-tertiary);
   }
-  .pubs {
-    margin-top: 16px;
-  }
-  .pubs summary {
-    list-style: none;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-  }
-  .pubs summary::-webkit-details-marker {
-    display: none;
-  }
-  .pubs-chevron {
-    display: inline-block;
-    transition: transform 0.25s var(--ease);
-  }
-  .pubs[open] .pubs-chevron {
-    transform: rotate(90deg);
-  }
-  .pub-item {
-    display: block;
-    padding: 8px 0 0;
-  }
-  .pub-name {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.2s ease;
-  }
-  .pub-item:hover .pub-name {
-    color: var(--accent);
-  }
-  .pub-venue {
-    display: block;
-    font-size: 0.78rem;
-    color: var(--text-tertiary);
-  }
-  @media (max-width: 860px) {
-    .exp-grid {
-      grid-template-columns: 1fr;
-      gap: 48px;
-    }
-    .exp-intro {
-      position: static;
-    }
-  }
-
-  .clients-title {
-    margin: 64px 0 6px;
-  }
-  .clients-lead {
-    color: var(--text-secondary);
-    max-width: 60ch;
-    margin-bottom: 20px;
-  }
-  .client-apps {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-  }
-  .client-app {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px;
-    border-radius: var(--radius-sm);
-    transition: background 0.2s ease;
-  }
-  .client-app:hover {
-    background: var(--surface);
-  }
-  .client-app-name {
-    display: block;
-    font-weight: 600;
-    font-size: 0.92rem;
-  }
-  .client-app-desc {
-    display: block;
-    font-size: 0.76rem;
-    color: var(--text-secondary);
-    line-height: 1.35;
-  }
-  .edu {
-    margin-top: 40px;
-    font-size: 0.86rem;
-    color: var(--text-tertiary);
-  }
-  @media (max-width: 860px) {
-    .client-apps {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  @media (max-width: 560px) {
-    .client-apps {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Contact */
-  .contact {
-    text-align: center;
-  }
-  .contact .section-title {
-    margin-inline: auto;
-  }
-  .contact-text {
-    color: var(--text-secondary);
-    max-width: 46ch;
-    margin: 0 auto 32px;
-    font-size: 1.1rem;
-  }
-  .contact-actions {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .btn-whatsapp {
-    background: #25d366;
-    color: #fff;
-  }
-  .btn-whatsapp:hover {
-    background: #1fbd5a;
-  }
-  .socials {
-    display: flex;
-    justify-content: center;
-    gap: 28px;
-    margin-top: 36px;
-  }
-  .socials a {
-    color: var(--text-secondary);
-    font-weight: 500;
-    transition: color 0.2s ease;
-  }
-  .socials a:hover {
-    color: var(--accent);
-  }
-  .contact-meta {
-    margin-top: 28px;
-    font-size: 0.76rem;
+  .location {
+    margin-top: 10px;
+    font-size: 13px;
     color: var(--text-tertiary);
   }
 </style>
