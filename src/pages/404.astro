@@ -3,27 +3,26 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Page not found · Paul Vasile" description="This page doesn’t exist." noindex>
-  <section class="nf container">
-    <p class="eyebrow">404</p>
-    <h1>This page doesn’t exist.</h1>
-    <p class="nf-text">The link may be old or mistyped. The work and contact details are on the home page.</p>
-    <a class="btn btn-primary" href="/">Go to the home page <span class="arrow">→</span></a>
-  </section>
+  <div class="container">
+    <section class="row nf">
+      <p class="row-label">404</p>
+      <div>
+        <h1>This page doesn’t exist.</h1>
+        <p class="plain">The link may be old or mistyped. <a href="/">Go to the home page →</a></p>
+      </div>
+    </section>
+  </div>
 </Layout>
 
 <style>
   .nf {
-    padding: 180px 0 120px;
+    border-top: 0;
+    padding-top: 0;
+    min-height: 40vh;
   }
-  .nf h1 {
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 700;
-    letter-spacing: -0.035em;
-    margin-bottom: 14px;
-  }
-  .nf-text {
-    color: var(--text-secondary);
-    max-width: 52ch;
-    margin-bottom: 28px;
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 8px;
   }
 </style>

@@ -6,9 +6,11 @@
 export const profile = {
   name: 'Paul Vasile',
   role: 'Fullstack Engineer',
-  eyebrow: 'Fullstack engineer · 10+ years shipping · AI-powered workflow',
-  tagline:
-    'I design, build and run complete products, from web platforms and backends to mobile apps, for teams that can’t afford for them to fail. Years of engineering make it solid; AI makes me faster than ever.',
+  headline: 'Fullstack engineer in Bucharest.',
+  intro: [
+    'I build web platforms, backends and iOS apps, and keep them running after launch.',
+    'Ten years across retail, banking, real estate and fiscal compliance. Top 3% on Toptal, Certified Ethical Hacker.',
+  ],
   location: 'Bucharest, Romania',
   email: 'paulcristian04@proton.me',
   // WhatsApp click-to-chat: digits only, international format, no + or spaces.
@@ -18,23 +20,13 @@ export const profile = {
     'I’ve been a fullstack engineer my whole career, shipping web platforms, backends ' +
     'and mobile apps. My work spans security at a digital-native bank, fiscal compliance ' +
     'across European markets, retail and real estate apps used at scale, payments, and ' +
-    'national-scale systems at Romania’s institute for informatics. Today I build whole ' +
-    'products, from database to deployment, and I use AI as a force multiplier inside a ' +
-    'process designed so that speed never costs reliability.',
+    'national-scale systems at Romania’s institute for informatics. Today I build and run ' +
+    'web platforms, backends and iOS apps for clients.',
   socials: [
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/paul-vasile' },
     { label: 'Toptal', href: 'https://www.toptal.com/developers/resume/paul-vasile' },
   ],
 };
-
-// Sourced from the Toptal profile or the repos only. Never add usage metrics
-// here without a source.
-export const stats: { value: string; label: string }[] = [
-  { value: '10+', label: 'Years shipping software' },
-  { value: 'Top 3%', label: 'Of global talent, vetted by Toptal' },
-  { value: 'CEH', label: 'Certified Ethical Hacker, so security is built in from day one' },
-  { value: '6', label: 'Industries: banking, retail, real estate, compliance, education, health' },
-];
 
 export type Publication = {
   title: string;
@@ -56,14 +48,14 @@ export const experience: Experience[] = [
     role: 'Fullstack Engineer',
     company: 'Independent · client platforms',
     summary:
-      'Designing, building and running complete platforms for clients, using AI to move fast and engineering discipline to keep them reliable.',
+      'Building and running web platforms and apps for clients.',
     highlights: [],
   },
   {
     role: 'Senior Software Engineer',
     company: 'Marks & Spencer',
     summary:
-      'Building one of the UK’s largest retail apps alongside many teams shipping every week, with AI tools part of my daily workflow.',
+      'Product page and basket rebuild in one of the UK’s largest retail apps.',
     highlights: [
       'Core part of the product detail page rearchitecture; helped refactor the entire basket module in under two months.',
       'Accessible, polished UI (VoiceOver, Dynamic Type) and rendering performance work.',
@@ -73,7 +65,7 @@ export const experience: Experience[] = [
   {
     role: 'Senior Security Engineer',
     company: 'Salt Bank',
-    summary: 'Helped lay the mobile security foundation of one of Romania’s first digital-native banks.',
+    summary: 'Mobile security for one of Romania’s first digital-native banks.',
     highlights: [
       'Runtime self-protection and jailbreak/root detection.',
       'Source code security reviews and MASVS-compliant penetration testing.',
@@ -84,7 +76,7 @@ export const experience: Experience[] = [
     role: 'Senior Fullstack Engineer · Top 3%',
     company: 'Toptal',
     summary:
-      'Hand-picked into Toptal’s network of the top 3% of global engineering talent. Engagements for startups and enterprises across real estate, fintech, compliance and consumer apps, delivered with an AI-powered workflow.',
+      'Contracts with startups and enterprises in real estate, fintech, compliance and consumer apps.',
     highlights: [
       'Property Finder (MENA’s leading real-estate marketplace): principal engineer; shipped remotely configurable SSL pinning and performance work.',
       'fiskaltrust: adapted point-of-sale compliance software for the Spanish and Italian markets, including a receipt-printing engine and a move to new hardware security modules.',
@@ -96,7 +88,7 @@ export const experience: Experience[] = [
     role: 'Senior Researcher · Head of Cybersecurity',
     company: 'National Institute for Research & Development in Informatics (ICI)',
     summary:
-      'Research and development on national and European Commission-funded projects, growing from engineer to leading the cybersecurity team.',
+      'Research on national and EU-funded projects, from engineer to head of the cybersecurity team.',
     highlights: [
       'Architected a scalable, microservice-based system with a cryptography provider that validates the authenticity of sales data from Romania’s next-generation cash registers.',
       'Led security audits and introduced a vulnerability-analysis method that made the work about 50% faster.',

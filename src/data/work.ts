@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
-//  Case studies, "how I work" and more work.
-//  Marketing tone: outcomes first, light on technical detail,
+//  Case studies and the short "process" note.
+//  Plain tone: say what it is and what it does, no sales lines,
 //  no AI model or tool names. Every statement is backed by the
 //  codebases or confirmed by Paul. Usage metrics stay out until
 //  there is a real number. Client-confidential details (internal
@@ -20,8 +20,9 @@ export type CaseStudy = {
   kind: string;
   sector: string;
   headline: string;
+  /** One line for the homepage list */
+  short: string;
   pitch: string;
-  visual: 'enrollment' | 'clinic' | 'ai' | 'nearby';
   clientHeading?: string;
   client: string;
   challenge: { intro: string; needs: string[] };
@@ -49,9 +50,9 @@ export const caseStudies: CaseStudy[] = [
     kind: 'Web platform',
     sector: 'Education · professional training',
     headline: 'Paperless enrollment for accredited courses',
+    short: 'Paperless enrollment for accredited courses at ICI.',
     pitch:
       'A course platform that takes students from browsing to a signed, verified enrollment file, on any device. Built for a national research institute that wanted paper out of its accredited training for good.',
-    visual: 'enrollment',
     client:
       'ICI, Romania’s national institute for informatics research, runs around thirty accredited professional courses, from cybersecurity and AI to GDPR and programming. Their goal: move enrollment fully online, onto infrastructure they own, without cutting corners on compliance.',
     challenge: {
@@ -139,9 +140,9 @@ export const caseStudies: CaseStudy[] = [
     kind: 'Web platform',
     sector: 'Healthcare · veterinary clinic',
     headline: 'All-in-one management for veterinary clinics',
+    short: 'Booking, medical records and invoicing for a vet clinic.',
     pitch:
       'A platform that runs a clinic end to end: online booking, a shared doctor schedule, digital medical records, invoicing and payroll reports. Built for WeCare, a Bucharest veterinary clinic caring for pets since 2005.',
-    visual: 'clinic',
     client:
       'WeCare is a well-established veterinary clinic in Bucharest: open since 2005, 8 specialists, a 4.9 Google rating and more than 1,000 patients a year.',
     challenge: {
@@ -227,9 +228,9 @@ export const caseStudies: CaseStudy[] = [
     kind: 'iOS app',
     sector: 'Consumer AI · photo editing',
     headline: 'Generative photo editing, as simple as a filter',
+    short: 'Edit photos by describing the change. Built for GlowUp.',
     pitch:
       'An iPhone app where people upload a photo, describe the change in plain words or pick a suggestion, and AI reimagines it in seconds. No sliders, no learning curve. Built for GlowUp and shipped from concept to the App Store.',
-    visual: 'ai',
     client:
       'GlowUp makes AI photo and avatar apps. They wanted a new app that makes generative editing feel as simple as applying a filter.',
     challenge: {
@@ -271,8 +272,8 @@ export const caseStudies: CaseStudy[] = [
         body: 'Reviews single out how easy it is to get a great result.',
       },
       {
-        title: 'Concept to launch, one owner',
-        body: 'Architecture, UI, AI integration and release, all handled by me.',
+        title: 'Concept to launch',
+        body: 'Architecture, UI, AI integration and App Store release.',
       },
     ],
     howIBuild: [
@@ -309,9 +310,9 @@ export const caseStudies: CaseStudy[] = [
     kind: 'iOS app',
     sector: 'Messaging · peer-to-peer',
     headline: 'Offline chat and games, phone to phone',
+    short: 'Offline chat and games between nearby phones. My own app.',
     pitch:
       'A peer-to-peer app for chatting, group chats and games with people around you, with no internet, servers or accounts. My own product, made for flights, festivals and anywhere without signal.',
-    visual: 'nearby',
     clientHeading: 'The idea',
     client:
       'I built Nearby for the moments regular chat apps fail: on a flight, at a festival or abroad without data. The people you want to talk to are often right next to you, so Nearby connects your phones directly.',
@@ -379,75 +380,6 @@ export const caseStudies: CaseStudy[] = [
     tags: ['iOS', 'Peer-to-peer', 'Group chat', 'Games', 'Privacy', 'Offline-first'],
   },
 ];
-export type WorkflowStep = { n: string; title: string; body: string };
-
-export const workflow: WorkflowStep[] = [
-  {
-    n: '01',
-    title: 'Understand the stakes',
-    body: 'We agree on what must never go wrong, like a double booking, a lost document or a leaked record, and write the plan down before any code.',
-  },
-  {
-    n: '02',
-    title: 'Build fast with AI',
-    body: 'I use AI throughout development, working inside rules I write for it, so weeks of work land in days without cutting corners.',
-  },
-  {
-    n: '03',
-    title: 'Prove every change',
-    body: 'Automated checks run on every change. If anything would break, it doesn’t ship. I review and approve every release myself.',
-  },
-  {
-    n: '04',
-    title: 'Run it and keep it healthy',
-    body: 'Monitoring, safe releases and ongoing updates after launch. The product keeps working while your team gets on with theirs.',
-  },
-];
-
-export type MoreWork = { title: string; client: string; body: string; tags: string[] };
-
-// Work beyond the two case studies, from the Toptal profile.
-export const moreWork: MoreWork[] = [
-  {
-    title: 'Fiscal data validation',
-    client: 'National scale · Romania',
-    body: 'A microservice system with its own cryptography provider that checks the authenticity and integrity of sales data from the country’s next-generation cash registers.',
-    tags: ['Architecture', 'Cryptography', 'Microservices'],
-  },
-  {
-    title: 'Retail at enterprise scale',
-    client: 'Marks & Spencer',
-    body: 'Product page and basket rebuilds in one of the UK’s largest retail apps, with accessibility and performance built in.',
-    tags: ['Mobile', 'GraphQL', 'Accessibility'],
-  },
-  {
-    title: 'Real-estate marketplace',
-    client: 'Property Finder',
-    body: 'Principal engineer on MENA’s leading property app: remotely configurable SSL pinning, performance tuning and new features.',
-    tags: ['Mobile', 'Security', 'Performance'],
-  },
-  {
-    title: 'Point-of-sale compliance',
-    client: 'fiskaltrust',
-    body: 'Fiscal compliance software adapted for Spain and Italy, including a receipt-printing engine and a move to new hardware security modules.',
-    tags: ['Compliance', 'CI/CD', 'Hardware security'],
-  },
-  {
-    title: 'Digital banking security',
-    client: 'Salt Bank',
-    body: 'Runtime protection, jailbreak detection, code reviews and penetration testing for one of Romania’s first digital-native banks.',
-    tags: ['Mobile security', 'Pentesting'],
-  },
-  {
-    title: 'Payments & marketplaces',
-    client: 'US startups',
-    body: 'Stripe and Plaid cashback payments for an eco-products marketplace; payments and Apple/Google sign-in that lifted trial conversion for a subscription app.',
-    tags: ['Fullstack', 'Stripe', 'Plaid'],
-  },
-  {
-    title: 'Digital identity wallet',
-    client: 'Research & development',
-    body: 'A mobile wallet for managing and verifying digital identities, secured with biometric authentication and encryption.',
-    tags: ['Identity', 'Biometrics', 'Encryption'],
-  },
-];
+// The homepage "Process" row.
+export const process =
+  'AI writes much of the code, under rules I set. Tests gate every change, I review every release, and I monitor and update what I ship.';
