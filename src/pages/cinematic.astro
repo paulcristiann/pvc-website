@@ -1,0 +1,737 @@
+---
+// Experiment: a scroll-driven, single-shot tour through the network.
+// Not linked from the main site and kept out of the index; the plain
+// site at / stays the canonical version.
+import Tbc from '../components/Tbc.astro';
+import { profile, experience, clientApps, education, certifications } from '../data/portfolio';
+import { caseStudies, process } from '../data/work';
+import { shortCompany, clientName, clip, publications, contacts, groups } from '../three/content';
+
+const groupColor = Object.fromEntries(groups.map((g) => [g.id, g.color]));
+
+// The network the camera travels through. Ids match the sections' data-focus.
+const graph = [
+  { id: 'root', kind: 'root', label: profile.name, color: '#f4f4ff' },
+  ...groups.flatMap((g) => [
+    { id: g.id, kind: 'group', parent: 'root', label: g.label, color: g.color },
+    ...g.items.map((item, i) => ({ id: `${g.id}-${i}`, kind: 'leaf', parent: g.id, label: clip(item, 26) })),
+  ]),
+];
+
+const chapters = [
+  { id: 'intro', label: 'Intro' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'clients', label: 'Client teams' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'writing', label: 'Writing' },
+  { id: 'contact', label: 'Contact' },
+];
+
+const pad = (n: number) => String(n).padStart(2, '0');
+const side = (i: number) => (i % 2 ? 'right' : 'left');
+const title = `${profile.name} · Cinematic`;
+const canonical = new URL('/', Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#07070c" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div id="labels" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="scrim scrim-left" aria-hidden="true"></div>
+    <div class="scrim scrim-right" aria-hidden="true"></div>
+    <div class="scrim scrim-low" aria-hidden="true"></div>
+    <script id="graph-data" type="application/json" set:html={JSON.stringify(graph)} />
+
+    <header class="top">
+      <a class="brand" href="#intro">{profile.name}</a>
+      <span class="chapter-now mono" aria-hidden="true"></span>
+      <a class="plain-link mono" href="/">Plain version</a>
+      <div class="progress" aria-hidden="true"></div>
+    </header>
+
+    <nav class="chapters" aria-label="Chapters">
+      <ol>
+        {
+          chapters.map((c, i) => (
+            <li>
+              <a href={`#${c.id}`} data-chapter={c.id}>
+                <span class="num mono">{pad(i)}</span>
+                <span class="name">{c.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <main>
+      <section id="intro" class="beat hero" data-focus="root" data-shot="hero" data-chapter="intro" data-side="left">
+        <div class="copy">
+          <p class="eyebrow mono">{profile.role} · {profile.location}</p>
+          <h1>{profile.headline}</h1>
+          <p class="lead">{profile.intro[0]}</p>
+        </div>
+        <p class="cue mono" aria-hidden="true"><span>Scroll</span></p>
+      </section>
+
+      <section class="beat" data-focus="root" data-shot="about" data-chapter="intro" data-side="right">
+        <div class="copy">
+          <p class="eyebrow mono">About</p>
+          <p class="big">{profile.about}</p>
+          <p>{profile.intro[1]}</p>
+          <p class="small">{process}</p>
+          <p class="small">
+            {education.map((e) => `${e.degree} in ${e.field}`).join(', ')}, {education[0].school}.{' '}
+            {certifications.join(', ')}.
+          </p>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="beat chapter" data-focus="projects" data-shot="group" data-chapter="projects" data-side="left" style={`--c:${groupColor.projects}`}>
+        <div class="copy">
+          <p class="eyebrow mono">01 · Projects</p>
+          <h2 class="display">Things I designed, built and run.</h2>
+          <p>{caseStudies.length} products, from a national institute’s enrollment platform to an offline mesh chat.</p>
+        </div>
+      </section>
+      {
+        caseStudies.map((c, i) => (
+          <section class="beat" data-focus={`projects-${i}`} data-shot="leaf" data-chapter="projects" data-side={side(i + 1)} style={`--c:${groupColor.projects}`}>
+            <div class="copy">
+              <p class="eyebrow mono">{pad(i + 1)} / {pad(caseStudies.length)} · {c.kind}</p>
+              <h3><Tbc claim={c.nameClaim}>{c.name}</Tbc></h3>
+              <p class="strong">{c.headline}</p>
+              <p>{c.pitch}</p>
+              <p class="small"><Tbc claim={c.roleClaim}>{c.role}</Tbc> · {c.sector}</p>
+              <ul class="tags">{c.tags.map((t) => <li>{t}</li>)}</ul>
+              <div class="actions">
+                <a class="btn" href={`/work/${c.slug}/`}>Read the case study</a>
+                <a href={c.url} target="_blank" rel="noopener">{c.linkLabel} ↗</a>
+              </div>
+            </div>
+          </section>
+        ))
+      }
+
+      <!-- Client teams -->
+      <section id="clients" class="beat chapter" data-focus="clients" data-shot="group" data-chapter="clients" data-side="right" style={`--c:${groupColor.clients}`}>
+        <div class="copy">
+          <p class="eyebrow mono">02 · Client teams</p>
+          <h2 class="display">Apps built with the teams behind them.</h2>
+          <ul class="list">
+            {
+              clientApps.map((a) => (
+                <li>
+                  <a href={a.href} target="_blank" rel="noopener">{clientName(a.name)} ↗</a>
+                  <span>{a.descriptor}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section id="experience" class="beat chapter" data-focus="experience" data-shot="group" data-chapter="experience" data-side="left" style={`--c:${groupColor.experience}`}>
+        <div class="copy">
+          <p class="eyebrow mono">03 · Experience</p>
+          <h2 class="display">Ten years, five rooms.</h2>
+          <p>Retail, banking, real estate, fiscal compliance and national research.</p>
+        </div>
+      </section>
+      {
+        experience.map((job, i) => (
+          <section class="beat" data-focus={`experience-${i}`} data-shot="leaf" data-chapter="experience" data-side={side(i + 1)} style={`--c:${groupColor.experience}`}>
+            <div class="copy">
+              <p class="eyebrow mono">{pad(i + 1)} / {pad(experience.length)} · {job.role}</p>
+              <h3>{shortCompany(job.company)}</h3>
+              <p class="strong">{job.summary}</p>
+              {job.highlights.length > 0 && <ul class="bullets">{job.highlights.map((h) => <li>{h}</li>)}</ul>}
+            </div>
+          </section>
+        ))
+      }
+
+      <!-- Writing -->
+      <section id="writing" class="beat chapter" data-focus="writing" data-shot="group" data-chapter="writing" data-side="right" style={`--c:${groupColor.writing}`}>
+        <div class="copy">
+          <p class="eyebrow mono">04 · Writing</p>
+          <h2 class="display">Research, published.</h2>
+          <ul class="list">
+            {
+              publications.map((p) => (
+                <li>
+                  <a href={p.href} target="_blank" rel="noopener">{p.title} ↗</a>
+                  <span>{p.venue}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+
+      <!-- Contact: the camera pulls back to show the whole network -->
+      <section id="contact" class="beat finale" data-focus="contact" data-shot="finale" data-chapter="contact" data-side="left" style={`--c:${groupColor.contact}`}>
+        <div class="copy">
+          <p class="eyebrow mono">05 · Contact</p>
+          <h2 class="display">Let’s build the next one.</h2>
+          <div class="contact-links">
+            {
+              contacts.map((ct) => (
+                <a href={ct.href} target={ct.href.startsWith('mailto:') ? undefined : '_blank'} rel="noopener">
+                  <span class="mono">{ct.label}</span>
+                  {ct.value}
+                </a>
+              ))
+            }
+          </div>
+          <p class="small">{profile.location} · <a href="/">Plain version</a> · <a href="/3d/">Graph version</a></p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      import { start } from '../three/cinematic';
+      start();
+    </script>
+
+    <style is:global>
+      :root {
+        --sans: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+        --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        --bg: #07070c;
+        --text: #ececf4;
+        --text-2: #b0b0c2;
+        --text-3: #7a7a90;
+        --line: rgba(255, 255, 255, 0.12);
+        --c: #f4f4ff;
+        color-scheme: dark;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.6;
+        background: var(--bg);
+        color: var(--text);
+      }
+      a {
+        color: inherit;
+        text-underline-offset: 3px;
+        text-decoration-color: var(--line);
+      }
+      a:hover {
+        text-decoration-color: currentColor;
+      }
+      ul,
+      ol {
+        list-style: none;
+      }
+      .mono {
+        font-family: var(--mono);
+      }
+      :focus-visible {
+        outline: 2px solid var(--c);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      #scene,
+      #labels,
+      .vignette,
+      .scrim,
+      .progress,
+      .chapter-now,
+      .cue {
+        display: none;
+      }
+
+      /* ── Header and chapter nav ── */
+      .top {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 24px;
+        background: linear-gradient(to bottom, rgba(7, 7, 12, 0.85), rgba(7, 7, 12, 0));
+      }
+      .brand {
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .plain-link {
+        margin-left: auto;
+        font-size: 12px;
+        color: var(--text-2);
+        text-decoration: none;
+      }
+      .plain-link:hover {
+        color: var(--text);
+      }
+      .chapters {
+        position: fixed;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 5;
+      }
+      .chapters ol {
+        display: grid;
+        gap: 4px;
+      }
+      .chapters a {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 4px 0;
+        text-decoration: none;
+        color: var(--text-3);
+        font-size: 13px;
+        transition: color 0.3s ease;
+      }
+      .chapters .num {
+        font-size: 11px;
+      }
+      .chapters .name {
+        opacity: 0;
+        transform: translateX(6px);
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
+      }
+      .chapters a::after {
+        content: '';
+        width: 18px;
+        height: 1px;
+        background: currentColor;
+        transition:
+          width 0.3s ease,
+          background 0.3s ease;
+      }
+      .chapters a:hover,
+      .chapters a[aria-current] {
+        color: var(--text);
+      }
+      .chapters a:hover .name,
+      .chapters a[aria-current] .name {
+        opacity: 1;
+        transform: none;
+      }
+      .chapters a[aria-current]::after {
+        width: 34px;
+        background: var(--c);
+      }
+
+      /* ── Beats ── */
+      .beat {
+        position: relative;
+        z-index: 2;
+        min-height: 110vh;
+        min-height: 110svh;
+        display: flex;
+        align-items: center;
+        padding: 96px max(24px, 8vw);
+      }
+      .beat[data-side='right'] {
+        justify-content: flex-end;
+        padding-right: max(190px, 8vw);
+      }
+      .beat.chapter {
+        min-height: 100vh;
+        min-height: 100svh;
+      }
+      .hero {
+        min-height: 100vh;
+        min-height: 100svh;
+        align-items: flex-end;
+        padding-bottom: 14vh;
+      }
+      .finale {
+        min-height: 130vh;
+        min-height: 130svh;
+        align-items: flex-end;
+        padding-bottom: 12vh;
+      }
+      .copy {
+        width: min(460px, 100%);
+      }
+      .hero .copy,
+      .finale .copy {
+        width: min(640px, 100%);
+      }
+      .copy > * + * {
+        margin-top: 14px;
+      }
+      .eyebrow {
+        font-size: 12px;
+        color: var(--c);
+        letter-spacing: 0.02em;
+      }
+      h1 {
+        font-size: clamp(2.6rem, 7.4vw, 6rem);
+        font-weight: 600;
+        letter-spacing: -0.045em;
+        line-height: 0.98;
+        text-wrap: balance;
+      }
+      .display {
+        font-size: clamp(2rem, 4.4vw, 3.4rem);
+        font-weight: 600;
+        letter-spacing: -0.035em;
+        line-height: 1.04;
+        text-wrap: balance;
+      }
+      h3 {
+        font-size: clamp(1.7rem, 3vw, 2.3rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        overflow-wrap: anywhere;
+      }
+      .copy p {
+        color: var(--text-2);
+      }
+      .copy .lead {
+        font-size: 1.2rem;
+        max-width: 36ch;
+      }
+      .copy .big {
+        font-size: 1.3rem;
+        line-height: 1.5;
+        color: var(--text);
+      }
+      .copy .strong {
+        color: var(--text);
+        font-weight: 500;
+        font-size: 1.08rem;
+      }
+      .copy .small {
+        font-size: 14px;
+        color: var(--text-3);
+      }
+      .bullets {
+        display: grid;
+        gap: 8px;
+      }
+      .bullets li {
+        position: relative;
+        padding-left: 18px;
+        color: var(--text-2);
+        font-size: 15px;
+      }
+      .bullets li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.68em;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c);
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .tags li {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--text-2);
+        padding: 3px 9px;
+        border: 1px solid var(--line);
+        border-radius: 980px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px 18px;
+        padding-top: 6px;
+        font-size: 15px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 10px 18px;
+        border-radius: 980px;
+        background: var(--c);
+        color: #0a0a12;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.15s ease;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .list {
+        display: grid;
+        border-top: 1px solid var(--line);
+      }
+      .list li {
+        display: grid;
+        gap: 2px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .list a {
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .list a:hover {
+        color: var(--c);
+      }
+      .list span {
+        font-size: 13px;
+        color: var(--text-3);
+      }
+      .contact-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+        padding-top: 8px;
+      }
+      .contact-links a {
+        display: grid;
+        gap: 2px;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        text-decoration: none;
+        overflow-wrap: anywhere;
+        background: rgba(10, 10, 18, 0.5);
+        transition:
+          border-color 0.2s ease,
+          transform 0.2s ease;
+      }
+      .contact-links a:hover {
+        border-color: var(--c);
+        transform: translateY(-2px);
+      }
+      .contact-links .mono {
+        font-size: 11px;
+        color: var(--c);
+      }
+
+      /* ── With WebGL ── */
+      .gl #scene {
+        display: block;
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .gl #labels {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .lbl {
+        position: absolute;
+        left: 0;
+        top: 0;
+        white-space: nowrap;
+        font-family: var(--mono);
+        font-size: 11px;
+        color: #c9c9d8;
+        opacity: 0;
+        text-shadow:
+          0 0 6px var(--bg),
+          0 0 2px var(--bg);
+        transition: opacity 0.4s ease;
+      }
+      .lbl-group {
+        font-family: var(--sans);
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text);
+      }
+      /* keeps text readable wherever the bright nodes drift */
+      .gl .vignette {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: radial-gradient(ellipse at center, transparent 55%, rgba(4, 4, 8, 0.6) 100%);
+      }
+      /* darken whichever side the text is on */
+      .gl .scrim {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+      }
+      .scrim-left {
+        background: linear-gradient(to right, rgba(7, 7, 12, 0.78) 0%, rgba(7, 7, 12, 0.45) 38%, transparent 62%);
+      }
+      .scrim-right {
+        background: linear-gradient(to left, rgba(7, 7, 12, 0.78) 0%, rgba(7, 7, 12, 0.45) 38%, transparent 62%);
+      }
+      .scrim-low {
+        background: linear-gradient(to top, rgba(7, 7, 12, 0.8) 0%, rgba(7, 7, 12, 0.35) 40%, transparent 65%);
+      }
+      body[data-side='left'] .scrim-left,
+      body[data-side='right'] .scrim-right,
+      body[data-side='low'] .scrim-low {
+        opacity: 1;
+      }
+      .gl .progress {
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background: var(--c);
+        transform-origin: left;
+        transform: scaleX(0);
+        transition: background 0.6s ease;
+      }
+      .gl .chapter-now {
+        display: block;
+        font-size: 12px;
+        color: var(--c);
+        transition: color 0.6s ease;
+      }
+      .gl .cue {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        position: absolute;
+        left: 50%;
+        bottom: 28px;
+        transform: translateX(-50%);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-3);
+      }
+      .cue::after {
+        content: '';
+        width: 1px;
+        height: 42px;
+        background: linear-gradient(to bottom, var(--text-3), transparent);
+        animation: cue 2s ease-in-out infinite;
+        transform-origin: top;
+      }
+      @keyframes cue {
+        0% {
+          transform: scaleY(0);
+        }
+        50% {
+          transform: scaleY(1);
+        }
+        100% {
+          transform: scaleY(1);
+          opacity: 0;
+        }
+      }
+      .gl .copy {
+        opacity: 0.12;
+        transform: translateY(24px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .gl .in-view .copy {
+        opacity: 1;
+        transform: none;
+      }
+      .gl .copy > * {
+        text-shadow: 0 0 24px rgba(7, 7, 12, 0.9);
+      }
+
+      @media (max-width: 760px) {
+        .chapters,
+        .gl .cue,
+        .gl .scrim {
+          display: none;
+        }
+        .top {
+          padding: 14px 16px;
+        }
+        .gl .chapter-now {
+          margin-left: auto;
+        }
+        .gl .plain-link {
+          margin-left: 0;
+        }
+        .beat,
+        .beat[data-side='right'] {
+          justify-content: flex-start;
+          align-items: flex-end;
+          padding: 80px 18px 9vh;
+        }
+        /* the scene sits in the top half; text gets a soft backdrop below it */
+        .gl .beat .copy {
+          padding: 18px;
+          margin: 0 -2px;
+          border-radius: 18px;
+          background: rgba(9, 9, 16, 0.62);
+          -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+        }
+        .gl .hero .copy {
+          background: none;
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+          padding: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </body>
+</html>
