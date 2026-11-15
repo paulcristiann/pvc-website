@@ -28,6 +28,7 @@ if (import.meta.env.PROD && pendingClaims.length && process.env.ALLOW_UNCONFIRME
 const home = Astro.url.pathname === '/' ? '' : '/';
 const nav = [
   { label: 'Work', href: `${home}#work` },
+  { label: 'Security', href: `${home}#security` },
   { label: 'Experience', href: `${home}#experience` },
   { label: 'Contact', href: `${home}#contact` },
 ];

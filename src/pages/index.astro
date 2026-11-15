@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Tbc from '../components/Tbc.astro';
-import { profile, experience, clientApps, education, certifications } from '../data/portfolio';
+import { profile, experience, clientApps, education, certifications, security } from '../data/portfolio';
 import { caseStudies, process } from '../data/work';
 
 const publications = experience.flatMap((job) => job.publications ?? []);
@@ -38,6 +38,27 @@ const shortRole = (role: string) => role.replace(' · Top 3%', '');
           ))
         }
       </ul>
+    </section>
+
+    <section id="security" class="row" aria-labelledby="security-label">
+      <h2 id="security-label" class="row-label">Security</h2>
+      <div>
+        <ul>
+          {
+            security.map((s) => (
+              <li class="entry">
+                <span class="entry-name">{s.name}</span>
+                <span class="entry-meta">{s.where}</span>
+                <p class="entry-desc">{s.description}</p>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="security-foot">
+          {certifications.join(', ')}. Research on AI in cybersecurity and on credential integrity, listed under{' '}
+          <a href="#writing">Writing</a>.
+        </p>
+      </div>
     </section>
 
     <section class="row" aria-labelledby="clients-label">
@@ -86,7 +107,7 @@ const shortRole = (role: string) => role.replace(' · Top 3%', '');
       <p class="plain">{process}</p>
     </section>
 
-    <section class="row" aria-labelledby="writing-label">
+    <section id="writing" class="row" aria-labelledby="writing-label">
       <h2 id="writing-label" class="row-label">Writing</h2>
       <ul>
         {
@@ -163,6 +184,15 @@ const shortRole = (role: string) => role.replace(' · Top 3%', '');
   .venue {
     font-size: 13px;
     color: var(--text-tertiary);
+  }
+  .security-foot {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .security-foot a {
+    color: inherit;
+    text-underline-offset: 3px;
   }
   .location {
     margin-top: 10px;
