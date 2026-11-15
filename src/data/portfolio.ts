@@ -6,10 +6,10 @@
 export const profile = {
   name: 'Paul Vasile',
   role: 'Fullstack Engineer',
-  headline: 'Fullstack engineer in Bucharest.',
+  headline: 'Fullstack engineer with a security background.',
   intro: [
     'I build web platforms, backends and iOS apps, and keep them running after launch.',
-    'Ten years across retail, banking, real estate and fiscal compliance. Top 3% on Toptal, Certified Ethical Hacker.',
+    'Ten years across retail, banking, real estate and fiscal compliance, including security engineering at a digital-native bank and leading a cybersecurity team at Romania’s institute for informatics. Certified Ethical Hacker, Top 3% on Toptal.',
   ],
   location: 'Bucharest, Romania',
   email: 'paulcristian04@proton.me',
@@ -198,6 +198,48 @@ export const clientApps: ClientApp[] = [
 ];
 
 export const certifications = ['Certified Ethical Hacker (EC-Council)'];
+
+export type SecurityArea = {
+  name: string;
+  where: string;
+  description: string;
+};
+
+// The homepage "Security" row. Every line restates work already described
+// in `experience` above or in the case studies (src/data/work.ts); add new
+// claims there first, not here.
+export const security: SecurityArea[] = [
+  {
+    name: 'Penetration testing and code review',
+    where: 'Salt Bank',
+    description:
+      'MASVS-compliant penetration testing and source code security reviews for a digital-native bank’s mobile apps.',
+  },
+  {
+    name: 'Mobile app hardening',
+    where: 'Salt Bank, Property Finder',
+    description:
+      'Runtime self-protection, jailbreak and root detection, and remotely configurable SSL pinning, in apps used at scale.',
+  },
+  {
+    name: 'Security audits',
+    where: 'ICI',
+    description:
+      'Led the cybersecurity team’s audits and introduced a vulnerability-analysis method that made them about 50% faster.',
+  },
+  {
+    name: 'Applied cryptography',
+    where: 'ICI, fiskaltrust',
+    description:
+      'A cryptography provider that validates sales data from Romania’s next-generation cash registers, a digital identity wallet with biometric authentication and encryption, and a move to new hardware security modules for point-of-sale compliance.',
+  },
+  {
+    name: 'Security in the platforms I run',
+    where: 'cursuri.ici.ro, WeCare',
+    description:
+      'Least-privilege access, logged access to sensitive documents, permission checks on every request, and ongoing security updates on the platforms I run.',
+  },
+];
 
 export const education: { school: string; degree: string; field: string }[] = [
   {

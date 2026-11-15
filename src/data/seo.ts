@@ -4,15 +4,15 @@
 //  The stack keywords live here because the visible site
 //  deliberately shows no tech stacks.
 // ─────────────────────────────────────────────────────────────
-import { profile, experience, education, certifications } from './portfolio';
+import { profile, experience, education, certifications, security } from './portfolio';
 import { caseStudies } from './work';
 
 export const site = 'https://paulcristian.ro';
 export const personId = `${site}/#person`;
 
-export const homeTitle = `${profile.name} · Fullstack Engineer | Web, backend and mobile`;
+export const homeTitle = `${profile.name} · Fullstack Engineer | Web, backend, mobile and security`;
 export const homeDescription =
-  'Fullstack engineer in Bucharest with 10+ years shipping web platforms, backends and mobile apps that teams rely on. Top 3% on Toptal, open to new projects.';
+  'Fullstack engineer in Bucharest with a security background: web platforms, backends and mobile apps, plus pentesting and cryptography. CEH, Top 3% on Toptal.';
 
 export const knowsAbout = [
   'Fullstack development',
@@ -24,6 +24,10 @@ export const knowsAbout = [
   'Application security',
   'Mobile security',
   'Cybersecurity',
+  'Penetration testing',
+  'Secure code review',
+  'Applied cryptography',
+  'OWASP MASVS',
   'GDPR compliance',
   'Generative AI products',
   'AI-powered development workflow',
@@ -138,6 +142,8 @@ export function llmsText() {
   for (const c of caseStudies) {
     lines.push(`- [${c.name}: ${c.headline}](${site}/work/${c.slug}/): ${c.pitch} Live product: ${c.url}`);
   }
+  lines.push('', '## Security', '');
+  for (const s of security) lines.push(`- ${s.name} (${s.where}): ${s.description}`);
   lines.push('', '## Experience', '');
   for (const e of experience) {
     lines.push(`- ${e.role}, ${e.company}: ${e.summary}`);
